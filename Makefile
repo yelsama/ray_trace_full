@@ -1,6 +1,6 @@
 NAME = rayTrace
 
-RESOURCES = main.c ops_on_point.c ops_on_vector.c \
+RESOURCES = main.c ops_on_point.c ops_on_vector.c mag_norm_dot_cros.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 

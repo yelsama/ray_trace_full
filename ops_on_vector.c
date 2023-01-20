@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:59:12 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/01/14 17:55:00 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:14:02 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,54 +25,58 @@ int	fill_vector(t_point_vector *v, float x, float y, float z)
 
 t_point_vector	add_vectors(const t_point_vector *v1, const t_point_vector *v2)
 {
-	t_point_vector	resul_vec;
+	t_point_vector	result_vec;
 
+	result_vec = (t_point_vector){0, 0, 0, 0};
 	if (!v1 || !v2 || v1->w == 1 || v2->w == 1)
-		return (write(2, "Error Adding victors\n", 21), NULL);
-	resul_vec.w = 0;
-	resul_vec.x = v1->x + v2->x;
-	resul_vec.y = v1->y + v2->y;
-	resul_vec.z = v1->z + v2->z;
-	return (resul_vec);
+		return (write(2, "Error Adding victors\n", 21), result_vec);
+	result_vec.w = 0;
+	result_vec.x = v1->x + v2->x;
+	result_vec.y = v1->y + v2->y;
+	result_vec.z = v1->z + v2->z;
+	return (result_vec);
 }
 
 t_point_vector	subract_vectors(const t_point_vector *v1,
 					const t_point_vector *v2)
 {
-	t_point_vector	resul_vec;
+	t_point_vector	result_vec;
 
+	result_vec = (t_point_vector){0, 0, 0, 0};
 	if (!v1 || !v2 || v1->w == 1 || v2->w == 1)
-		return (write(2, "Error Subtracting victors\n", 26), NULL);
-	resul_vec.w = 0;
-	resul_vec.x = v1->x - v2->x;
-	resul_vec.y = v1->y - v2->y;
-	resul_vec.z = v1->z - v2->z;
-	return (resul_vec);
+		return (write(2, "Error Subtracting victors\n", 26), result_vec);
+	result_vec.w = 0;
+	result_vec.x = v1->x - v2->x;
+	result_vec.y = v1->y - v2->y;
+	result_vec.z = v1->z - v2->z;
+	return (result_vec);
 }
 
 t_point_vector	vector_opposite(const t_point_vector *v)
 {
-	t_point_vector	restult_vector;
+	t_point_vector	result_vec;
 
+	result_vec = (t_point_vector){0, 0, 0, 0};
 	if (!v || v->w == 1)
-		return (write(2, "Error finding vector opposite\n", 30), NULL);
-	restult_vector.w = 0;
-	restult_vector.x = -1 * v->x;
-	restult_vector.y = -1 * v->y;
-	restult_vector.z = -1 * v->z;
-	return (restult_vector);
+		return (write(2, "Error finding vector opposite\n", 30), result_vec);
+	result_vec.w = 0;
+	result_vec.x = -1 * v->x;
+	result_vec.y = -1 * v->y;
+	result_vec.z = -1 * v->z;
+	return (result_vec);
 }
 
 t_point_vector	get_vec_a_to_b(const t_point_vector *a,
 					const t_point_vector *b)
 {
-	t_point_vector	result_vector;
+	t_point_vector	result_vec;
 
+	result_vec = (t_point_vector){0, 0, 0, 0};
 	if (!a || !b || a->w == 0 || b->w == 0)
-		return (write(2, "Error finding vector\n", 21), NULL);
-	result_vector.w = 0;
-	result_vector.x = b->x - a->x;
-	result_vector.y = b->y - a->y;
-	result_vector.z = b->z - a->z;
-	return (result_vector);
+		return (write(2, "Error finding vector\n", 21), result_vec);
+	result_vec.w = 0;
+	result_vec.x = b->x - a->x;
+	result_vec.y = b->y - a->y;
+	result_vec.z = b->z - a->z;
+	return (result_vec);
 }

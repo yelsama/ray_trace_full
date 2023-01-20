@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:57:38 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/01/14 19:08:34 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:14:19 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ t_point_vector	point_from_point_vector(const t_point_vector *a,
 {
 	t_point_vector	result_point;
 
+	result_point = (t_point_vector){0, 0, 0, 1};
 	if (!a || !v || a->w != 1 || v->w != 0)
-		return (write(2, "Error finding the point\n", 24), NULL);
+		return (write(2, "Error finding the point\n", 24), result_point);
 	result_point.w = 1;
 	result_point.x = a->x + v->x;
 	result_point.y = a->y + v->y;
@@ -37,7 +38,7 @@ t_point_vector	point_from_point_vector(const t_point_vector *a,
 	return (result_point);
 }
 
-int	points_are_identical(const t_point_vector *a,
+int	elemnts_are_identical(const t_point_vector *a,
 					const t_point_vector *b, float epsilon)
 {
 	float	differ;
