@@ -1,6 +1,6 @@
 NAME = rayTrace
 
-RESOURCES = main.c ops_on_point.c ops_on_vector.c mag_norm_dot_cros.c \
+SOURCES = main.c ops_on_point.c ops_on_vector.c mag_norm_dot_cros.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
@@ -16,7 +16,7 @@ $(NAME):$(OBJECTS)
 	$(MAKE) -C ./resources/mlx
 	$(MAKE)	-C ./resources/ft_libft_printf
 	$(CC) -o $(NAME) $(SOURCES) $(LIBX) $(LIBFTBF)  -framework OpenGL -framework AppKit
-	
+
 clean:
 	$(MAKE) clean -C ./resources/mlx
 	$(MAKE) clean -C ./resources/ft_libft_printf

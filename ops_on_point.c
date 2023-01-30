@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:57:38 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/01/20 20:14:19 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:48:07 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,18 @@ int	elemnts_are_identical(const t_point_vector *a,
 	if (differ > epsilon)
 		return (0);
 	return (1);
+}
+
+void	print_an_elemnt(t_point_vector *e)
+{
+	if (!e)
+	{
+		write(1, "Element not exist or inintialized\n", 34);
+		return ;
+	}
+	if (e->w == 0)
+		write(1, "this is a vector, ", 18);
+	if (e->w == 1)
+		write(1, "this is point, ", 15);
+	printf("x is %.4f, y is %.4f, z is %.4f\n", e->x, e->y, e->z);
 }

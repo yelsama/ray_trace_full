@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:08:39 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/01/20 21:40:42 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/01/30 20:00:56 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_point_vector	vec_norm(const t_point_vector *v)
 
 	result_vec = (t_point_vector){0, 0, 0, 0};
 	magnitude = vec_mag(v);
-	if (!magnitude || !v || v->w == 1)
+	if (magnitude == 0 || !v || v->w == 1)
 		return (write(2, "Error Normalizing victor\n", 26), result_vec);
 		result_vec.w = 0;
 		result_vec.x = v->x / magnitude;
@@ -55,7 +55,7 @@ t_point_vector	cros_multiplication(const t_point_vector *v1,
 
 	result_vec = (t_point_vector){0, 0, 0, 0};
 	if (!v1 || !v2 || v1->w == 1 || v2->w == 1)
-		return (write(2, "Error operating cross product\n", 30), 0);
+		return (write(2, "Error operating cross product\n", 30), result_vec);
 	result_vec.w = 0;
 	result_vec.x = v1->y * v2->z - (v1->z * v2->y);
 	result_vec.y = v1->z * v2->x - (v1->x * v2->z);
