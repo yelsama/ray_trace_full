@@ -27,3 +27,6 @@ fclean: clean
 	/bin/rm -f $(NAME) $(BNAME)
 
 re: fclean all
+
+test: all
+	./$(NAME)
