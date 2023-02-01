@@ -1,6 +1,6 @@
 NAME = rayTrace
 
-SOURCES = main.c ops_on_point.c ops_on_vector.c mag_norm_dot_cros.c \
+SOURCES = main.c ops_on_point.c ops_on_vector.c mag_norm_dot_cros.c colors.c canvas.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
@@ -27,3 +27,6 @@ fclean: clean
 	/bin/rm -f $(NAME) $(BNAME)
 
 re: fclean all
+
+test: all
+	./$(NAME)

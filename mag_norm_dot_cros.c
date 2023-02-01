@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:08:39 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/01/30 20:00:56 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:35:31 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,19 @@ t_point_vector	cros_multiplication(const t_point_vector *v1,
 	result_vec.x = v1->y * v2->z - (v1->z * v2->y);
 	result_vec.y = v1->z * v2->x - (v1->x * v2->z);
 	result_vec.z = v1->x * v2->y - (v1->y * v2->x);
+	return (result_vec);
+}
+
+t_point_vector	rescale_vecotr(const t_point_vector *v, float scl)
+{
+	t_point_vector	result_vec;
+
+	result_vec = (t_point_vector){0, 0, 0, 0};
+	if (!v || v->w != 0)
+		return (write(2, "Error Secaling vector\n", 22), result_vec);
+	result_vec.w = 0;
+	result_vec.x = v->x * scl;
+	result_vec.y = v->y * scl;
+	result_vec.z = v->z * scl;
 	return (result_vec);
 }
