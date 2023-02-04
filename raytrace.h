@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/01 21:55:07 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/04 04:22:39 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ typedef struct s_ranger
 	t_main_frame	frame;
 }	t_ranger;
 
+
+typedef struct s_matrix
+{
+	float	matrix[4][4];
+}	t_matrix;
+
 // Operations to get vectors (ops_on_vectors.c)
 int				fill_vector(t_point_vector *v, float x, float y, float z);
 t_point_vector	add_vectors(const t_point_vector *v1, const t_point_vector *v2);
@@ -97,5 +103,14 @@ int				rgb_to_int(const t_color *c);
 int				fill_batch(t_batch *can, const t_color *c, int width,
 					int height);
 int				paint_batch_at_mlx(const t_batch *can, t_ranger *alive);
+
+// Matrices operations (matrices.c)
+int				fill_zero_matrix(t_matrix *m);
+int				fill_identity_matrix(t_matrix *m);
+t_matrix		matrices_multiplication(const t_matrix *m1, const t_matrix *m2);
+t_point_vector	matrix_by_tuple(const t_matrix *m, const t_point_vector *tuple);
+
+// Perform Matrix Inverse (matrix_inverse.c)
+t_matrix		matrix_inverse(const t_matrix *m);
 
 #endif
