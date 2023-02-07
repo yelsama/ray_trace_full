@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/04 04:22:39 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/06 21:50:12 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,18 @@
 # ifndef EPSILON
 #  define EPSILON 0.01
 # endif
+# define DEGTORAD 0.01745327
 # define XBLOCK_DIM 900
-# define YBLOCK_DIM 550
+# define YBLOCK_DIM 600
 # define BATCH_WIDTH 2
 # define BATCH_HEIGHT 2
+
+typedef enum e_axis
+{
+	x_axis,
+	y_axis,
+	z_axis
+}	t_axis;
 
 typedef struct s_main_frame
 {
@@ -58,7 +66,6 @@ typedef struct s_ranger
 {
 	t_main_frame	frame;
 }	t_ranger;
-
 
 typedef struct s_matrix
 {
@@ -104,13 +111,23 @@ int				fill_batch(t_batch *can, const t_color *c, int width,
 					int height);
 int				paint_batch_at_mlx(const t_batch *can, t_ranger *alive);
 
-// Matrices operations (matrices.c)
+// Matrices operations (matrix_4_4.c)
 int				fill_zero_matrix(t_matrix *m);
 int				fill_identity_matrix(t_matrix *m);
 t_matrix		matrices_multiplication(const t_matrix *m1, const t_matrix *m2);
-t_point_vector	matrix_by_tuple(const t_matrix *m, const t_point_vector *tuple);
+// t_point_vector	matrix_by_tuple(const t_matrix *m, const t_point_vector *tuple);
 
 // Perform Matrix Inverse (matrix_inverse.c)
 t_matrix		matrix_inverse(const t_matrix *m);
+
+// Get transforming matrices to move or rotate (transforms.c)
+t_matrix		get_translation_matrix(float x, float y, float z);
+t_matrix		get_scaling_matrix(float x, float y, float z);
+t_point_vector	matrix_by_tuple(const t_matrix *mat, const t_point_vector *tpl);
+void			reform_tupl_by_matrix(const t_matrix *mat, t_point_vector *tpl);
+
+// Get rotation arround x y z axis (tuple_rotation.c)
+void			rotate_tuple(t_point_vector *tpl, int axis, int degree);
+void			shearing_trans(t_point_vector *tpl, float xy_xz_yx_yz_zx_zy[6]);
 
 #endif
