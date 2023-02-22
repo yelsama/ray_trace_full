@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/06 21:50:12 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:12:39 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #  define EPSILON 0.01
 # endif
 # define DEGTORAD 0.01745327
-# define XBLOCK_DIM 900
-# define YBLOCK_DIM 600
+# define XBLOCK_DIM 1200
+# define YBLOCK_DIM 800
 # define BATCH_WIDTH 2
 # define BATCH_HEIGHT 2
 
@@ -71,6 +71,19 @@ typedef struct s_matrix
 {
 	float	matrix[4][4];
 }	t_matrix;
+
+typedef struct s_ray
+{
+	t_point_vector	*origin;
+	t_point_vector	direction;
+}	t_ray;
+
+typedef struct s_sphere
+{
+	int				objct_id;
+	float			rad;
+	t_point_vector	cent;
+}	t_sphere;
 
 // Operations to get vectors (ops_on_vectors.c)
 int				fill_vector(t_point_vector *v, float x, float y, float z);
@@ -129,5 +142,15 @@ void			reform_tupl_by_matrix(const t_matrix *mat, t_point_vector *tpl);
 // Get rotation arround x y z axis (tuple_rotation.c)
 void			rotate_tuple(t_point_vector *tpl, int axis, int degree);
 void			shearing_trans(t_point_vector *tpl, float xy_xz_yx_yz_zx_zy[6]);
+
+// Create and handle rays (ops_on_ray.c)
+t_ray			fill_ray(t_point_vector *orgn_p, t_point_vector v);
+t_point_vector	intrsction_point(const t_ray *r, float t);
+				//point = origin + vector * time
+void			ray_sphare_intrsection(const t_ray *r, const t_sphere *s,
+					float *inf);
+
+// Fill Basic shapes (form_shapes.c)
+t_sphere		fill_sphare(t_point_vector cntr, float rad, int objct_id);
 
 #endif

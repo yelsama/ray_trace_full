@@ -1,7 +1,8 @@
 NAME = rayTrace
 
 SOURCES = main.c ops_on_point.c ops_on_vector.c mag_norm_dot_cros.c colors.c batch.c \
-          matrix_4_4.c matrix_inverse.c transforms.c tuple_rotation.c extra.c \
+          matrix_4_4.c matrix_inverse.c transforms.c tuple_rotation.c extra.c ops_on_ray.c \
+		  form_shapes.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
