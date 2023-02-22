@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_transforms.c                                :+:      :+:    :+:   */
+/*   transforms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:47:36 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/04 22:12:21 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/23 02:47:23 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_point_vector	matrix_by_tuple(const t_matrix *mat, const t_point_vector *tpl)
 {
 	t_point_vector	result_tuple;
 
-	result_tuple = (t_point_vector){0, 0, 0, 0};
+	result_tuple = (t_point_vector){0.0, 0.0, 0.0, 0.0};
 	if (!mat || !tpl)
 		return (write(2, "Error finiding needed elements\n", 31), result_tuple);
 	result_tuple.x = (mat->matrix[0][0] * tpl->x)

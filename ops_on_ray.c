@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 19:13:52 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/18 15:59:04 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/23 02:46:32 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ t_ray	fill_ray(t_point_vector *orgn_p, t_point_vector v)
 	t_ray	result_ray;
 
 	result_ray.origin = NULL;
-	result_ray.direction = (t_point_vector){0, 0, 0, 0};
+	result_ray.direction = (t_point_vector){0.0, 0.0, 0.0, 0.0};
 	if (!orgn_p || orgn_p->w != 1)
 		return (write(2, "Error Creating ray\n", 19), result_ray);
 	result_ray.origin = orgn_p;
-	result_ray.direction.w = 0;
+	result_ray.direction.w = 0.0;
 	result_ray.direction.x = v.x;
 	result_ray.direction.y = v.y;
 	result_ray.direction.z = v.z;
@@ -33,7 +33,7 @@ t_point_vector	intrsction_point(const t_ray *r, float t)
 	t_point_vector	result_point;
 	t_point_vector	vec_x_t;
 
-	result_point = (t_point_vector){0, 0, 0, 1};
+	result_point = (t_point_vector){0.0, 0.0, 0.0, 1.0};
 	if (!r)
 		return (write(2, "Errro find intersection point on a ray\n", 39),
 			result_point);
@@ -51,14 +51,14 @@ static void	calculate_intersecion(const t_ray *r, const t_sphere *s, float *inf)
 	t_point_vector	tmp;
 
 	tmp = get_vec_a_to_b(&s->cent, r->origin);
-	b = 2 * dot_multiplication(&tmp, &r->direction);
+	b = 2.0 * dot_multiplication(&tmp, &r->direction);
 	a = dot_multiplication(&r->direction, &r->direction);
 	c = dot_multiplication(&tmp, &tmp) - (s->rad * s->rad);
 	det = (b * b) - (4 * a * c);
 	if (det < 0)
 		return ;
-	det = sqrtf(det) / (2 * a);
-	c = (-1 * b) / (2 * a);
+	det = sqrtf(det) / (2.0 * a);
+	c = (-1.0 * b) / (2.0 * a);
 	inf[2] = c + det;
 	inf[3] = c - det;
 	if (inf[3] > 0 || inf[2] > 0)
@@ -78,8 +78,8 @@ void	ray_sphare_intrsection(const t_ray *r, const t_sphere *s, float *inf)
 	}
 	inf[0] = s->objct_id;
 	inf[1] = 0;
-	inf[2] = 0;
-	inf[3] = 0;
+	inf[2] = 0.0;
+	inf[3] = 0.0;
 	inf[4] = 0;
 	calculate_intersecion(r, s, inf);
 	if (inf[2] > inf[3])

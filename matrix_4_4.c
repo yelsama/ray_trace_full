@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:10 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/06 21:48:55 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/23 02:51:46 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	fill_zero_matrix(t_matrix *m)
 	{
 		j = -1;
 		while (++j < 4)
-			m->matrix[i][j] = 0;
+			m->matrix[i][j] = 0.0;
 	}
 	if (i == 4 && j == 4)
 		return (1);
@@ -45,9 +45,9 @@ int	fill_identity_matrix(t_matrix *m)
 		while (++j < 4)
 		{
 			if (j == i)
-				m->matrix[i][j] = 1;
+				m->matrix[i][j] = 1.0;
 			else
-				m->matrix[i][j] = 0;
+				m->matrix[i][j] = 0.0;
 		}
 	}
 	if (i == 4 && j == 4)

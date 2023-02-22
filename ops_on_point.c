@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:57:38 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/01/30 19:48:07 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/23 02:49:29 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_point_vector	point_from_point_vector(const t_point_vector *a,
 {
 	t_point_vector	result_point;
 
-	result_point = (t_point_vector){0, 0, 0, 1};
+	result_point = (t_point_vector){0.0, 0.0, 0.0, 1};
 	if (!a || !v || a->w != 1 || v->w != 0)
 		return (write(2, "Error finding the point\n", 24), result_point);
 	result_point.w = 1;
