@@ -6,13 +6,13 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 08:17:03 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/01/31 18:28:30 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:59:44 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
 
-int	fill_color(t_color *c, int red, int green, int blue)
+int	fill_color(t_color *c, float red, float green, float blue)
 {
 	if (!c)
 		return (write(2, "Error filling color\n", 20), 0);
@@ -38,7 +38,7 @@ t_color	add_colors(const t_color *c1, const t_color *c2)
 {
 	t_color	result_color;
 
-	result_color = (t_color){0, 0, 0};
+	result_color = (t_color){0.0, 0.0, 0.0};
 	if (!c1 || !c2)
 		return (write(2, "Error adding colors\n", 20), result_color);
 	result_color.red = c1->red + c2->red;
@@ -72,7 +72,7 @@ t_color	subt_colors(const t_color *c1, const t_color *c2)
 	return (result_color);
 }
 
-t_color	color_multi_scalar(const t_color *c, int sclr)
+t_color	color_multi_scalar(const t_color *c, float sclr)
 {
 	t_color	result_color;
 
@@ -84,10 +84,16 @@ t_color	color_multi_scalar(const t_color *c, int sclr)
 	result_color.blue = c->blue * sclr;
 	if (result_color.red > 255)
 		result_color.red = 255;
+	if (result_color.red < 0)
+		result_color.red = 0;
 	if (result_color.green > 255)
 		result_color.green = 255;
+	if (result_color.green < 0)
+		result_color.green = 0;
 	if (result_color.blue > 255)
 		result_color.blue = 255;
+	if (result_color.blue < 0)
+		result_color.blue = 0;
 	return (result_color);
 }
 
@@ -107,9 +113,15 @@ t_color	blend_two_colors(const t_color *c1, const t_color *c2)
 	result_color.blue = rgb[2] * 255;
 	if (result_color.red > 255)
 		result_color.red = 255;
+	if (result_color.red < 0)
+		result_color.red = 0;
 	if (result_color.green > 255)
 		result_color.green = 255;
+	if (result_color.green < 0)
+		result_color.green = 0;
 	if (result_color.blue > 255)
 		result_color.blue = 255;
+	if (result_color.blue < 0)
+		result_color.blue = 0;
 	return (result_color);
 }

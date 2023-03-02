@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:18:46 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/07 16:26:59 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/02/24 22:40:12 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	rotate_tuple(t_point_vector *tpl, int axis, int degree)
 	int		final_degree;
 
 	final_degree = degree % 360;
-	if (degree < 0)
-		final_degree = 360 - final_degree;
 	rad = final_degree * DEGTORAD;
 	cos_d = (float)cos(rad);
 	sin_d = (float)sin(rad);

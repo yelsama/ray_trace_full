@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/21 15:12:39 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:04:26 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ typedef struct s_main_frame
 
 typedef struct s_colors
 {
-	int	red;
-	int	green;
-	int	blue;
+	float	red;
+	float	green;
+	float	blue;
 }	t_color;
 
 typedef struct s_point_vector_in_3d
@@ -77,12 +77,19 @@ typedef struct s_ray
 	t_point_vector	*origin;
 	t_point_vector	direction;
 }	t_ray;
+typedef struct s_light
+{
+	t_point_vector	position;
+	float			brightness;
+	t_color			color;
+}	t_light;
 
 typedef struct s_sphere
 {
 	int				objct_id;
-	float			rad;
 	t_point_vector	cent;
+	float			rad;
+	t_color			color;
 }	t_sphere;
 
 // Operations to get vectors (ops_on_vectors.c)
@@ -112,10 +119,10 @@ t_point_vector	cros_multiplication(const t_point_vector *v1,
 t_point_vector	rescale_vecotr(const t_point_vector *v, float scl);
 
 // Handle Colors (colors.c)
-int				fill_color(t_color *c, int red, int green, int blue);
+int				fill_color(t_color *c, float red, float green, float blue);
 t_color			add_colors(const t_color *c1, const t_color *c2);
 t_color			subt_colors(const t_color *c1, const t_color *c2);
-t_color			color_multi_scalar(const t_color *c, int sclr);
+t_color			color_multi_scalar(const t_color *c, float sclr);
 t_color			blend_two_colors(const t_color *c1, const t_color *c2);
 
 // Convert the RGB values into one int value and making batch (batch.c)
@@ -151,6 +158,14 @@ void			ray_sphare_intrsection(const t_ray *r, const t_sphere *s,
 					float *inf);
 
 // Fill Basic shapes (form_shapes.c)
-t_sphere		fill_sphare(t_point_vector cntr, float rad, int objct_id);
+t_sphere		fill_sphere(t_point_vector cntr, float rad, t_color clr,
+					int objct_id);
+
+// Find normal and light vectors for light and shade (light_shade.c)
+t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p);
+// t_point_vector	reflect_around_normal(const t_point_vector *in,
+// 					const t_point_vector *norm);
+int				ligth_effect_on_sphere_pxl_color(t_point_vector hit_p,
+					const t_sphere *s, const t_light *l, const t_light *amb);
 
 #endif
