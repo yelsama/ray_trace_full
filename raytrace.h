@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/01 16:04:26 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:59:58 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,31 @@ typedef struct s_canva
 	int	color;
 }	t_batch;
 
-typedef struct s_ranger
-{
-	t_main_frame	frame;
-}	t_ranger;
-
 typedef struct s_matrix
 {
 	float	matrix[4][4];
 }	t_matrix;
+
+typedef struct s_camera
+{
+	t_point_vector	location;
+	t_point_vector	look_forward;
+	t_matrix		transform;
+	float			field_of_view;
+	float			half_width;
+	float			half_height;
+	float			aspect_ratio;
+	float			pixel_size;
+}	t_camera;
+
+typedef struct s_render_system
+{
+	float	half_width;
+	float	half_heigh;
+	float	pixel_size;
+	float	half_szie;
+	float	aspect_ratio;
+}	t_render;
 
 typedef struct s_ray
 {
@@ -91,6 +107,15 @@ typedef struct s_sphere
 	float			rad;
 	t_color			color;
 }	t_sphere;
+typedef struct s_ranger
+{
+	t_main_frame	frame;
+	t_camera		cam;
+	t_render		rend;
+	t_light			main_light;
+	t_light			ambient;
+	int				error;
+}	t_ranger;
 
 // Operations to get vectors (ops_on_vectors.c)
 int				fill_vector(t_point_vector *v, float x, float y, float z);
@@ -167,5 +192,12 @@ t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p);
 // 					const t_point_vector *norm);
 int				ligth_effect_on_sphere_pxl_color(t_point_vector hit_p,
 					const t_sphere *s, const t_light *l, const t_light *amb);
+
+// Prepare rendering values from camera and canvas info (for_render.c)
+void			set_camera(t_ranger *alive);
+t_ray			ray_for_pixel(t_ranger *alive, int x, int y);
+void			get_camera_transform_matrix(t_ranger *alive);
+t_matrix		get_orientation_matrix(t_ranger *alive);
+// void			set_rendering_info(t_ranger *alive);
 
 #endif

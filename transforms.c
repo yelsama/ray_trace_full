@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:47:36 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/23 02:47:23 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:47:12 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,25 @@ t_point_vector	matrix_by_tuple(const t_matrix *mat, const t_point_vector *tpl)
 
 void	reform_tupl_by_matrix(const t_matrix *mat, t_point_vector *tpl)
 {
-	float	*result_tuple;
+	float	result_tuple[4];
 
-	result_tuple = malloc(sizeof(float) * 4);
-	if (!mat || !tpl || !result_tuple)
+	if (!mat || !tpl)
 	{
 		write(2, "Error finiding needed elements\n", 31);
 		return ;
 	}
 	result_tuple[0] = (mat->matrix[0][0] * tpl->x)
-		+ (mat->matrix[0][1] * tpl->y) + (mat->matrix[0][2] * tpl->x);
+		+ (mat->matrix[0][1] * tpl->y) + (mat->matrix[0][2] * tpl->z)
+		+ (mat->matrix[0][3] * tpl->w);
 	result_tuple[1] = (mat->matrix[1][0] * tpl->x)
-		+ (mat->matrix[1][1] * tpl->y) + (mat->matrix[1][2] * tpl->x);
+		+ (mat->matrix[1][1] * tpl->y) + (mat->matrix[1][2] * tpl->z)
+		+ (mat->matrix[1][3] * tpl->w);
 	result_tuple[2] = (mat->matrix[2][0] * tpl->x)
-		+ (mat->matrix[2][1] * tpl->y) + (mat->matrix[2][2] * tpl->x);
+		+ (mat->matrix[2][1] * tpl->y) + (mat->matrix[2][2] * tpl->z)
+		+ (mat->matrix[2][3] * tpl->w);
 	result_tuple[3] = tpl->w * mat->matrix[3][3];
 	tpl->x = result_tuple[0];
 	tpl->y = result_tuple[1];
 	tpl->z = result_tuple[2];
 	tpl->w = result_tuple[3];
-	free(result_tuple);
-	result_tuple = NULL;
 }

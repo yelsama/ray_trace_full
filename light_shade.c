@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/02 08:55:30 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:51:40 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ const t_light *l, const t_light *amb)
 	pxl_to_light_v = get_vec_a_to_b(&hit_p, &l->position);
 	pxl_to_light_v = vec_norm(&pxl_to_light_v);
 	normal_v = normal_vec_on_sphere(s, hit_p);
+	normal_v = vec_norm(&normal_v);
 	amb_clr = color_multi_scalar(&amb->color, amb->brightness);
 	amb_clr = blend_two_colors(&amb_clr, &s->color);
 	result_color = color_multi_scalar(&l->color, l->brightness);
 	effect = dot_multiplication(&normal_v, &pxl_to_light_v);
-	result_color = color_multi_scalar(&result_color, effect);
+	result_color = color_multi_scalar(&l->color, effect);
 	result_color = blend_two_colors(&result_color, &s->color);
 	result_color = add_colors(&result_color, &amb_clr);
 	return (rgb_to_int(&result_color));
