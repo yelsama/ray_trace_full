@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/05 20:59:58 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:02:30 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #  define EPSILON 0.01
 # endif
 # define DEGTORAD 0.01745327
-# define XBLOCK_DIM 1200
-# define YBLOCK_DIM 800
+# define XBLOCK_DIM 1600
+# define YBLOCK_DIM 1200
 # define BATCH_WIDTH 2
 # define BATCH_HEIGHT 2
 
@@ -81,11 +81,13 @@ typedef struct s_camera
 
 typedef struct s_render_system
 {
-	float	half_width;
-	float	half_heigh;
-	float	pixel_size;
-	float	half_szie;
-	float	aspect_ratio;
+	float			half_width;
+	float			half_heigh;
+	float			pixel_size;
+	float			half_szie;
+	float			aspect_ratio;
+	t_point_vector	look_up;
+	t_point_vector	look_right;
 }	t_render;
 
 typedef struct s_ray
@@ -193,11 +195,11 @@ t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p);
 int				ligth_effect_on_sphere_pxl_color(t_point_vector hit_p,
 					const t_sphere *s, const t_light *l, const t_light *amb);
 
-// Prepare rendering values from camera and canvas info (for_render.c)
+// Prepare rendering values from camera and canvas info and get
+// rays when rendering image (for_render.c)
 void			set_camera(t_ranger *alive);
 t_ray			ray_for_pixel(t_ranger *alive, int x, int y);
 void			get_camera_transform_matrix(t_ranger *alive);
 t_matrix		get_orientation_matrix(t_ranger *alive);
-// void			set_rendering_info(t_ranger *alive);
 
 #endif

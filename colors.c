@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 08:17:03 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/02 08:59:44 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:45:49 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,17 @@ t_color	blend_two_colors(const t_color *c1, const t_color *c2)
 	result_color.red = rgb[0] * 255;
 	result_color.green = rgb[1] * 255;
 	result_color.blue = rgb[2] * 255;
-	if (result_color.red > 255)
-		result_color.red = 255;
-	if (result_color.red < 0)
-		result_color.red = 0;
-	if (result_color.green > 255)
-		result_color.green = 255;
-	if (result_color.green < 0)
-		result_color.green = 0;
-	if (result_color.blue > 255)
-		result_color.blue = 255;
-	if (result_color.blue < 0)
-		result_color.blue = 0;
+	// if (result_color.red > 255)
+	// 	result_color.red = 255;
+	// if (result_color.red < 0)
+	// 	result_color.red = 0;
+	// if (result_color.green > 255)
+	// 	result_color.green = 255;
+	// if (result_color.green < 0)
+	// 	result_color.green = 0;
+	// if (result_color.blue > 255)
+	// 	result_color.blue = 255;
+	// if (result_color.blue < 0)
+	// 	result_color.blue = 0;
 	return (result_color);
 }

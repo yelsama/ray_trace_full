@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/03 16:51:40 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:49:05 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ const t_light *l, const t_light *amb)
 	amb_clr = blend_two_colors(&amb_clr, &s->color);
 	result_color = color_multi_scalar(&l->color, l->brightness);
 	effect = dot_multiplication(&normal_v, &pxl_to_light_v);
-	result_color = color_multi_scalar(&l->color, effect);
+	result_color = color_multi_scalar(&result_color, effect);
 	result_color = blend_two_colors(&result_color, &s->color);
 	result_color = add_colors(&result_color, &amb_clr);
 	return (rgb_to_int(&result_color));
