@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 19:13:52 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/11 23:27:18 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:30:02 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,52 +40,4 @@ t_point_vector	intrsction_point(const t_ray *r, float t)
 	vec_x_t = rescale_vecotr(&r->direction, t);
 	result_point = point_from_point_vector(r->origin, &vec_x_t);
 	return (result_point);
-}
-
-static void	calculate_intersecion(const t_ray *r, const t_sphere *s, float *inf)
-{
-	float			a;
-	float			b;
-	float			c;
-	float			det;
-	t_point_vector	tmp;
-
-	tmp = get_vec_a_to_b(&s->cent, r->origin);
-	b = 2.0 * dot_multiplication(&tmp, &r->direction);
-	a = dot_multiplication(&r->direction, &r->direction);
-	c = dot_multiplication(&tmp, &tmp) - (s->rad * s->rad);
-	det = (b * b) - (4 * a * c);
-	if (det < 0)
-		return ;
-	det = sqrtf(det) / (2.0 * a);
-	c = (-1.0 * b) / (2.0 * a);
-	inf[2] = c + det;
-	inf[3] = c - det;
-	if (inf[3] > 0 || inf[2] > 0)
-		inf[1] = 1;
-	else
-		inf[1] = -1;
-}
-
-void	ray_sphare_intrsection(const t_ray *r, const t_sphere *s, float *inf)
-{
-	float	tmp;
-
-	if (!r || !s)
-	{
-		write(2, "Error getting intersctions with sphere\n", 39);
-		return ;
-	}
-	inf[0] = s->objct_id;
-	inf[1] = 0;
-	inf[2] = 0.0;
-	inf[3] = 0.0;
-	inf[4] = 0;
-	calculate_intersecion(r, s, inf);
-	if (inf[2] > inf[3])
-	{
-		tmp = inf[2];
-		inf[2] = inf[3];
-		inf[3] = tmp;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/12 18:14:32 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:30:21 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ int	exit_clear_window(t_ranger *alive)
 
 int	create_amlx_window(t_ranger *alive)
 {
-	t_sphere		s1, s2, s3;
+	t_sphere		s2;
+	t_plane			p1;
 	t_point_vector	hit_p;
 	t_ray			current_r;
-	float			inf[5];
+	float			s_inf[5];
+	float			p_inf[5];
 	int				x,y,clr;
 
 
@@ -34,9 +36,10 @@ int	create_amlx_window(t_ranger *alive)
 			XBLOCK_DIM, YBLOCK_DIM, "mini_rt");
 	if (!alive->frame.frame_ptr || !alive->frame.window)
 		return (0);
-	s1 = fill_sphere((t_point_vector){13.0, 13.0, 80.0, 1}, 6.0, (t_color){0, 200, 200}, 7);
-	s2 = fill_sphere((t_point_vector){0.0, 0.0, 80.0, 1}, 6.0, (t_color){200, 0, 200}, 7);
-	s3 = fill_sphere((t_point_vector){-13.0, 0.0, 80.0, 1}, 6.0, (t_color){50, 200, 0}, 7);
+	p1 = fill_plane((t_point_vector){0.0, 0.0, 100.0, 1}, (t_point_vector){0.0, 1.0, 0.0, 0},  (t_color){0, 200, 0}, 7);
+	// s1 = fill_sphere((t_point_vector){13.0, 13.0, 80.0, 1}, 6.0, (t_color){0, 200, 200}, 7);
+	s2 = fill_sphere((t_point_vector){0.0, 0.01, -10.0, 1}, 2.0, (t_color){255, 0, 0}, 7);
+	// s3 = fill_sphere((t_point_vector){-13.0, 0.0, 80.0, 1}, 6.0, (t_color){50, 200, 0}, 7);
 	current_r = fill_ray(&alive->cam.location, (t_point_vector){0.0, 0.0, 0.0, 0});
 	hit_p.w = 1;
 
@@ -47,31 +50,40 @@ int	create_amlx_window(t_ranger *alive)
 		while (++x < XBLOCK_DIM)
 		{
 			current_r = ray_for_pixel(alive, x, y);
-			ray_sphare_intrsection(&current_r, &s1, inf);
-			if (inf[1] > 0)
+			// ray_sphare_intrsection(&current_r, &s1, inf);
+			// if (inf[1] > 0)
+			// {
+			// 	hit_p.x = alive->cam.location.x + (inf[2] * current_r.direction.x);
+			// 	hit_p.y = alive->cam.location.y + (inf[2] * current_r.direction.y);
+			// 	hit_p.z = alive->cam.location.z + (inf[2] * current_r.direction.z);
+			// 	clr = ligth_effect_on_sphere_pxl_color(hit_p, &s1, &alive->main_light, &alive->ambient);
+			// 	mlx_pixel_put(alive->frame.frame_ptr, alive->frame.window, x, y, clr);
+			// }
+			// ray_sphare_intrsection(&current_r, &s3, inf);
+			// if (inf[1] > 0)
+			// {
+			// 	hit_p.x = alive->cam.location.x + (inf[2] * current_r.direction.x);
+			// 	hit_p.y = alive->cam.location.y + (inf[2] * current_r.direction.y);
+			// 	hit_p.z = alive->cam.location.z + (inf[2] * current_r.direction.z);
+			// 	clr = ligth_effect_on_sphere_pxl_color(hit_p, &s3, &alive->main_light, &alive->ambient);
+			// 	mlx_pixel_put(alive->frame.frame_ptr, alive->frame.window, x, y, clr);
+			// }
+			ray_sphare_intrsection(&current_r, &s2, s_inf);
+			ray_plane_intersection(&current_r, &p1, p_inf);
+			if (s_inf[1] > 0 && (s_inf[2] < p_inf[2] || !p_inf[1]))
 			{
-				hit_p.x = alive->cam.location.x + (inf[2] * current_r.direction.x);
-				hit_p.y = alive->cam.location.y + (inf[2] * current_r.direction.y);
-				hit_p.z = alive->cam.location.z + (inf[2] * current_r.direction.z);
-				clr = ligth_effect_on_sphere_pxl_color(hit_p, &s1, &alive->main_light, &alive->ambient);
-				mlx_pixel_put(alive->frame.frame_ptr, alive->frame.window, x, y, clr);
-			}
-			ray_sphare_intrsection(&current_r, &s3, inf);
-			if (inf[1] > 0)
-			{
-				hit_p.x = alive->cam.location.x + (inf[2] * current_r.direction.x);
-				hit_p.y = alive->cam.location.y + (inf[2] * current_r.direction.y);
-				hit_p.z = alive->cam.location.z + (inf[2] * current_r.direction.z);
-				clr = ligth_effect_on_sphere_pxl_color(hit_p, &s3, &alive->main_light, &alive->ambient);
-				mlx_pixel_put(alive->frame.frame_ptr, alive->frame.window, x, y, clr);
-			}
-			ray_sphare_intrsection(&current_r, &s2, inf);
-			if (inf[1] > 0)
-			{
-				hit_p.x = alive->cam.location.x + (inf[2] * current_r.direction.x);
-				hit_p.y = alive->cam.location.y + (inf[2] * current_r.direction.y);
-				hit_p.z = alive->cam.location.z + (inf[2] * current_r.direction.z);
+				hit_p.x = alive->cam.location.x + (s_inf[2] * current_r.direction.x);
+				hit_p.y = alive->cam.location.y + (s_inf[2] * current_r.direction.y);
+				hit_p.z = alive->cam.location.z + (s_inf[2] * current_r.direction.z);
 				clr = ligth_effect_on_sphere_pxl_color(hit_p, &s2, &alive->main_light, &alive->ambient);
+				mlx_pixel_put(alive->frame.frame_ptr, alive->frame.window, x, y, clr);
+			}
+			else if (p_inf[1] > 0)
+			{
+				hit_p.x = alive->cam.location.x + (p_inf[2] * current_r.direction.x);
+				hit_p.y = alive->cam.location.y + (p_inf[2] * current_r.direction.y);
+				hit_p.z = alive->cam.location.z + (p_inf[2] * current_r.direction.z);
+				clr = light_effect_on_plane_pxl_color(hit_p, &p1, &alive->main_light, &alive->ambient);
 				mlx_pixel_put(alive->frame.frame_ptr, alive->frame.window, x, y, clr);
 			}
 		}
@@ -85,10 +97,10 @@ int	create_amlx_window(t_ranger *alive)
 
 void	fill_initial_values(t_ranger *alive)
 {
-	alive->cam.field_of_view = 40;
-	alive->cam.location = (t_point_vector){0.0, 0.0, 0.0, 1};
-	alive->cam.look_forward = (t_point_vector){0.0, 0.0, 1.0, 0};
-	alive->main_light.position = (t_point_vector){0.0, 50.0, 0.0, 1};
+	alive->cam.field_of_view = 60;
+	alive->cam.location = (t_point_vector){0.0, 1.0, 9.0, 1};
+	alive->cam.look_forward = (t_point_vector){0.0, -0.1, -1.0, 0};
+	alive->main_light.position = (t_point_vector){10.0, 10.0, 4.0, 1};
 	alive->main_light.brightness = 0.8;
 	alive->main_light.color = (t_color){255, 255, 255};
 	alive->ambient.brightness = 0.2;
@@ -114,3 +126,4 @@ int	main(void)
 // intersection which I am going to call it hit.
 	// test = ray_for_pixel(&alive, 0, 0);
 	// print_an_elemnt(&test.direction);
+//for plane t = (op - plane point) dot n / (v dot n)

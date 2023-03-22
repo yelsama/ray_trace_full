@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/12 18:02:30 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:19:04 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #  define EPSILON 0.01
 # endif
 # define DEGTORAD 0.01745327
-# define XBLOCK_DIM 1600
-# define YBLOCK_DIM 1200
+# define XBLOCK_DIM 1920 
+# define YBLOCK_DIM 1080
 # define BATCH_WIDTH 2
 # define BATCH_HEIGHT 2
 
@@ -109,6 +109,15 @@ typedef struct s_sphere
 	float			rad;
 	t_color			color;
 }	t_sphere;
+
+typedef struct s_plane
+{
+	int				objct_id;
+	t_point_vector	c_point;
+	t_point_vector	normal_v;
+	t_color			color;
+}	t_plane;
+
 typedef struct s_ranger
 {
 	t_main_frame	frame;
@@ -180,20 +189,25 @@ void			shearing_trans(t_point_vector *tpl, float xy_xz_yx_yz_zx_zy[6]);
 // Create and handle rays (ops_on_ray.c)
 t_ray			fill_ray(t_point_vector *orgn_p, t_point_vector v);
 t_point_vector	intrsction_point(const t_ray *r, float t);
-				//point = origin + vector * time
+
+// Find if the ray intersect with specific shape or not (inspect_intersect.c)
 void			ray_sphare_intrsection(const t_ray *r, const t_sphere *s,
+					float *inf);
+void			ray_plane_intersection(const t_ray *r, const t_plane *p,
 					float *inf);
 
 // Fill Basic shapes (form_shapes.c)
 t_sphere		fill_sphere(t_point_vector cntr, float rad, t_color clr,
 					int objct_id);
+t_plane			fill_plane(t_point_vector cntr, t_point_vector normal_v,
+					t_color clr, int objct_id);
 
 // Find normal and light vectors for light and shade (light_shade.c)
 t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p);
-// t_point_vector	reflect_around_normal(const t_point_vector *in,
-// 					const t_point_vector *norm);
 int				ligth_effect_on_sphere_pxl_color(t_point_vector hit_p,
 					const t_sphere *s, const t_light *l, const t_light *amb);
+int				light_effect_on_plane_pxl_color(t_point_vector hit_p,
+					const t_plane *p, const t_light *l, const t_light *amb);
 
 // Prepare rendering values from camera and canvas info and get
 // rays when rendering image (for_render.c)
