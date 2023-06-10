@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:29:13 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/05/21 18:06:37 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:49:43 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ray_plane_intersection(const t_ray *r, const t_plane *p, float *inf)
 	inf[3] = 0.0;
 	inf[4] = 0;
 	oc_v = get_vec_a_to_b(r->origin, &p->c_point);
-	// oc_v = vec_norm(&oc_v);
+	oc_v = vec_norm(&oc_v);
 	vdotn = dot_multiplication(&r->direction, &p->normal_v);
 	if (vdotn == 0.0)
 		return ;
