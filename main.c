@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/23 16:24:16 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:52:29 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	create_amlx_window(t_ranger *alive)
 			XBLOCK_DIM, YBLOCK_DIM, "mini_rt");
 	if (!alive->frame.frame_ptr || !alive->frame.window)
 		return (0);
-	p1 = fill_plane((t_point_vector){0.0, -2.0, 100.0, 1}, (t_point_vector){0.0, 1.0, 0.0, 0},  (t_color){0, 200, 0}, 7);
+	p1 = fill_plane((t_point_vector){0.0, 0.0, 100.0, 1}, (t_point_vector){0.0, 1.0, 0.0, 0},  (t_color){0, 200, 0}, 7);
 	// s1 = fill_sphere((t_point_vector){13.0, 13.0, 80.0, 1}, 6.0, (t_color){0, 200, 200}, 7);
 	s2 = fill_sphere((t_point_vector){0.0, 0.01, -10.0, 1}, 2.0, (t_color){255, 0, 0}, 7);
 	// s3 = fill_sphere((t_point_vector){-13.0, 0.0, 80.0, 1}, 6.0, (t_color){50, 200, 0}, 7);
@@ -98,8 +98,8 @@ int	create_amlx_window(t_ranger *alive)
 void	fill_initial_values(t_ranger *alive)
 {
 	alive->cam.field_of_view = 60;
-	alive->cam.location = (t_point_vector){0.0, 1.0, 9.0, 1};
-	alive->cam.look_forward = (t_point_vector){0.0, -0.1, -1.0, 0};
+	alive->cam.location = (t_point_vector){0.0, 0.0, 9.0, 1};
+	alive->cam.look_forward = (t_point_vector){0.0, 0.0, -1.0, 0};
 	alive->main_light.position = (t_point_vector){10.0, 10.0, 4.0, 1};
 	alive->main_light.brightness = 0.8;
 	alive->main_light.color = (t_color){255, 255, 255};
