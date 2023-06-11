@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/11 18:52:46 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/11 19:19:07 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	create_amlx_window(t_ranger *alive)
 			hit_info = get_hit_object(alive, &current_r);
 			if (!hit_info.hit_or_not)
 				continue;
-
 			hit_p.x = alive->cam.location.x + (hit_info.t * current_r.direction.x);
 			hit_p.y = alive->cam.location.y + (hit_info.t * current_r.direction.y);
 			hit_p.z = alive->cam.location.z + (hit_info.t * current_r.direction.z);
@@ -83,14 +82,11 @@ void	fill_initial_values(t_ranger *alive)
 int	main(void)
 {
 	t_ranger	alive;
-	// t_ray		test;
 
 	alive.error = 0;
 	fill_initial_values(&alive);
 	set_camera(&alive);
 	set_objects(&alive);
-	// test = ray_for_pixel(&alive, 100, 50);
-	// print_an_elemnt(&test.direction);
 	if (1 && !create_amlx_window(&alive))
 		return (write(1, "Error making main frame window\n", 31), 1);
 	return (0);

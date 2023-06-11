@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:42:11 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/15 11:58:30 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:06:59 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,34 @@ t_ray	ray_for_pixel(t_ranger *alive, int x, int y)
 	return (result_ray);
 }
 
-t_matrix	get_orientation_matrix(t_ranger *alive)
+// t_matrix	get_orientation_matrix(t_ranger *alive)
+// {
+// 	t_matrix			new;
+// 	t_point_vector		look_up;
+
+// 	look_up = (t_point_vector){0.0, 1.0, 0.0, 0};
+// 	alive->cam.look_forward = vec_norm(&alive->cam.look_forward);
+// 	alive->rend.look_right = cros_multiplication(&look_up, &alive->cam.look_forward);
+// 	if (alive->cam.look_forward.y == 1.0)
+// 		alive->rend.look_right.x = 1.0;
+// 	alive->rend.look_right = vec_norm(&alive->rend.look_right);
+// 	look_up = cros_multiplication(&alive->cam.look_forward, &alive->rend.look_right);
+// 	alive->rend.look_up = vec_norm(&look_up);
+// 	fill_identity_matrix(&new);
+// 	new.matrix[0][0] = alive->rend.look_right.x;
+// 	new.matrix[0][1] = alive->rend.look_right.y;
+// 	new.matrix[0][2] = alive->rend.look_right.z;
+// 	new.matrix[1][0] = alive->rend.look_up.x;
+// 	new.matrix[1][1] = alive->rend.look_up.y;
+// 	new.matrix[1][2] = alive->rend.look_up.z;
+// 	new.matrix[2][0] = alive->cam.look_forward.x;
+// 	new.matrix[2][1] = alive->cam.look_forward.y;
+// 	new.matrix[2][2] = alive->cam.look_forward.z;
+// 	return (new);
+// }
+
+void	get_camera_transform_matrix(t_ranger *alive)
 {
-	t_matrix			new;
 	t_point_vector		look_up;
 
 	look_up = (t_point_vector){0.0, 1.0, 0.0, 0};
@@ -77,28 +102,50 @@ t_matrix	get_orientation_matrix(t_ranger *alive)
 	alive->rend.look_right = vec_norm(&alive->rend.look_right);
 	look_up = cros_multiplication(&alive->cam.look_forward, &alive->rend.look_right);
 	alive->rend.look_up = vec_norm(&look_up);
-	fill_identity_matrix(&new);
-	new.matrix[0][0] = alive->rend.look_right.x;
-	new.matrix[0][1] = alive->rend.look_right.y;
-	new.matrix[0][2] = alive->rend.look_right.z;
-	new.matrix[1][0] = alive->rend.look_up.x;
-	new.matrix[1][1] = alive->rend.look_up.y;
-	new.matrix[1][2] = alive->rend.look_up.z;
-	new.matrix[2][0] = alive->cam.look_forward.x;
-	new.matrix[2][1] = alive->cam.look_forward.y;
-	new.matrix[2][2] = alive->cam.look_forward.z;
-	return (new);
-}
-
-void	get_camera_transform_matrix(t_ranger *alive)
-{
-	t_matrix	orient_m;
+	// t_matrix	orient_m;
 	// t_matrix	transl_m;
 	// t_matrix	transform;
 
-	orient_m = get_orientation_matrix(alive);
+	// orient_m = get_orientation_matrix(alive);
 	// transl_m = get_translation_matrix(-1.0 * alive->cam.location.x,
 	// 		-1.0 * alive->cam.location.y, -1.0 * alive->cam.location.z);
 	// transform = matrices_multiplication(&orient_m, &transl_m);
 	// alive->cam.transform = matrix_inverse(&transform);
+}
+
+t_hit_info	get_hit_object(t_ranger *alive, const t_ray *r)
+{
+	t_hit_info		inf;
+	t_hit_info		tmp_inf;
+	int				i;
+	int				past_first;
+
+	inf.hit_or_not = 0;
+	inf.t = 0.0;
+	inf.obj_id = -1;
+	past_first = 0;
+	i = -1;
+	while (++i < alive->no_of_object)
+	{
+		if (alive->objcs[i].obj_type == sphere)
+			tmp_inf = ray_sphare_intrsection(r, (t_sphere *)alive->objcs[i].the_obj);
+		else if (alive->objcs[i].obj_type == plane)
+			tmp_inf = ray_plane_intersection(r, (t_plane *)alive->objcs[i].the_obj);
+		else
+			printf("got uknown object\n");/////
+		if (!past_first && tmp_inf.hit_or_not > 0)
+		{
+			inf.hit_or_not = 1;
+			inf.t = tmp_inf.t;
+			inf.obj_id = i;
+			past_first++;
+		}
+		if (tmp_inf.hit_or_not > 0 && tmp_inf.t < inf.t)
+		{
+			inf.hit_or_not = 1;
+			inf.t = tmp_inf.t;
+			inf.obj_id = i;
+		}
+	}
+	return (inf);
 }

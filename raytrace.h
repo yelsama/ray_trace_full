@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/11 18:03:36 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:08:10 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,10 +229,10 @@ int				light_effect_on_plane_pxl_color(t_point_vector hit_p,
 void			set_camera(t_ranger *alive);
 t_ray			ray_for_pixel(t_ranger *alive, int x, int y);
 void			get_camera_transform_matrix(t_ranger *alive);
-t_matrix		get_orientation_matrix(t_ranger *alive);
+t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
+// t_matrix		get_orientation_matrix(t_ranger *alive);
 
 // this part is on progress temp.c
 void			set_objects(t_ranger *alive);
-t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
 
 #endif
