@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:29:13 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/10 15:49:43 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:34:19 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,63 +29,63 @@ static void	calculate_intersecion(const t_ray *r, const t_sphere *s, float *inf)
 		return ;
 	det = sqrtf(det) / (2.0 * a);
 	c = (-1.0 * b) / (2.0 * a);
-	inf[2] = c + det;
-	inf[3] = c - det;
-	if (inf[3] > 0 || inf[2] > 0)
-		inf[1] = 1;
+	inf[1] = c + det;
+	inf[2] = c - det;
+	if (inf[2] > 0 || inf[1] > 0)
+		inf[0] = 1;
 	else
-		inf[1] = -1;
+		inf[0] = -1;
 }
 
-void	ray_sphare_intrsection(const t_ray *r, const t_sphere *s, float *inf)
+t_hit_info	ray_sphare_intrsection(const t_ray *r, const t_sphere *s)
 {
-	float	tmp;
+	float		tmp;
+	t_hit_info	new;
+	float		inf[3];
 
 	if (!r || !s)
 	{
 		write(2, "Error getting intersctions with sphere\n", 39);
-		return ;
+		return (new.hit_or_not = 0, new.t = 0, new);
 	}
-	inf[0] = s->objct_id;
-	inf[1] = 0;
+	inf[0] = 0;
+	inf[1] = 0.0;
 	inf[2] = 0.0;
-	inf[3] = 0.0;
-	inf[4] = 0;
 	calculate_intersecion(r, s, inf);
-	if (inf[2] > inf[3])
+	if (inf[1] > inf[2] && inf[2] > 0)
 	{
-		tmp = inf[2];
-		inf[2] = inf[3];
-		inf[3] = tmp;
+		tmp = inf[1];
+		inf[1] = inf[2];
+		inf[2] = tmp;
 	}
+	new.hit_or_not = inf[0];
+	new.t = inf[1];
+	return (new);
 }
 
-void	ray_plane_intersection(const t_ray *r, const t_plane *p, float *inf)
+t_hit_info	ray_plane_intersection(const t_ray *r, const t_plane *p)
 {
 	t_point_vector	oc_v;
 	float			vdotn;
 	float			oc_vdotn;
-	float			t;
+	t_hit_info		new;
 
+	new.hit_or_not = 0;
+	new.t = 0;
 	if (!r || !p)
 	{
 		write(2, "Error getting intersctions with plane\n", 39);
-		return ;
+		return (new);
 	}
-	inf[0] = p->objct_id;
-	inf[1] = 0;
-	inf[2] = 0.0;
-	inf[3] = 0.0;
-	inf[4] = 0;
 	oc_v = get_vec_a_to_b(r->origin, &p->c_point);
-	oc_v = vec_norm(&oc_v);
+	// oc_v = vec_norm(&oc_v);
 	vdotn = dot_multiplication(&r->direction, &p->normal_v);
 	if (vdotn == 0.0)
-		return ;
+		return (new);
 	oc_vdotn = dot_multiplication(&oc_v, &p->normal_v);
-	t = oc_vdotn / vdotn;
-	if (t < 0.0)
-		return ;
-	inf[1] = 1;
-	inf[2] = t;
+	new.t = oc_vdotn / vdotn;
+	if (new.t < 0.0)
+		return (new);
+	new.hit_or_not = 1;
+	return (new);
 }

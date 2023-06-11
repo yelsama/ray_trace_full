@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/03/21 21:19:04 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:03:36 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,17 @@ typedef enum e_axis
 {
 	x_axis,
 	y_axis,
-	z_axis
+	z_axis,
+	sphere,
+	plane
 }	t_axis;
+
+typedef	struct s_objects_lis
+{
+	int					obj_id;
+	int 				obj_type;
+	void				*the_obj;
+}	t_objcs_list;
 
 typedef struct s_main_frame
 {
@@ -61,6 +70,13 @@ typedef struct s_canva
 	int	height;
 	int	color;
 }	t_batch;
+
+typedef	struct s_hit_info
+{
+	float	hit_or_not;
+	float	t;
+	int		obj_id;
+}	t_hit_info;
 
 typedef struct s_matrix
 {
@@ -104,7 +120,6 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	int				objct_id;
 	t_point_vector	cent;
 	float			rad;
 	t_color			color;
@@ -112,7 +127,6 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	int				objct_id;
 	t_point_vector	c_point;
 	t_point_vector	normal_v;
 	t_color			color;
@@ -125,6 +139,10 @@ typedef struct s_ranger
 	t_render		rend;
 	t_light			main_light;
 	t_light			ambient;
+	t_objcs_list	objcs[100];
+	t_sphere		s[24];
+	t_plane			p[24];
+	int				no_of_object;
 	int				error;
 }	t_ranger;
 
@@ -191,16 +209,13 @@ t_ray			fill_ray(t_point_vector *orgn_p, t_point_vector v);
 t_point_vector	intrsction_point(const t_ray *r, float t);
 
 // Find if the ray intersect with specific shape or not (inspect_intersect.c)
-void			ray_sphare_intrsection(const t_ray *r, const t_sphere *s,
-					float *inf);
-void			ray_plane_intersection(const t_ray *r, const t_plane *p,
-					float *inf);
+t_hit_info		ray_sphare_intrsection(const t_ray *r, const t_sphere *s);
+t_hit_info		ray_plane_intersection(const t_ray *r, const t_plane *p);
 
 // Fill Basic shapes (form_shapes.c)
-t_sphere		fill_sphere(t_point_vector cntr, float rad, t_color clr,
-					int objct_id);
+t_sphere		fill_sphere(t_point_vector cntr, float rad, t_color clr);
 t_plane			fill_plane(t_point_vector cntr, t_point_vector normal_v,
-					t_color clr, int objct_id);
+					t_color clr);
 
 // Find normal and light vectors for light and shade (light_shade.c)
 t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p);
@@ -215,5 +230,9 @@ void			set_camera(t_ranger *alive);
 t_ray			ray_for_pixel(t_ranger *alive, int x, int y);
 void			get_camera_transform_matrix(t_ranger *alive);
 t_matrix		get_orientation_matrix(t_ranger *alive);
+
+// this part is on progress temp.c
+void			set_objects(t_ranger *alive);
+t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
 
 #endif
