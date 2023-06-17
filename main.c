@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/11 19:19:07 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:31:21 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ int	create_amlx_window(t_ranger *alive)
 			hit_info = get_hit_object(alive, &current_r);
 			if (!hit_info.hit_or_not)
 				continue;
-			hit_p.x = alive->cam.location.x + (hit_info.t * current_r.direction.x);
-			hit_p.y = alive->cam.location.y + (hit_info.t * current_r.direction.y);
-			hit_p.z = alive->cam.location.z + (hit_info.t * current_r.direction.z);
+			p0_plus_t_mul_v(&hit_p, &alive->cam.location, &current_r.direction, hit_info.t);
 			if (alive->objcs[hit_info.obj_id].obj_type == sphere)
-				clr = ligth_effect_on_sphere_pxl_color(hit_p, (t_sphere *)alive->objcs[hit_info.obj_id].the_obj, &alive->main_light, &alive->ambient);
+				clr = ligth_effect_on_sphere_pxl_color(alive, hit_p, hit_info.obj_id);
 			else if (alive->objcs[hit_info.obj_id].obj_type == plane)
-				clr = light_effect_on_plane_pxl_color(hit_p, (t_plane *)alive->objcs[hit_info.obj_id].the_obj, &alive->main_light, &alive->ambient);
+				clr = light_effect_on_plane_pxl_color(alive, hit_p, hit_info.obj_id);
 			else
 				continue;	
 			mlx_pixel_put(alive->frame.frame_ptr, alive->frame.window, x, y, clr);
@@ -68,14 +66,16 @@ int	create_amlx_window(t_ranger *alive)
 
 void	fill_initial_values(t_ranger *alive)
 {
-	alive->cam.field_of_view = 60;
-	alive->cam.location = (t_point_vector){0.0, 1.0, 9.0, 1};
+	alive->cam.field_of_view = 40;
+	alive->cam.location = (t_point_vector){0.0, 0.0, 30.0, 1};
 	alive->cam.look_forward = (t_point_vector){0.0, 0.0, -1.0, 0};
-	alive->main_light.position = (t_point_vector){10.0, 10.0, 4.0, 1};
+	alive->main_light.position = (t_point_vector){-4.0, 10.0, 4.0, 1};
 	alive->main_light.brightness = 0.8;
 	alive->main_light.color = (t_color){255, 255, 255};
 	alive->ambient.brightness = 0.2;
 	alive->ambient.color = (t_color){255, 255, 255};
+	alive->light_appear_clr = color_multi_scalar(&alive->main_light.color, alive->main_light.brightness);
+	alive->amb_appear_clr = color_multi_scalar(&alive->ambient.color, alive->ambient.brightness);
 	get_camera_transform_matrix(alive);
 }
 

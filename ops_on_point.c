@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:57:38 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/23 02:49:29 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:32:27 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,13 @@ void	print_an_elemnt(t_point_vector *e)
 	if (e->w == 1)
 		write(1, "this is point, ", 15);
 	printf("x is %.4f, y is %.4f, z is %.4f\n", e->x, e->y, e->z);
+}
+
+void	p0_plus_t_mul_v(t_point_vector *p, const t_point_vector *p0,
+					const t_point_vector *v, float t)
+{
+	p->w = 1;
+	p->x = p0->x + (t * v->x);
+	p->y = p0->y + (t * v->y);
+	p->z = p0->z + (t * v->z);
 }

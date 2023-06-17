@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/11 21:08:10 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:00:51 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ typedef enum e_axis
 	y_axis,
 	z_axis,
 	sphere,
-	plane
+	plane,
+	cylinder
 }	t_axis;
 
 typedef	struct s_objects_lis
@@ -125,6 +126,14 @@ typedef struct s_sphere
 	t_color			color;
 }	t_sphere;
 
+typedef struct s_cylinder
+{
+	t_point_vector	start;
+	t_point_vector	end;
+	float			rad;
+	t_color			color;
+}	t_cylndr;
+
 typedef struct s_plane
 {
 	t_point_vector	c_point;
@@ -139,9 +148,12 @@ typedef struct s_ranger
 	t_render		rend;
 	t_light			main_light;
 	t_light			ambient;
+	t_color			light_appear_clr;
+	t_color			amb_appear_clr;
 	t_objcs_list	objcs[100];
 	t_sphere		s[24];
 	t_plane			p[24];
+	t_cylndr		c[24];
 	int				no_of_object;
 	int				error;
 }	t_ranger;
@@ -162,6 +174,8 @@ int				elemnts_are_identical(const t_point_vector *a,
 t_point_vector	point_from_point_vector(const t_point_vector *a,
 					const t_point_vector *v);
 void			print_an_elemnt(t_point_vector *e);
+void	p0_plus_t_mul_v(t_point_vector *p, const t_point_vector *p0,
+					const t_point_vector *v, float t);
 
 // Dot and Cross Multiplication of vectors (mag_norm_dot_cros.c)
 float			vec_mag(const t_point_vector *v);
@@ -211,18 +225,21 @@ t_point_vector	intrsction_point(const t_ray *r, float t);
 // Find if the ray intersect with specific shape or not (inspect_intersect.c)
 t_hit_info		ray_sphare_intrsection(const t_ray *r, const t_sphere *s);
 t_hit_info		ray_plane_intersection(const t_ray *r, const t_plane *p);
+t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
 
 // Fill Basic shapes (form_shapes.c)
 t_sphere		fill_sphere(t_point_vector cntr, float rad, t_color clr);
 t_plane			fill_plane(t_point_vector cntr, t_point_vector normal_v,
 					t_color clr);
+t_cylndr		fill_cylndr(t_point_vector cntr, t_point_vector vec, t_color clr,
+					float *h_r);
 
 // Find normal and light vectors for light and shade (light_shade.c)
 t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p);
-int				ligth_effect_on_sphere_pxl_color(t_point_vector hit_p,
-					const t_sphere *s, const t_light *l, const t_light *amb);
-int				light_effect_on_plane_pxl_color(t_point_vector hit_p,
-					const t_plane *p, const t_light *l, const t_light *amb);
+int				ligth_effect_on_sphere_pxl_color(t_ranger *alive, t_point_vector hit_p,
+					int obj_id);
+int				light_effect_on_plane_pxl_color(t_ranger *alive, t_point_vector hit_p,
+					int obj_id);
 
 // Prepare rendering values from camera and canvas info and get
 // rays when rendering image (for_render.c)
