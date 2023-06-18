@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/17 19:00:51 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/18 18:05:11 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <math.h>
 # include <unistd.h>
 #include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <stdint.h>
+# include <stdarg.h>
+# include <fcntl.h>
 
 # ifndef EPSILON
 #  define EPSILON 0.01
@@ -251,5 +257,20 @@ t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
 
 // this part is on progress temp.c
 void			set_objects(t_ranger *alive);
+
+//Parsing
+int	parsing(t_ranger *alive, char **av);
+int	read_width(char *strt);
+void	fill(char ***argsex, t_ranger *alive, int l);
+void	fill_ambient(t_ranger *alive, char **str);
+void	fill_camera(t_ranger *alive, char **str);
+
+//get_next_line
+char	*ft_strchr(const char *s, int c);
+int		ft_strlen(char *str);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substr(char *s, int start, int len);
+char	*get_next_line(int fd);
+char	*ft_strdup(char *src);
 
 #endif
