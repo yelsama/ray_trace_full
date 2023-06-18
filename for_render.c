@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:42:11 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/17 22:00:31 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/18 18:07:20 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,10 @@ t_hit_info	get_hit_object(t_ranger *alive, const t_ray *r)
 			tmp_inf = ray_sphare_intrsection(r, (t_sphere *)alive->objcs[i].the_obj);
 		else if (alive->objcs[i].obj_type == plane)
 			tmp_inf = ray_plane_intersection(r, (t_plane *)alive->objcs[i].the_obj);
-		// else if (alive->objcs[i].obj_type == cylinder)
-		// 	tmp_inf = ray_cylinder_intersect(r, (t_plane *)alive->objcs[i].the_obj);
+		else if (alive->objcs[i].obj_type == cylinder)
+			tmp_inf = ray_cylinder_intersect(r, (t_cylndr *)alive->objcs[i].the_obj);
 		else
-			printf("got uknown object\n");/////
+			printf("got uknown object at for_render\n");/////
 		if (!past_first && tmp_inf.hit_or_not > 0)
 		{
 			inf.hit_or_not = 1;

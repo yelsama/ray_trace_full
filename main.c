@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 17:23:07 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/18 18:38:07 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ int	main(int ac, char **av)
 	t_ranger	alive;
 
 	alive.error = 0;
-	parsing(&alive, av);
+	(void)ac;
+	(void)av;
+	// parsing(&alive, av);
 	fill_initial_values(&alive);
 	set_camera(&alive);
 	set_objects(&alive);

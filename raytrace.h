@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 18:05:11 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/18 18:40:17 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@
 # include <math.h>
 # include <unistd.h>
 #include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <stdint.h>
-# include <stdarg.h>
-# include <fcntl.h>
 
 # ifndef EPSILON
 #  define EPSILON 0.01
@@ -134,9 +128,10 @@ typedef struct s_sphere
 
 typedef struct s_cylinder
 {
-	t_point_vector	start;
-	t_point_vector	end;
+	t_point_vector	cnt;
+	t_point_vector	vec;
 	float			rad;
+	float			height;
 	t_color			color;
 }	t_cylndr;
 
@@ -246,6 +241,8 @@ int				ligth_effect_on_sphere_pxl_color(t_ranger *alive, t_point_vector hit_p,
 					int obj_id);
 int				light_effect_on_plane_pxl_color(t_ranger *alive, t_point_vector hit_p,
 					int obj_id);
+int				light_effect_on_cylndr_pxl_color(t_ranger *alive, t_point_vector hit_p,
+					int obj_id);
 
 // Prepare rendering values from camera and canvas info and get
 // rays when rendering image (for_render.c)
@@ -258,6 +255,7 @@ t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
 // this part is on progress temp.c
 void			set_objects(t_ranger *alive);
 
+
 //Parsing
 int	parsing(t_ranger *alive, char **av);
 int	read_width(char *strt);
@@ -267,10 +265,10 @@ void	fill_camera(t_ranger *alive, char **str);
 
 //get_next_line
 char	*ft_strchr(const char *s, int c);
-int		ft_strlen(char *str);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_substr(char *s, int start, int len);
+// int		ft_strlen(char *str);
+// char	*ft_strjoin(char *s1, char *s2);
+// char	*ft_substr(char *s, int start, int len);
 char	*get_next_line(int fd);
-char	*ft_strdup(char *src);
+// char	*ft_strdup(char *src);
 
 #endif

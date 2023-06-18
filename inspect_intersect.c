@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:29:13 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/17 21:58:34 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/18 18:28:54 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_hit_info	ray_plane_intersection(const t_ray *r, const t_plane *p)
 	new.hit_or_not = 1;
 	return (new);
 }
+
 
 // t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c)
 // {

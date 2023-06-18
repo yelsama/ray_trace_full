@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:09:12 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/17 18:39:38 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:52:37 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ t_cylndr	fill_cylndr(t_point_vector cntr, t_point_vector vec, t_color clr,
 {
 	t_cylndr	c;
 
-	p0_plus_t_mul_v(&c.start, &cntr, &vec, -h_r[0] / 2 );
-	p0_plus_t_mul_v(&c.end, &cntr, &vec, h_r[0] / 2);
-	c.color = clr;
+	c.cnt = cntr;
+	c.vec = vec;
 	c.rad = h_r[1];
+	c.height = h_r[0];
+	c.color = clr;
 	return (c);
 }	
