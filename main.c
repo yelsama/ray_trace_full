@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 18:38:07 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/18 18:46:07 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	create_amlx_window(t_ranger *alive)
 				clr = ligth_effect_on_sphere_pxl_color(alive, hit_p, hit_info.obj_id);
 			else if (alive->objcs[hit_info.obj_id].obj_type == plane)
 				clr = light_effect_on_plane_pxl_color(alive, hit_p, hit_info.obj_id);
+			else if (alive->objcs[hit_info.obj_id].obj_type == cylinder)
+				clr = light_effect_on_cylndr_pxl_color(alive, hit_p, hit_info.obj_id);
 			else
 				continue;	
 			mlx_pixel_put(alive->frame.frame_ptr, alive->frame.window, x, y, clr);
