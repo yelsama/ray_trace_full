@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:29:13 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 18:28:54 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:43:03 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static void	calculate_intersecion(const t_ray *r, const t_sphere *s, float *inf)
 	a = dot_multiplication(&r->direction, &r->direction);
 	c = dot_multiplication(&tmp, &tmp) - (s->rad * s->rad);
 	det = (b * b) - (4 * a * c);
-	if (det < 0.00001)
+	if (det < 0.0)
 		return ;
-	det = sqrtf(det) / (2.0 * a);
-	c = (-1.0 * b) / (2.0 * a);
+	a = 2.0 * a;
+	det = sqrtf(det) / a;
+	c = (-1.0 * b) / a;
 	inf[1] = c + det;
 	inf[2] = c - det;
 	if (inf[2] > 0 || inf[1] > 0)
