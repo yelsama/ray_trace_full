@@ -2,32 +2,70 @@
 
 
 // cylinder defined by extremes a and b, and radious ra
-vec4 cylIntersect( in vec3 ro, in vec3 rd, in vec3 a, in vec3 b, float ra )
-{
-    vec3  ba = b  - a;
-    vec3  oc = ro - a;
-    float baba = dot(ba,ba);
-    float bard = dot(ba,rd);
-    float baoc = dot(ba,oc);
-    float k2 = baba            - bard*bard;
-    float k1 = baba*dot(oc,rd) - baoc*bard;
-    float k0 = baba*dot(oc,oc) - baoc*baoc - ra*ra*baba;
-    float h = k1*k1 - k2*k0;
-    if( h<0.0 ) return vec4(-1.0);//no intersection
-    h = sqrt(h);
-    float t = (-k1-h)/k2;
-    // body
-    float y = baoc + t*bard;
-    if( y>0.0 && y<baba ) return vec4( t, (oc+t*rd - ba*y/baba)/ra );
-    // caps
-    t = ( ((y<0.0) ? 0.0 : baba) - baoc)/bard;
-    if( abs(k1+k2*t)<h )
-    {
-        return vec4( t, ba*sign(y)/sqrt(baba) );
-    }
-    return vec4(-1.0);//no intersection
-}
+// vec4 cylIntersect( in vec3 ro, in vec3 rd, in vec3 a, in vec3 b, float ra )
+// {
+//     vec3  ba = b  - a;
+//     vec3  oc = ro - a;
+//     float baba = dot(ba,ba);
+//     float bard = dot(ba,rd);
+//     float baoc = dot(ba,oc);
+//     float k2 = baba            - bard*bard;
+//     float k1 = baba*dot(oc,rd) - baoc*bard;
+//     float k0 = baba*dot(oc,oc) - baoc*baoc - ra*ra*baba;
+//     float h = k1*k1 - k2*k0;
+//     if( h<0.0 ) return vec4(-1.0);//no intersection
+//     h = sqrt(h);
+//     float t = (-k1-h)/k2;
+//     // body
+//     float y = baoc + t*bard;
+//     if( y>0.0 && y<baba ) return vec4( t, (oc+t*rd - ba*y/baba)/ra );
+//     // caps
+//     t = ( ((y<0.0) ? 0.0 : baba) - baoc)/bard;
+//     if( abs(k1+k2*t)<h )
+//     {
+//         return vec4( t, ba*sign(y)/sqrt(baba) );
+//     }
+//     return vec4(-1.0);//no intersection
+// }
 
+t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c)
+{
+    t_point_vector  oc_v;
+    float           bard;
+    float           baoc;
+    float           k2;
+    float           k1;
+    float           k0;
+    float           h;
+    float           y;
+    t_hit_info      inf;
+
+    inf.hit_or_not = 0;
+    oc_v = get_vec_a_to_b(&c->a, r->origin);
+    bard = dot_multiplication(&c->ba_v, &r->direction);
+    baoc = dot_multiplication(&c->ba_v, &oc_v);
+    k2 = c->baba - (bard * bard);
+    k1 = (c->baba * dot_multiplication(&oc_v, &r->direction)) - (baoc * bard);
+    k0 = (c->baba * dot_multiplication(&oc_v, &oc_v)) - (baoc * baoc) - (c->rad * c->rad * c->baba);
+    h = k1 * k1 - k2 * k0;
+    if (h < 0.0)
+        return (inf);
+    h = sqrtf(h);
+    inf.t = (-1.0 * k1 - h)/k2;
+    y = baoc + inf.t * bard;
+    if( y > 0.0 && y < c->baba )
+    {
+        inf.hit_or_not = 1;
+        return (inf);
+    }
+    // if (fabs(k1 + k2 * inf.t) < h)
+    // {
+    //     inf.t = 0;
+    //     return (inf);
+    // }
+    // inf.hit_or_not = 1;
+    return (inf);
+}
 // t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c)
 // {
 // 	t_point_vector	z;

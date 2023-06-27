@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 18:40:17 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:41:49 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,12 @@ typedef struct s_cylinder
 {
 	t_point_vector	cnt;
 	t_point_vector	vec;
+	t_point_vector	a;
+	t_point_vector	b;
+	t_point_vector	ba_v;
 	float			rad;
 	float			height;
+	float			baba;
 	t_color			color;
 }	t_cylndr;
 
