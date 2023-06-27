@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/06/27 20:51:42 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:02:33 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,21 @@ void	fill_ambient(t_ranger *alive, char **str)
 
 void	fill_camera(t_ranger *alive, char **str)
 {
+	char **tmp;
 	
+	alive->cam.field_of_view = ft_atof(str[3]);
+	tmp = ft_split(str[1],',');
+	alive->cam.location.w = 1;
+	alive->cam.location.x = ft_atof(tmp[0]);
+	alive->cam.location.y = ft_atof(tmp[1]);
+	alive->cam.location.z = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	tmp = ft_split(str[2],',');
+	alive->cam.look_forward.w = 0;
+	alive->cam.look_forward.x = ft_atof(tmp[0]);
+	alive->cam.look_forward.y = ft_atof(tmp[1]);
+	alive->cam.look_forward.z = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
 }
 
 void	fill_light(t_ranger *alive, char **str)

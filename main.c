@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/27 20:52:15 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:03:04 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	create_amlx_window(t_ranger *alive)
 
 void	fill_initial_values(t_ranger *alive)
 {
-	alive->cam.field_of_view = 40;
-	alive->cam.location = (t_point_vector){0.0, 0.0, 30.0, 1};
-	alive->cam.look_forward = (t_point_vector){0.0, 0.0, -1.0, 0};
+	// alive->cam.field_of_view = 40;
+	// alive->cam.location = (t_point_vector){0.0, 0.0, 30.0, 1};
+	// alive->cam.look_forward = (t_point_vector){0.0, 0.0, -1.0, 0};
 	alive->main_light.position = (t_point_vector){-4.0, 10.0, 4.0, 1};
 	alive->main_light.brightness = 0.8;
 	alive->main_light.color = (t_color){255, 255, 255};
