@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/27 20:31:57 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:14:37 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,11 @@ void	fill_camera(t_ranger *alive, char **str);
 
 //get_next_line
 char	*ft_strchr(const char *s, int c);
+char	*gl_substr(char *s, int start, int len);
+char	*gl_strjoin(char *s1, char *s2);
+int	gl_strlen2(char *str);
+int	gl_strlen(char *str);
+char	*gl_strchr(const char *s, int c);
 // int		ft_strlen(char *str);
 // char	*ft_strjoin(char *s1, char *s2);
 // char	*ft_substr(char *s, int start, int len);

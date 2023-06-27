@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/06/27 21:08:51 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:33:01 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	fill_camera(t_ranger *alive, char **str)
 	alive->cam.location.x = ft_atof(tmp[0]);
 	alive->cam.location.y = ft_atof(tmp[1]);
 	alive->cam.location.z = ft_atof(tmp[2]);
+	ft_printf("%.6f \n %.6f\n %.6f\n",ft_atof(tmp[0]),ft_atof(tmp[1]),ft_atof(tmp[2]) );
 	free_2d_array_char(tmp);
 	tmp = ft_split(str[2],',');
 	alive->cam.look_forward.w = 0;
@@ -99,17 +100,20 @@ void	fill_light(t_ranger *alive, char **str)
 
 void	fill_plane2(t_ranger *alive, char **str)
 {
-	
+	(void)alive;
+	(void)str;
 }
 
 void	fill_sphere2(t_ranger *alive, char **str)
 {
-	
+	(void)alive;
+	(void)str;
 }
 
 void	fill_cylinder2(t_ranger *alive, char **str)
 {
-	
+	(void)alive;
+	(void)str;
 }
 
 void	fill(char ***argsex, t_ranger *alive, int l)
@@ -131,7 +135,7 @@ void	fill(char ***argsex, t_ranger *alive, int l)
 			fill_sphere2(alive, argsex[i]);
 		else if ( ft_strncmp(argsex[i][0],"cy",2) == 0)
 			fill_cylinder2(alive, argsex[i]);
-			 
+		i++; 
 	}
 }
 
@@ -143,6 +147,7 @@ int	parsing(t_ranger *alive, char **av)
 	int	fd;
 	char	***argsex;
 
+	i = 0;
 	l = read_width(av[1]);
 	args = (char**)malloc(sizeof(char*)*(l + 1));
 	fd = open(av[1], O_RDONLY);
@@ -161,4 +166,6 @@ int	parsing(t_ranger *alive, char **av)
 		i++;
 	}
 	fill(argsex, alive, l);
+
+	return (0);
 }

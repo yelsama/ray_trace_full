@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/27 21:08:57 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:25:46 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	main(int ac, char **av)
 
 	alive.error = 0;
 	(void)ac;
-	(void)av;
 	parsing(&alive, av);
 	fill_initial_values(&alive);
 	set_camera(&alive);

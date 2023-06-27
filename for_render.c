@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   for_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:42:11 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 18:07:20 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:31:02 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_ray	ray_for_pixel(t_ranger *alive, int x, int y)
 void	get_camera_transform_matrix(t_ranger *alive)
 {
 	t_point_vector		look_up;
-
+	print_an_elemnt(&alive->cam.look_forward);
 	look_up = (t_point_vector){0.0, 1.0, 0.0, 0};
 	alive->cam.look_forward = vec_norm(&alive->cam.look_forward);
 	alive->rend.look_right = cros_multiplication(&look_up, &alive->cam.look_forward);
