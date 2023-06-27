@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/06/27 21:02:33 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:08:51 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,20 @@ void	fill_camera(t_ranger *alive, char **str)
 
 void	fill_light(t_ranger *alive, char **str)
 {
+	char **tmp;
 	
+	alive->main_light.brightness = ft_atof(str[2]);
+	tmp = ft_split(str[1],',');
+	alive->main_light.position.w = 1;
+	alive->main_light.position.x = ft_atof(tmp[0]);
+	alive->main_light.position.y = ft_atof(tmp[1]);
+	alive->main_light.position.z = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	tmp = ft_split(str[3],',');
+	alive->main_light.color.red = ft_atof(tmp[0]);
+	alive->main_light.color.green = ft_atof(tmp[1]);
+	alive->main_light.color.blue = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
 }
 
 void	fill_plane2(t_ranger *alive, char **str)
