@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:12:09 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/06/18 17:26:54 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:32:52 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ char	*read_str(char	*str, int fd)
 	size_t	malloc_size;
 
 	size = -100;
-	malloc_size = BUFFER_SIZE;
-	while ((size == BUFFER_SIZE && !gl_strchr(str, '\n')) || size == -100)
+	malloc_size = 1;
+	while ((size == 1 && !gl_strchr(str, '\n')) || size == -100)
 	{
 		part = (char *)malloc(sizeof(char) * (malloc_size + 1));
 		if (!part)
 			return (NULL);
-		size = read(fd, part, BUFFER_SIZE);
+		size = read(fd, part, 1);
 		if (size == -1)
 		{
 			free (part);
@@ -60,7 +60,7 @@ char	*get_next_line(int fd)
 	int			size;
 	char		*tmp;
 
-	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 1024)
 		return (NULL);
 	tmp = read_str(s, fd);
 	if (!tmp)

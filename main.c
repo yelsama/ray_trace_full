@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 18:46:07 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:52:15 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	fill_initial_values(t_ranger *alive)
 	alive->main_light.position = (t_point_vector){-4.0, 10.0, 4.0, 1};
 	alive->main_light.brightness = 0.8;
 	alive->main_light.color = (t_color){255, 255, 255};
-	alive->ambient.brightness = 0.2;
-	alive->ambient.color = (t_color){255, 255, 255};
+	// alive->ambient.brightness = 0.2;
+	// alive->ambient.color = (t_color){255, 255, 255};
 	alive->light_appear_clr = color_multi_scalar(&alive->main_light.color, alive->main_light.brightness);
 	alive->amb_appear_clr = color_multi_scalar(&alive->ambient.color, alive->ambient.brightness);
 	get_camera_transform_matrix(alive);
@@ -88,7 +88,7 @@ int	main(int ac, char **av)
 	alive.error = 0;
 	(void)ac;
 	(void)av;
-	// parsing(&alive, av);
+	parsing(&alive, av);
 	fill_initial_values(&alive);
 	set_camera(&alive);
 	set_objects(&alive);

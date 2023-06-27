@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/27 16:41:49 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:31:57 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <math.h>
 # include <unistd.h>
 #include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <stdint.h>
+# include <stdarg.h>
+# include <fcntl.h>
 
 # ifndef EPSILON
 #  define EPSILON 0.01
