@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 18:08:31 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/28 03:53:23 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	under_shadow(t_ranger *alive, t_point_vector p, t_point_vector v, int ob_id)
 			hit_inf = ray_sphare_intrsection(&r, (t_sphere *)alive->objcs[i].the_obj);
 		else if (alive->objcs[i].obj_type == plane)
 			hit_inf = ray_plane_intersection(&r, (t_plane *)alive->objcs[i].the_obj);
-		// else if (alive->objcs[i].obj_type == cylinder)
-		// 	hit_inf = ray_cylinder_intersect(&r, (t_cylndr *)alive->objcs[i].the_obj);
+		else if (alive->objcs[i].obj_type == cylinder)
+			hit_inf = ray_cylinder_intersect(&r, (t_cylndr *)alive->objcs[i].the_obj);
 		else
 			continue;
 			// printf("got uknown object at light_shade.c\n");/////
@@ -99,15 +99,4 @@ int obj_id)
 	full_clr = blend_two_colors(&full_clr, &p->color);
 	full_clr = add_colors(&full_clr, &amb_clr);
 	return (rgb_to_int(&full_clr));
-}
-
-int	light_effect_on_cylndr_pxl_color(t_ranger *alive, t_point_vector hit_p,
-int obj_id)
-{
-	t_cylndr	*c;
-
-	c = (t_cylndr *)alive->objcs[obj_id].the_obj;
-	(void)hit_p;
-	(void)obj_id;
-	return (rgb_to_int(&c->color));
 }
