@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/28 05:49:23 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/28 05:52:56 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,6 @@ int	under_shadow(t_ranger *alive, t_point_vector p, t_point_vector v, int ob_id)
 	}
 	return (0);
 }
-
-// t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p)
-// {
-// 	t_point_vector	result_vec;
-
-// 	result_vec = (t_point_vector){0, 0, 0, 0};
-// 	if (!s || p.w == 0)
-// 		return (write(2, "Erro findin sphere normal vector\n", 33), result_vec);
-// 	result_vec.x = p.x - s->cent.x;
-// 	result_vec.y = p.y - s->cent.y;
-// 	result_vec.z = p.z - s->cent.z;
-// 	result_vec = vec_norm(&result_vec);
-// 	return (result_vec);
-// }
 
 int	ligth_effect_on_sphere_pxl_color(t_ranger *alive, t_point_vector hit_p,
 int obj_id)
