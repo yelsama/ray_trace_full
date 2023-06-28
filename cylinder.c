@@ -30,8 +30,6 @@ t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c)
     y = baoc + inf.t * bard;
     if( y > 0.0 && y < c->baba )
     {
-        if (inf.t < 0.0)
-            return (inf);
         inf.hit_or_not = 1;
         return (inf);
     }
@@ -41,8 +39,8 @@ t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c)
         inf.t = (c->baba - baoc) / bard;
     if (fabs(k1 + k2 * inf.t) < h)
     {
-        if (inf.t < 0.0)
-            return (inf);
+        // if (inf.t < 0.0)
+        //     return (inf);
         inf.hit_or_not = 1;
         return (inf);
     }

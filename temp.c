@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:47:12 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/28 06:07:36 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/28 06:35:43 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	set_objects(t_ranger *alive)
 	alive->s[0] = fill_sphere((t_point_vector){4.0, 4.0, -6.0, 1}, 1.0, (t_color){0, 200, 200});
 	// alive->s[1] = fill_sphere((t_point_vector){2.0, 0.01, -10.0, 1}, 2.0, (t_color){126, 112, 152});
 	alive->s[1] = fill_sphere((t_point_vector){2.0, 0.01, -10.0, 1}, 1.0, (t_color){126, 112, 152});
-	alive->s[2] = fill_sphere((t_point_vector){-3.0, 0.0, -2.0, 1}, 1.0, (t_color){126, 112, 152});
-	alive->s[3] = fill_sphere((t_point_vector){-5.0, 1.0, 0.0, 1}, 1.0, (t_color){240, 151, 41});
+	alive->s[2] = fill_sphere((t_point_vector){-5.0, 0.0, -8.0, 1}, 1.0, (t_color){126, 112, 152});
+	alive->s[3] = fill_sphere((t_point_vector){-2.0, 1.0, 0.0, 1}, 1.0, (t_color){240, 151, 41});
 	float h_r[] = {4.0, 1.0};
-	alive->c[0] = fill_cylndr((t_point_vector){0.0, 2.4, 40.0, 1}, (t_point_vector){0.0, 1.0, 0.0, 0}, (t_color){240, 151, 41}, h_r);
+	alive->c[0] = fill_cylndr((t_point_vector){0.9, 0.4, -10.0, 1}, (t_point_vector){1.0, 1.0, -1.0, 0}, (t_color){240, 151, 41}, h_r);
 	alive->objcs[0].obj_id = 0;
 	alive->objcs[0].obj_type = plane;
 	alive->objcs[0].the_obj = &alive->p[0];
