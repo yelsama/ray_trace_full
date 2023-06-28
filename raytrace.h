@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/28 03:53:03 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/06/28 05:50:56 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,8 @@ int				ligth_effect_on_sphere_pxl_color(t_ranger *alive, t_point_vector hit_p,
 					int obj_id);
 int				light_effect_on_plane_pxl_color(t_ranger *alive, t_point_vector hit_p,
 					int obj_id);
-int				under_shadow(t_ranger *alive, t_point_vector p, t_point_vector v, int ob_id);
+int				light_effect_on_cylndr_pxl_color(t_ranger *alive, t_point_vector hit_p,
+					int obj_id);
 
 // Prepare rendering values from camera and canvas info and get
 // rays when rendering image (for_render.c)
@@ -261,8 +262,6 @@ t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
 
 // Special function to operate cylinder (cylinder.c)
 t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
-int				light_effect_on_cylndr_pxl_color(t_ranger *alive, t_point_vector hit_p,
-					int obj_id);
 
 // this part is on progress temp.c
 void			set_objects(t_ranger *alive);
