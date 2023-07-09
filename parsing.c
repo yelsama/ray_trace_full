@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/06/27 21:33:01 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 22:38:17 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,43 @@ void	fill_light(t_ranger *alive, char **str)
 
 void	fill_plane2(t_ranger *alive, char **str)
 {
-	(void)alive;
-	(void)str;
-}
+	char **tmp;
 
+	tmp = ft_split(str[1],',');
+	alive->p[alive->pl].c_point.w = 1;
+	alive->p[alive->pl].c_point.x = ft_atof(tmp[0]);
+	alive->p[alive->pl].c_point.y = ft_atof(tmp[1]);
+	alive->p[alive->pl].c_point.z = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	tmp = ft_split(str[2],',');
+	alive->p[alive->pl].normal_v.w = 0;
+	alive->p[alive->pl].normal_v.x = ft_atof(tmp[0]);
+	alive->p[alive->pl].normal_v.y = ft_atof(tmp[1]);
+	alive->p[alive->pl].normal_v.z = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	tmp = ft_split(str[3],',');
+	alive->p[alive->pl].color.red = ft_atof(tmp[0]);
+	alive->p[alive->pl].color.green = ft_atof(tmp[1]);
+	alive->p[alive->pl].color.blue = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
+	alive->objcs[alive->obj_index].obj_type = plane;
+	alive->objcs[alive->obj_index].the_obj = &alive->p[alive->pl];
+	alive->pl++;
+	alive->obj_index++;
+}
 void	fill_sphere2(t_ranger *alive, char **str)
 {
-	(void)alive;
-	(void)str;
+	char **tmp;
+
+	tmp = ft_split(str[1],',');
+	alive->s[alive->sp].cent.w = 1;
+	alive->s[alive->sp].cent.x = ft_atof(tmp[0]);
+	alive->s[alive->sp].cent.y = ft_atof(tmp[1]);
+	alive->s[alive->sp].cent.z = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	alive->sp++;
+	alive->obj_index++;
 }
 
 void	fill_cylinder2(t_ranger *alive, char **str)
@@ -116,11 +145,66 @@ void	fill_cylinder2(t_ranger *alive, char **str)
 	(void)str;
 }
 
+void	initiate_params(t_ranger *alive)
+{
+	alive->A = 0;
+	alive->C = 0;
+	alive->L = 0;
+	alive->pl = 0;
+	alive->sp = 0;
+	alive->cy = 0;
+}
+
+void check_numbers(char ***argsex, t_ranger *alive, int l)
+{
+	int	i;
+
+	i = 0;
+	initiate_params(alive);
+	while (i < l)
+	{
+		if ( ft_strncmp(argsex[i][0],"A",1) == 0)
+			alive->A++;
+		else if ( ft_strncmp(argsex[i][0],"C",1) == 0)
+			alive->C++;
+		else if ( ft_strncmp(argsex[i][0],"L",1) == 0)
+			alive->L++;
+		else if ( ft_strncmp(argsex[i][0],"pl",2) == 0)
+			alive->pl++;
+		else if ( ft_strncmp(argsex[i][0],"sp",2) == 0)
+			alive->sp++;
+		else if ( ft_strncmp(argsex[i][0],"cy",2) == 0)
+			alive->cy++;
+	}
+}
+
+void check_for_errors(t_ranger *alive)
+{
+	if (alive->A > 1 || alive->A == 0 || alive->C > 1 || alive->C == 0 || alive->L > 1 || alive->L == 0)
+	{
+		ft_printf("check inputs\n");
+		exit(0);
+	}
+	if (alive->sp > 0)
+		alive->s = malloc(sizeof(t_sphere) * (alive->sp));
+	if (alive->pl > 0)
+		alive->p = malloc(sizeof(t_plane) * alive->pl);
+	if (alive->cy > 0)
+		alive->c = malloc(sizeof(t_cylndr) * (alive->cy));
+	alive->no_of_object = alive->pl + alive->sp + alive->cy;
+	if (alive->no_of_object > 0)
+		alive->objcs = malloc(sizeof(t_objcs_list) * alive->no_of_object);
+}
+
 void	fill(char ***argsex, t_ranger *alive, int l)
 {
 	int	i;
 
 	i = 0;
+	check_numbers(argsex, alive, l);
+	check_for_errors(alive);
+	initiate_params(alive);
+	alive->obj_index = 0;
 	while (i < l)
 	{
 		if ( ft_strncmp(argsex[i][0],"A",1) == 0)

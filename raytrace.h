@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/27 21:14:37 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/06/27 22:18:26 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,19 @@ typedef struct s_ranger
 	t_light			ambient;
 	t_color			light_appear_clr;
 	t_color			amb_appear_clr;
-	t_objcs_list	objcs[100];
-	t_sphere		s[24];
-	t_plane			p[24];
-	t_cylndr		c[24];
+	t_objcs_list	*objcs;
+	t_sphere		*s;
+	t_plane			*p;
+	t_cylndr		*c;
 	int				no_of_object;
 	int				error;
+	int				A;
+	int				C;
+	int				L;
+	int				pl;
+	int				sp;
+	int				cy;
+	int				obj_index;
 }	t_ranger;
 
 // Operations to get vectors (ops_on_vectors.c)
