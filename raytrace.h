@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/27 22:18:26 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/07/09 17:02:22 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,6 @@ t_point_vector	intrsction_point(const t_ray *r, float t);
 // Find if the ray intersect with specific shape or not (inspect_intersect.c)
 t_hit_info		ray_sphare_intrsection(const t_ray *r, const t_sphere *s);
 t_hit_info		ray_plane_intersection(const t_ray *r, const t_plane *p);
-t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
 
 // Fill Basic shapes (form_shapes.c)
 t_sphere		fill_sphere(t_point_vector cntr, float rad, t_color clr);
@@ -267,6 +266,9 @@ t_ray			ray_for_pixel(t_ranger *alive, int x, int y);
 void			get_camera_transform_matrix(t_ranger *alive);
 t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
 // t_matrix		get_orientation_matrix(t_ranger *alive);
+
+// Special function to operate cylinder (cylinder.c)
+t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
 
 // this part is on progress temp.c
 void			set_objects(t_ranger *alive);
