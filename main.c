@@ -90,7 +90,7 @@ int	main(int ac, char **av)
 	parsing(&alive, av);
 	fill_initial_values(&alive);
 	set_camera(&alive);
-	set_objects(&alive);
+	// set_objects(&alive);
 	if (1 && !create_amlx_window(&alive))
 		return (write(1, "Error making main frame window\n", 31), 1);
 	return (0);

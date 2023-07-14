@@ -135,14 +135,41 @@ void	fill_sphere2(t_ranger *alive, char **str)
 	alive->s[alive->sp].cent.y = ft_atof(tmp[1]);
 	alive->s[alive->sp].cent.z = ft_atof(tmp[2]);
 	free_2d_array_char(tmp);
+	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
+	alive->objcs[alive->obj_index].obj_type = sphere;
+	alive->objcs[alive->obj_index].the_obj = &alive->p[alive->sp];
 	alive->sp++;
 	alive->obj_index++;
 }
 
 void	fill_cylinder2(t_ranger *alive, char **str)
 {
-	(void)alive;
-	(void)str;
+	char **tmp;
+
+	tmp = ft_split(str[1],',');
+	alive->c[alive->cy].cnt.w = 1;
+	alive->c[alive->cy].cnt.x = ft_atof(tmp[0]);
+	alive->c[alive->cy].cnt.y = ft_atof(tmp[1]);
+	alive->c[alive->cy].cnt.z = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	tmp = ft_split(str[2],',');
+	alive->c[alive->cy].vec.w = 0;
+	alive->c[alive->cy].vec.x = ft_atof(tmp[0]);
+	alive->c[alive->cy].vec.y = ft_atof(tmp[1]);
+	alive->c[alive->cy].vec.z = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	alive->c[alive->cy].rad = (ft_atof(str[3])/2.0);
+	alive->c[alive->cy].height = ft_atof(str[4]);
+	tmp = ft_split(str[5],',');
+	alive->c[alive->cy].color.red = ft_atof(tmp[0]);
+	alive->c[alive->cy].color.green = ft_atof(tmp[1]);
+	alive->c[alive->cy].color.blue = ft_atof(tmp[2]);
+	free_2d_array_char(tmp);
+	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
+	alive->objcs[alive->obj_index].obj_type = cylinder;
+	alive->objcs[alive->obj_index].the_obj = &alive->p[alive->cy];
+	alive->cy++;
+	alive->obj_index++;
 }
 
 void	initiate_params(t_ranger *alive)
@@ -175,6 +202,7 @@ void check_numbers(char ***argsex, t_ranger *alive, int l)
 			alive->sp++;
 		else if ( ft_strncmp(argsex[i][0],"cy",2) == 0)
 			alive->cy++;
+		i++;
 	}
 }
 
@@ -202,6 +230,7 @@ void	fill(char ***argsex, t_ranger *alive, int l)
 
 	i = 0;
 	check_numbers(argsex, alive, l);
+	ft_printf("test\n");
 	check_for_errors(alive);
 	initiate_params(alive);
 	alive->obj_index = 0;
@@ -250,6 +279,7 @@ int	parsing(t_ranger *alive, char **av)
 		i++;
 	}
 	fill(argsex, alive, l);
+
 
 	return (0);
 }
