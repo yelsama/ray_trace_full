@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/06/27 22:38:17 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/07/15 21:17:14 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,15 @@ void	fill_sphere2(t_ranger *alive, char **str)
 	alive->s[alive->sp].cent.y = ft_atof(tmp[1]);
 	alive->s[alive->sp].cent.z = ft_atof(tmp[2]);
 	free_2d_array_char(tmp);
+	tmp = ft_split(str[3],',');
+	alive->s[alive->sp].color.red = ft_atof(tmp[0]);
+	alive->s[alive->sp].color.green = ft_atof(tmp[1]);
+	alive->s[alive->sp].color.blue = ft_atof(tmp[2]);
+	alive->s[alive->sp].rad = ft_atof(str[2]);
+	free_2d_array_char(tmp);
 	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
 	alive->objcs[alive->obj_index].obj_type = sphere;
-	alive->objcs[alive->obj_index].the_obj = &alive->p[alive->sp];
+	alive->objcs[alive->obj_index].the_obj = &alive->s[alive->sp];
 	alive->sp++;
 	alive->obj_index++;
 }
@@ -145,6 +151,7 @@ void	fill_sphere2(t_ranger *alive, char **str)
 void	fill_cylinder2(t_ranger *alive, char **str)
 {
 	char **tmp;
+	t_point_vector	tmp2;
 
 	tmp = ft_split(str[1],',');
 	alive->c[alive->cy].cnt.w = 1;
@@ -161,13 +168,19 @@ void	fill_cylinder2(t_ranger *alive, char **str)
 	alive->c[alive->cy].rad = (ft_atof(str[3])/2.0);
 	alive->c[alive->cy].height = ft_atof(str[4]);
 	tmp = ft_split(str[5],',');
-	alive->c[alive->cy].color.red = ft_atof(tmp[0]);
-	alive->c[alive->cy].color.green = ft_atof(tmp[1]);
-	alive->c[alive->cy].color.blue = ft_atof(tmp[2]);
+	alive->c[alive->cy].color.red = ft_atoi(tmp[0]);
+	alive->c[alive->cy].color.green = ft_atoi(tmp[1]);
+	alive->c[alive->cy].color.blue = ft_atoi(tmp[2]);
 	free_2d_array_char(tmp);
+	tmp2 = rescale_vecotr(&alive->c->vec, alive->c->height / 2);
+	alive->c[alive->cy].a = point_from_point_vector(&alive->c[alive->cy].cnt, &tmp2);
+	tmp2 = rescale_vecotr(&tmp2, -1.0);
+	alive->c[alive->cy].b = point_from_point_vector(&alive->c[alive->cy].cnt, &tmp2);
+	alive->c[alive->cy].ba_v = get_vec_a_to_b(&alive->c[alive->cy].a, &alive->c[alive->cy].b);
+	alive->c[alive->cy].baba = dot_multiplication(&alive->c[alive->cy].ba_v, &alive->c[alive->cy].ba_v);
 	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
 	alive->objcs[alive->obj_index].obj_type = cylinder;
-	alive->objcs[alive->obj_index].the_obj = &alive->p[alive->cy];
+	alive->objcs[alive->obj_index].the_obj = &alive->c[alive->cy];
 	alive->cy++;
 	alive->obj_index++;
 }

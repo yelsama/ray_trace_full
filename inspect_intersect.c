@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:29:13 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/26 10:43:03 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/15 21:15:19 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,14 @@ t_hit_info	ray_sphare_intrsection(const t_ray *r, const t_sphere *s)
 	float		tmp;
 	t_hit_info	new;
 	float		inf[3];
+	// t_point_vector t1;
+	// t_color			clr;
 
+	// clr = (t_color)s->color;
+	// t1 = (t_point_vector)s->cent;
+	// printf("got to sphere rad: %f, with color red: %f, green: %f, blue: %f\n", s->rad, clr.red, clr.green, clr.blue);
+	// print_an_elemnt(&t1);
+	// exit(0);
 	if (!r || !s)
 	{
 		write(2, "Error getting intersctions with sphere\n", 39);

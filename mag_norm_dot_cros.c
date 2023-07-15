@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:08:39 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/23 02:50:38 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:48:10 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_point_vector	vec_norm(const t_point_vector *v)
 	result_vec = (t_point_vector){0.0, 0.0, 0.0, 0};
 	magnitude = vec_mag(v);
 	if (magnitude == 0 || !v || v->w == 1)
-		return (write(2, "Error Normalizing victor\n", 26), result_vec);
+		return (write(2, "Error Normalizing vector\n", 26), result_vec);
 		result_vec.w = 0;
 		result_vec.x = v->x / magnitude;
 		result_vec.y = v->y / magnitude;
