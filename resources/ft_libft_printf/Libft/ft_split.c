@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 13:51:50 by ymohamed          #+#    #+#             */
-/*   Updated: 2022/07/30 14:31:44 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/15 21:45:29 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**ft_split(char const *s, char c)
 	char	**p;
 	int		words;
 	int		i;
-
+	
 	if (!s)
 		return (0);
 	words = count_strings(s, c);

@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/07/15 21:17:14 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/15 21:58:46 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	free_2d_array_char(char **str)
 void	fill_ambient(t_ranger *alive, char **str)
 {
 	char **tmp;
-	
-	
+	printf("%s\n",str[1]);
 	alive->ambient.brightness = ft_atof(str[1]);
+	printf("test\n");
 	tmp = ft_split(str[2],',');
 	alive->ambient.color.red = ft_atof(tmp[0]);
 	alive->ambient.color.green = ft_atof(tmp[1]);
@@ -249,6 +249,7 @@ void	fill(char ***argsex, t_ranger *alive, int l)
 	alive->obj_index = 0;
 	while (i < l)
 	{
+		printf("%d\n",i);
 		if ( ft_strncmp(argsex[i][0],"A",1) == 0)
 			fill_ambient(alive,argsex[i]);
 		else if ( ft_strncmp(argsex[i][0],"C",1) == 0)
