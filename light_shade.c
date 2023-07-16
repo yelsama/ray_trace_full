@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/28 05:58:59 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:17:07 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,12 @@ t_point_vector  get_cylinder_normal_v(t_cylndr *c, t_point_vector *hit_p)
 	tmp = get_vec_a_to_b(&c->a, hit_p);
 	sab = fabs(vec_mag(&tmp));
     if (sab < c->rad)
-        return (c->vec);
+		return (rescale_vecotr(&c->vec, -1.0));
+        // return (c->vec);
 	tmp = get_vec_a_to_b(&c->b, hit_p);
 	sab = fabs(vec_mag(&tmp));
     if (sab < c->rad)
-        return (rescale_vecotr(&c->vec, -1.0));
+        return (c->vec);
     ch_v = get_vec_a_to_b(&c->cnt, hit_p);
 	p0_plus_t_mul_v(&n_cnt, &c->cnt, &c->vec,
             dot_multiplication(&ch_v, &c->vec));

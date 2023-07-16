@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:29:01 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/06/27 20:29:19 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:03:37 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ double	ft_atof(const char *str)
 	double	res2;
 	char	*c;
 	int		len;
+	int		sign = 0;
 
 	c = (char *)str;
 	res = (double)ft_atoi(c);
+	// TODO: Norminette & check the rest of the cases
+	if (*c == '-')
+		sign = -1;
 	while (*c && *c != '.')
 		c++;
 	if (*c == '.')
@@ -29,7 +33,7 @@ double	ft_atof(const char *str)
 	len = ft_strlen(c);
 	while (len--)
 		res2 /= 10;
-	if (res >= 0)
+	if (res >= 0 && sign != -1)
 		return (res + res2);
 	else
 		return (res + -res2);
