@@ -6,11 +6,21 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/07/16 15:54:47 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:06:02 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
+
+void	norm_a_vector(t_point_vector *vec)
+{
+	float	this_vec_mag;
+
+	this_vec_mag = vec_mag(vec);
+	vec->x = vec->x / this_vec_mag;
+	vec->y = vec->y / this_vec_mag;
+	vec->z = vec->z / this_vec_mag;
+}
 
 int	read_width(char *strt)
 {
@@ -77,6 +87,7 @@ void	fill_camera(t_ranger *alive, char **str)
 	alive->cam.look_forward.x = ft_atof(tmp[0]);
 	alive->cam.look_forward.y = ft_atof(tmp[1]);
 	alive->cam.look_forward.z = ft_atof(tmp[2]);
+	norm_a_vector(&alive->cam.look_forward);
 	free_2d_array_char(tmp);
 }
 
@@ -113,6 +124,7 @@ void	fill_plane2(t_ranger *alive, char **str)
 	alive->p[alive->pl].normal_v.x = ft_atof(tmp[0]);
 	alive->p[alive->pl].normal_v.y = ft_atof(tmp[1]);
 	alive->p[alive->pl].normal_v.z = ft_atof(tmp[2]);
+	norm_a_vector(&alive->p[alive->pl].normal_v);
 	free_2d_array_char(tmp);
 	tmp = ft_split(str[3],',');
 	alive->p[alive->pl].color.red = ft_atof(tmp[0]);
@@ -150,7 +162,7 @@ void	fill_sphere2(t_ranger *alive, char **str)
 
 void	fill_cylinder2(t_ranger *alive, char **str)
 {
-	char **tmp;
+	char			**tmp;
 	t_point_vector	tmp2;
 
 	tmp = ft_split(str[1],',');
@@ -164,6 +176,7 @@ void	fill_cylinder2(t_ranger *alive, char **str)
 	alive->c[alive->cy].vec.x = ft_atof(tmp[0]);
 	alive->c[alive->cy].vec.y = ft_atof(tmp[1]);
 	alive->c[alive->cy].vec.z = ft_atof(tmp[2]);
+	norm_a_vector(&alive->c[alive->cy].vec);
 	free_2d_array_char(tmp);
 	alive->c[alive->cy].rad = (ft_atof(str[3])/2.0);
 	alive->c[alive->cy].height = ft_atof(str[4]);
@@ -172,7 +185,7 @@ void	fill_cylinder2(t_ranger *alive, char **str)
 	alive->c[alive->cy].color.green = ft_atoi(tmp[1]);
 	alive->c[alive->cy].color.blue = ft_atoi(tmp[2]);
 	free_2d_array_char(tmp);
-	tmp2 = rescale_vecotr(&alive->c->vec, alive->c->height / 2);
+	tmp2 = rescale_vecotr(&alive->c[alive->cy].vec, alive->c[alive->cy].height / 2.0);
 	alive->c[alive->cy].a = point_from_point_vector(&alive->c[alive->cy].cnt, &tmp2);
 	tmp2 = rescale_vecotr(&tmp2, -1.0);
 	alive->c[alive->cy].b = point_from_point_vector(&alive->c[alive->cy].cnt, &tmp2);
