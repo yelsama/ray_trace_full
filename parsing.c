@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/07/15 21:58:46 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/16 14:16:27 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	fill_sphere2(t_ranger *alive, char **str)
 	alive->s[alive->sp].color.red = ft_atof(tmp[0]);
 	alive->s[alive->sp].color.green = ft_atof(tmp[1]);
 	alive->s[alive->sp].color.blue = ft_atof(tmp[2]);
-	alive->s[alive->sp].rad = ft_atof(str[2]);
+	alive->s[alive->sp].rad = ft_atof(str[2]) / 2;
 	free_2d_array_char(tmp);
 	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
 	alive->objcs[alive->obj_index].obj_type = sphere;
