@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:42:11 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/18 21:44:32 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:13:22 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,41 +67,45 @@ void	get_camera_transform_matrix(t_ranger *alive)
 	alive->rend.look_up = vec_norm(&look_up);
 }
 
-t_hit_info	get_hit_object(t_ranger *alive, const t_ray *r)
+static void	update_hit(t_hit_info *inf, t_hit_info *tmp_inf, int i)
+{
+			inf->hit_or_not = 1;
+			inf->t = tmp_inf->t;
+			inf->obj_id = i;
+}
+
+typedef struct hit_set
 {
 	t_hit_info		inf;
 	t_hit_info		tmp_inf;
 	int				i;
 	int				past_first;
+}	t_hit_set;
 
-	inf.hit_or_not = 0;
-	inf.t = 0.0;
-	inf.obj_id = -1;
-	past_first = 0;
-	i = -1;
-	while (++i < alive->no_of_object)
+t_hit_info	get_hit_object(t_ranger *alive, const t_ray *r)
+{
+	t_hit_set	set;
+
+	set.inf.hit_or_not = 0;
+	set.inf.t = 0.0;
+	set.inf.obj_id = -1;
+	set.past_first = 0;
+	set.i = -1;
+	while (++set.i < alive->no_of_object)
 	{
-		if (alive->objcs[i].obj_type == sphere)
-			tmp_inf = ray_sphare_intrsection(r, (t_sphere *)alive->objcs[i].the_obj);
-		else if (alive->objcs[i].obj_type == plane)
-			tmp_inf = ray_plane_intersection(r, (t_plane *)alive->objcs[i].the_obj);
-		else if (alive->objcs[i].obj_type == cylinder)
-			tmp_inf = ray_cylinder_intersect(r, (t_cylndr *)alive->objcs[i].the_obj);
-		else
-			printf("got uknown object at for_render\n");/////
-		if (!past_first && tmp_inf.hit_or_not > 0)
-		{
-			inf.hit_or_not = 1;
-			inf.t = tmp_inf.t;
-			inf.obj_id = i;
-			past_first++;
-		}
-		if (tmp_inf.hit_or_not > 0 && tmp_inf.t < inf.t)
-		{
-			inf.hit_or_not = 1;
-			inf.t = tmp_inf.t;
-			inf.obj_id = i;
-		}
+		if (alive->objcs[set.i].obj_type == sphere)
+			set.tmp_inf = ray_sphare_intrsection(r,
+					(t_sphere *)alive->objcs[set.i].the_obj);
+		else if (alive->objcs[set.i].obj_type == plane)
+			set.tmp_inf = ray_plane_intersection(r,
+					(t_plane *)alive->objcs[set.i].the_obj);
+		else if (alive->objcs[set.i].obj_type == cylinder)
+			set.tmp_inf = ray_cylinder_intersect(r,
+					(t_cylndr *)alive->objcs[set.i].the_obj);
+		if (!set.past_first && set.tmp_inf.hit_or_not > 0 && !set.past_first++)
+			update_hit(&set.inf, &set.tmp_inf, set.i);
+		if (set.tmp_inf.hit_or_not > 0 && set.tmp_inf.t < set.inf.t)
+			update_hit(&set.inf, &set.tmp_inf, set.i);
 	}
-	return (inf);
+	return (set.inf);
 }
