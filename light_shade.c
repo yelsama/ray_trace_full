@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/16 18:52:21 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:04:46 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ int	under_shadow(t_ranger *alive, t_point_vector p, t_point_vector v, int ob_id)
 			hit_inf = ray_plane_intersection(&r,
 					(t_plane *)alive->objcs[i].the_obj);
 		else if (alive->objcs[i].obj_type == cylinder)
+		{
 			hit_inf = ray_cylinder_intersect(&r,
 					(t_cylndr *)alive->objcs[i].the_obj);
+		}
 		else
-			printf("got uknown object at light_shade.c\n");
+			printf("got uknown object at light_shade.c\n");//exit with error
 		if (hit_inf.hit_or_not == 1)
 			return (1);
 	}
@@ -93,19 +95,18 @@ t_point_vector	get_cylinder_normal_v(t_cylndr *c, t_point_vector *hit_p)
 {
 	t_point_vector	ch_v;
 	t_point_vector	n_cnt;
-	t_point_vector	tmp;
+	t_point_vector	tmp[2];
 	t_point_vector	normal_v;
-	float			sab;
+	float			sab[2];
 
-	tmp = get_vec_a_to_b(&c->a, hit_p);
-	sab = fabs(vec_mag(&tmp));
-	if (sab < c->rad)
+	tmp[0] = get_vec_a_to_b(&c->a, hit_p);
+	sab[0] = fabs(vec_mag(&tmp[0]));
+	tmp[1] = get_vec_a_to_b(&c->b, hit_p);
+	sab[1] = fabs(vec_mag(&tmp[1]));
+	if (sab[0] < c->rad && sab[0] < sab[1])
 		return (c->vec);
-	tmp = get_vec_a_to_b(&c->b, hit_p);
-	sab = fabs(vec_mag(&tmp));
-	if (sab < c->rad)
+	if (sab[1] < c->rad)
 		return (rescale_vecotr(&c->vec, -1.0));
-		// return (c->vec);
 	ch_v = get_vec_a_to_b(&c->cnt, hit_p);
 	p0_plus_t_mul_v(&n_cnt, &c->cnt, &c->vec,
 		dot_multiplication(&ch_v, &c->vec));

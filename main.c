@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/15 19:54:47 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:34:57 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	create_amlx_window(t_ranger *alive)
 {
 	t_point_vector	hit_p;
 	t_ray			current_r;
-	t_hit_info	hit_info;
+	t_hit_info		hit_info;
 	int				x,y,clr;
 
 

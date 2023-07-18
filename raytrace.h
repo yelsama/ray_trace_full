@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/09 17:02:22 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:27:40 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "./resources/ft_libft_printf/ft_libft_printf.h"
 # include <math.h>
 # include <unistd.h>
-#include <stdio.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <stdint.h>
@@ -42,10 +42,10 @@ typedef enum e_axis
 	cylinder
 }	t_axis;
 
-typedef	struct s_objects_lis
+typedef struct s_objects_lis
 {
 	int					obj_id;
-	int 				obj_type;
+	int					obj_type;
 	void				*the_obj;
 }	t_objcs_list;
 
@@ -77,7 +77,7 @@ typedef struct s_canva
 	int	color;
 }	t_batch;
 
-typedef	struct s_hit_info
+typedef struct s_hit_info
 {
 	float	hit_or_not;
 	float	t;
@@ -191,7 +191,7 @@ int				elemnts_are_identical(const t_point_vector *a,
 t_point_vector	point_from_point_vector(const t_point_vector *a,
 					const t_point_vector *v);
 void			print_an_elemnt(t_point_vector *e);
-void	p0_plus_t_mul_v(t_point_vector *p, const t_point_vector *p0,
+void			p0_plus_t_mul_v(t_point_vector *p, const t_point_vector *p0,
 					const t_point_vector *v, float t);
 
 // Dot and Cross Multiplication of vectors (mag_norm_dot_cros.c)
@@ -247,17 +247,17 @@ t_hit_info		ray_plane_intersection(const t_ray *r, const t_plane *p);
 t_sphere		fill_sphere(t_point_vector cntr, float rad, t_color clr);
 t_plane			fill_plane(t_point_vector cntr, t_point_vector normal_v,
 					t_color clr);
-t_cylndr		fill_cylndr(t_point_vector cntr, t_point_vector vec, t_color clr,
-					float *h_r);
+t_cylndr		fill_cylndr(t_point_vector cntr, t_point_vector vec,
+					t_color clr, float *h_r);
 
 // Find normal and light vectors for light and shade (light_shade.c)
 t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p);
-int				ligth_effect_on_sphere_pxl_color(t_ranger *alive, t_point_vector hit_p,
-					int obj_id);
-int				light_effect_on_plane_pxl_color(t_ranger *alive, t_point_vector hit_p,
-					int obj_id);
-int				light_effect_on_cylndr_pxl_color(t_ranger *alive, t_point_vector hit_p,
-					int obj_id);
+int				ligth_effect_on_sphere_pxl_color(t_ranger *alive,
+					t_point_vector hit_p, int obj_id);
+int				light_effect_on_plane_pxl_color(t_ranger *alive,
+					t_point_vector hit_p, int obj_id);
+int				light_effect_on_cylndr_pxl_color(t_ranger *alive,
+					t_point_vector hit_p, int obj_id);
 
 // Prepare rendering values from camera and canvas info and get
 // rays when rendering image (for_render.c)

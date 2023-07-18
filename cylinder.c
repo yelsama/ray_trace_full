@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/18 10:16:36 by ymohamed          #+#    #+#             */
+/*   Updated: 2023/07/18 17:04:11 by ymohamed         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raytrace.h"
 
 
@@ -25,22 +37,19 @@ t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c)
         return (inf);
     h = sqrtf(h);
     inf.t = (-1.0 * k1 - h)/k2;
-    if (inf.t < 0.0)
-        return (inf);
     y = baoc + inf.t * bard;
     if( y > 0.0 && y < c->baba )
     {
-        inf.hit_or_not = 1;
+		if (inf.t >= 0)
+        	inf.hit_or_not = 1;
         return (inf);
     }
     if (y < 0.0)
         inf.t = (0.0 - baoc) / bard;
     else
         inf.t = (c->baba - baoc) / bard;
-    if (fabs(k1 + k2 * inf.t) < h)
+    if (fabs(k1 + k2 * inf.t) < h && inf.t >= 0)
     {
-        // if (inf.t < 0.0)
-        //     return (inf);
         inf.hit_or_not = 1;
         return (inf);
     }
