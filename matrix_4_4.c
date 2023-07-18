@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:10 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/02/23 02:51:46 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:03:38 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,3 @@ t_matrix	matrices_multiplication(const t_matrix *m1, const t_matrix *m2)
 	}
 	return (result_mat);
 }
-
-// t_point_vector	matrix_by_tuple(const t_matrix *m, const t_point_vector *tuple)
-// {
-// 	t_point_vector	result_tuple;
-// 	float			tmp[4];
-// 	int				i;
-
-// 	result_tuple = (t_point_vector){0, 0, 0, 0};
-// 	if (!m || !tuple)
-// 		return (write(2, "Error multiplication matrix with tuple\n", 39),
-// 			result_tuple);
-// 	i = -1;
-// 	while (++i < 4)
-// 		tmp[i] = 0;
-// 	i = -1;
-// 	while (++i < 4)
-// 		tmp[i] = m->matrix[i][0] * tuple->x
-// 			+ m->matrix[i][1] * tuple->y
-// 			+ m->matrix[i][2] * tuple->z
-// 			+ m->matrix[i][3] * tuple->w;
-// 	result_tuple.x = tmp[0];
-// 	result_tuple.y = tmp[1];
-// 	result_tuple.z = tmp[2];
-// 	result_tuple.w = tmp[3];
-// 	return (result_tuple);
-// }

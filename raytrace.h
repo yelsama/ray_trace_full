@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/18 13:27:40 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:05:49 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,10 +269,6 @@ t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
 
 // Special function to operate cylinder (cylinder.c)
 t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
-
-// this part is on progress temp.c
-void			set_objects(t_ranger *alive);
-
 
 //Parsing
 int	parsing(t_ranger *alive, char **av);

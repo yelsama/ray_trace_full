@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/18 17:04:46 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:02:12 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,8 @@ int	under_shadow(t_ranger *alive, t_point_vector p, t_point_vector v, int ob_id)
 			hit_inf = ray_plane_intersection(&r,
 					(t_plane *)alive->objcs[i].the_obj);
 		else if (alive->objcs[i].obj_type == cylinder)
-		{
 			hit_inf = ray_cylinder_intersect(&r,
 					(t_cylndr *)alive->objcs[i].the_obj);
-		}
-		else
-			printf("got uknown object at light_shade.c\n");//exit with error
 		if (hit_inf.hit_or_not == 1)
 			return (1);
 	}
