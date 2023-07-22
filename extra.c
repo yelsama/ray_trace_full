@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 20:52:50 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/18 21:03:57 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:58:55 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	print_matrix(const t_matrix *m)
 // t_matrix	get_orientation_matrix(t_ranger *alive)
 // {
 // 	t_matrix			new;
-// 	t_point_vector		look_up;
+// 	t_tuple		look_up;
 
-// 	look_up = (t_point_vector){0.0, 1.0, 0.0, 0};
+// 	look_up = (t_tuple){0.0, 1.0, 0.0, 0};
 // 	alive->cam.look_forward = vec_norm(&alive->cam.look_forward);
 // 	alive->rend.look_right = cros_multiplication(&look_up,
 			// &alive->cam.look_forward);
@@ -56,14 +56,14 @@ void	print_matrix(const t_matrix *m)
 // 	return (new);
 // }
 
-// t_point_vector	matrix_by_tuple(const t_matrix *m, 
-// const t_point_vector *tuple)
+// t_tuple	matrix_by_tuple(const t_matrix *m, 
+// const t_tuple *tuple)
 // {
-// 	t_point_vector	result_tuple;
+// 	t_tuple	result_tuple;
 // 	float			tmp[4];
 // 	int				i;
 
-// 	result_tuple = (t_point_vector){0, 0, 0, 0};
+// 	result_tuple = (t_tuple){0, 0, 0, 0};
 // 	if (!m || !tuple)
 // 		return (write(2, "Error multiplication matrix with tuple\n", 39),
 // 			result_tuple);

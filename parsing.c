@@ -6,13 +6,13 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/07/18 14:26:50 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:58:55 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
 
-void	norm_a_vector(t_point_vector *vec)
+void	norm_a_vector(t_tuple *vec)
 {
 	float	this_vec_mag;
 
@@ -163,7 +163,7 @@ void	fill_sphere2(t_ranger *alive, char **str)
 void	fill_cylinder2(t_ranger *alive, char **str)
 {
 	char			**tmp;
-	t_point_vector	tmp2;
+	t_tuple	tmp2;
 
 	tmp = ft_split(str[1],',');
 	alive->c[alive->cy].cnt.w = 1;

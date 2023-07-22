@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/18 13:34:57 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:58:55 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exit_clear_window(t_ranger *alive)
 
 int	create_amlx_window(t_ranger *alive)
 {
-	t_point_vector	hit_p;
+	t_tuple	hit_p;
 	t_ray			current_r;
 	t_hit_info		hit_info;
 	int				x,y,clr;
@@ -33,7 +33,7 @@ int	create_amlx_window(t_ranger *alive)
 			XBLOCK_DIM, YBLOCK_DIM, "mini_rt");
 	if (!alive->frame.frame_ptr || !alive->frame.window)
 		return (0);
-	current_r = fill_ray(&alive->cam.location, (t_point_vector){0.0, 0.0, 0.0, 0});
+	current_r = fill_ray(&alive->cam.location, (t_tuple){0.0, 0.0, 0.0, 0});
 	hit_p.w = 1;
 
 	(void)clr;
@@ -69,9 +69,9 @@ int	create_amlx_window(t_ranger *alive)
 void	fill_initial_values(t_ranger *alive)
 {
 	// alive->cam.field_of_view = 40;
-	// alive->cam.location = (t_point_vector){0.0, 0.0, 30.0, 1};
-	// alive->cam.look_forward = (t_point_vector){0.0, 0.0, -1.0, 0};
-	// alive->main_light.position = (t_point_vector){-4.0, 10.0, 4.0, 1};
+	// alive->cam.location = (t_tuple){0.0, 0.0, 30.0, 1};
+	// alive->cam.look_forward = (t_tuple){0.0, 0.0, -1.0, 0};
+	// alive->main_light.position = (t_tuple){-4.0, 10.0, 4.0, 1};
 	// alive->main_light.brightness = 0.8;
 	// alive->main_light.color = (t_color){255, 255, 255};
 	// alive->ambient.brightness = 0.2;

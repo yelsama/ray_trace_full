@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:29:13 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/18 20:59:48 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:02:20 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	calculate_intersecion(const t_ray *r, const t_sphere *s, float *inf)
 	float			b;
 	float			c;
 	float			det;
-	t_point_vector	tmp;
+	t_tuple	tmp;
 
 	tmp = get_vec_a_to_b(&s->cent, r->origin);
 	b = 2.0 * dot_multiplication(&tmp, &r->direction);
@@ -66,10 +66,10 @@ t_hit_info	ray_sphare_intrsection(const t_ray *r, const t_sphere *s)
 
 t_hit_info	ray_plane_intersection(const t_ray *r, const t_plane *p)
 {
-	t_point_vector	oc_v;
-	float			vdotn;
-	float			oc_vdotn;
-	t_hit_info		new;
+	t_tuple		oc_v;
+	float		vdotn;
+	float		oc_vdotn;
+	t_hit_info	new;
 
 	new.hit_or_not = 0;
 	new.t = 0;

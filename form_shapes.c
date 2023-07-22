@@ -6,13 +6,13 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:09:12 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/15 20:43:07 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:01:48 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
 
-t_sphere	fill_sphere(t_point_vector cntr, float rad, t_color clr)
+t_sphere	fill_sphere(t_tuple cntr, float rad, t_color clr)
 {
 	t_sphere	s;
 
@@ -22,7 +22,7 @@ t_sphere	fill_sphere(t_point_vector cntr, float rad, t_color clr)
 	return (s);
 }
 
-t_plane	fill_plane(t_point_vector cntr, t_point_vector normal_v, t_color clr)
+t_plane	fill_plane(t_tuple cntr, t_tuple normal_v, t_color clr)
 {
 	t_plane	new_plane;
 
@@ -32,11 +32,11 @@ t_plane	fill_plane(t_point_vector cntr, t_point_vector normal_v, t_color clr)
 	return (new_plane);
 }
 
-t_cylndr	fill_cylndr(t_point_vector cntr, t_point_vector vec, t_color clr,
+t_cylndr	fill_cylndr(t_tuple cntr, t_tuple vec, t_color clr,
 	float *h_r)
 {
-	t_cylndr		c;
-	t_point_vector	tmp;
+	t_cylndr	c;
+	t_tuple		tmp;
 
 	c.cnt = cntr;
 	c.vec = vec_norm(&vec);

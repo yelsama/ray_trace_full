@@ -6,13 +6,13 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:57:38 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/06/17 16:32:27 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:58:55 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
 
-int	fill_point(t_point_vector *p, float x, float y, float z)
+int	fill_point(t_tuple *p, float x, float y, float z)
 {
 	if (!p)
 		return (write(2, "Error fillig point\n", 19), 0);
@@ -23,12 +23,12 @@ int	fill_point(t_point_vector *p, float x, float y, float z)
 	return (1);
 }
 
-t_point_vector	point_from_point_vector(const t_point_vector *a,
-					const t_point_vector *v)
+t_tuple	point_from_point_vector(const t_tuple *a,
+					const t_tuple *v)
 {
-	t_point_vector	result_point;
+	t_tuple	result_point;
 
-	result_point = (t_point_vector){0.0, 0.0, 0.0, 1};
+	result_point = (t_tuple){0.0, 0.0, 0.0, 1};
 	if (!a || !v || a->w != 1 || v->w != 0)
 		return (write(2, "Error finding the point\n", 24), result_point);
 	result_point.w = 1;
@@ -38,8 +38,8 @@ t_point_vector	point_from_point_vector(const t_point_vector *a,
 	return (result_point);
 }
 
-int	elemnts_are_identical(const t_point_vector *a,
-					const t_point_vector *b, float epsilon)
+int	elemnts_are_identical(const t_tuple *a,
+					const t_tuple *b, float epsilon)
 {
 	float	differ;
 
@@ -63,7 +63,7 @@ int	elemnts_are_identical(const t_point_vector *a,
 	return (1);
 }
 
-void	print_an_elemnt(t_point_vector *e)
+void	print_an_elemnt(t_tuple *e)
 {
 	if (!e)
 	{
@@ -77,8 +77,8 @@ void	print_an_elemnt(t_point_vector *e)
 	printf("x is %.4f, y is %.4f, z is %.4f\n", e->x, e->y, e->z);
 }
 
-void	p0_plus_t_mul_v(t_point_vector *p, const t_point_vector *p0,
-					const t_point_vector *v, float t)
+void	p0_plus_t_mul_v(t_tuple *p, const t_tuple *p0,
+					const t_tuple *v, float t)
 {
 	p->w = 1;
 	p->x = p0->x + (t * v->x);

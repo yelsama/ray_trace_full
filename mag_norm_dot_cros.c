@@ -6,13 +6,13 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:08:39 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/13 15:48:10 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:02:34 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
 
-float	vec_mag(const t_point_vector *v)
+float	vec_mag(const t_tuple *v)
 {
 	float	result;
 
@@ -22,12 +22,12 @@ float	vec_mag(const t_point_vector *v)
 	return (result);
 }
 
-t_point_vector	vec_norm(const t_point_vector *v)
+t_tuple	vec_norm(const t_tuple *v)
 {
-	t_point_vector	result_vec;
-	float			magnitude;
+	t_tuple	result_vec;
+	float	magnitude;
 
-	result_vec = (t_point_vector){0.0, 0.0, 0.0, 0};
+	result_vec = (t_tuple){0.0, 0.0, 0.0, 0};
 	magnitude = vec_mag(v);
 	if (magnitude == 0 || !v || v->w == 1)
 		return (write(2, "Error Normalizing vector\n", 26), result_vec);
@@ -38,7 +38,7 @@ t_point_vector	vec_norm(const t_point_vector *v)
 	return (result_vec);
 }
 
-float	dot_multiplication(const t_point_vector *v1, const t_point_vector *v2)
+float	dot_multiplication(const t_tuple *v1, const t_tuple *v2)
 {
 	float	result;
 
@@ -48,12 +48,12 @@ float	dot_multiplication(const t_point_vector *v1, const t_point_vector *v2)
 	return (result);
 }
 
-t_point_vector	cros_multiplication(const t_point_vector *v1,
-					const t_point_vector *v2)
+t_tuple	cros_multiplication(const t_tuple *v1,
+					const t_tuple *v2)
 {
-	t_point_vector	result_vec;
+	t_tuple	result_vec;
 
-	result_vec = (t_point_vector){0, 0, 0, 0};
+	result_vec = (t_tuple){.x = 0, .y = 0, .z = 0, .w = 0};
 	if (!v1 || !v2 || v1->w == 1 || v2->w == 1)
 		return (write(2, "Error operating cross product\n", 30), result_vec);
 	result_vec.w = 0;
@@ -63,11 +63,11 @@ t_point_vector	cros_multiplication(const t_point_vector *v1,
 	return (result_vec);
 }
 
-t_point_vector	rescale_vecotr(const t_point_vector *v, float scl)
+t_tuple	rescale_vecotr(const t_tuple *v, float scl)
 {
-	t_point_vector	result_vec;
+	t_tuple	result_vec;
 
-	result_vec = (t_point_vector){0, 0, 0, 0};
+	result_vec = (t_tuple){0, 0, 0, 0};
 	if (!v || v->w != 0)
 		return (write(2, "Error Secaling vector\n", 22), result_vec);
 	result_vec.w = 0;

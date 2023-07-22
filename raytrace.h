@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/18 21:05:49 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:14:32 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_point_vector_in_3d
 	float	y;
 	float	z;
 	int		w;
-}	t_point_vector;
+}	t_tuple;
 
 typedef struct s_canva
 {
@@ -91,64 +91,64 @@ typedef struct s_matrix
 
 typedef struct s_camera
 {
-	t_point_vector	location;
-	t_point_vector	look_forward;
-	t_matrix		transform;
-	float			field_of_view;
-	float			half_width;
-	float			half_height;
-	float			aspect_ratio;
-	float			pixel_size;
+	t_tuple		location;
+	t_tuple		look_forward;
+	t_matrix	transform;
+	float		field_of_view;
+	float		half_width;
+	float		half_height;
+	float		aspect_ratio;
+	float		pixel_size;
 }	t_camera;
 
 typedef struct s_render_system
 {
-	float			half_width;
-	float			half_heigh;
-	float			pixel_size;
-	float			half_szie;
-	float			aspect_ratio;
-	t_point_vector	look_up;
-	t_point_vector	look_right;
+	float	half_width;
+	float	half_heigh;
+	float	pixel_size;
+	float	half_szie;
+	float	aspect_ratio;
+	t_tuple	look_up;
+	t_tuple	look_right;
 }	t_render;
 
 typedef struct s_ray
 {
-	t_point_vector	*origin;
-	t_point_vector	direction;
+	t_tuple	*origin;
+	t_tuple	direction;
 }	t_ray;
 typedef struct s_light
 {
-	t_point_vector	position;
-	float			brightness;
-	t_color			color;
+	t_tuple	position;
+	float	brightness;
+	t_color	color;
 }	t_light;
 
 typedef struct s_sphere
 {
-	t_point_vector	cent;
-	float			rad;
-	t_color			color;
+	t_tuple	cent;
+	float	rad;
+	t_color	color;
 }	t_sphere;
 
 typedef struct s_cylinder
 {
-	t_point_vector	cnt;
-	t_point_vector	vec;
-	t_point_vector	a;
-	t_point_vector	b;
-	t_point_vector	ba_v;
-	float			rad;
-	float			height;
-	float			baba;
-	t_color			color;
+	t_tuple	cnt;
+	t_tuple	vec;
+	t_tuple	a;
+	t_tuple	b;
+	t_tuple	ba_v;
+	float	rad;
+	float	height;
+	float	baba;
+	t_color	color;
 }	t_cylndr;
 
 typedef struct s_plane
 {
-	t_point_vector	c_point;
-	t_point_vector	normal_v;
-	t_color			color;
+	t_tuple	c_point;
+	t_tuple	normal_v;
+	t_color	color;
 }	t_plane;
 
 typedef struct s_ranger
@@ -176,118 +176,112 @@ typedef struct s_ranger
 }	t_ranger;
 
 // Operations to get vectors (ops_on_vectors.c)
-int				fill_vector(t_point_vector *v, float x, float y, float z);
-t_point_vector	add_vectors(const t_point_vector *v1, const t_point_vector *v2);
-t_point_vector	subtract_vectors(const t_point_vector *v1,
-					const t_point_vector *v2);
-t_point_vector	vector_opposite(const t_point_vector *v);
-t_point_vector	get_vec_a_to_b(const t_point_vector *a,
-					const t_point_vector *b);
+int			fill_vector(t_tuple *v, float x, float y, float z);
+t_tuple		add_vectors(const t_tuple *v1, const t_tuple *v2);
+t_tuple		subtract_vectors(const t_tuple *v1, const t_tuple *v2);
+t_tuple		vector_opposite(const t_tuple *v);
+t_tuple		get_vec_a_to_b(const t_tuple *a, const t_tuple *b);
 
 // Operations on points (ops_on_point.c)
-int				fill_point(t_point_vector *p, float x, float y, float z);
-int				elemnts_are_identical(const t_point_vector *a,
-					const t_point_vector *b, float epsilon);
-t_point_vector	point_from_point_vector(const t_point_vector *a,
-					const t_point_vector *v);
-void			print_an_elemnt(t_point_vector *e);
-void			p0_plus_t_mul_v(t_point_vector *p, const t_point_vector *p0,
-					const t_point_vector *v, float t);
+int			fill_point(t_tuple *p, float x, float y, float z);
+int			elemnts_are_identical(const t_tuple *a,
+				const t_tuple *b, float epsilon);
+t_tuple		point_from_point_vector(const t_tuple *a, const t_tuple *v);
+void		print_an_elemnt(t_tuple *e);
+void		p0_plus_t_mul_v(t_tuple *p, const t_tuple *p0,
+				const t_tuple *v, float t);
 
 // Dot and Cross Multiplication of vectors (mag_norm_dot_cros.c)
-float			vec_mag(const t_point_vector *v);
-t_point_vector	vec_norm(const t_point_vector *v);
-float			dot_multiplication(const t_point_vector *v1,
-					const t_point_vector *v2);
-t_point_vector	cros_multiplication(const t_point_vector *v1,
-					const t_point_vector *v2);
-t_point_vector	rescale_vecotr(const t_point_vector *v, float scl);
+float		vec_mag(const t_tuple *v);
+t_tuple		vec_norm(const t_tuple *v);
+float		dot_multiplication(const t_tuple *v1, const t_tuple *v2);
+t_tuple		cros_multiplication(const t_tuple *v1, const t_tuple *v2);
+t_tuple		rescale_vecotr(const t_tuple *v, float scl);
 
 // Handle Colors (colors.c)
-int				fill_color(t_color *c, float red, float green, float blue);
-t_color			add_colors(const t_color *c1, const t_color *c2);
-t_color			subt_colors(const t_color *c1, const t_color *c2);
-t_color			color_multi_scalar(const t_color *c, float sclr);
-t_color			blend_two_colors(const t_color *c1, const t_color *c2);
+int			fill_color(t_color *c, float red, float green, float blue);
+t_color		add_colors(const t_color *c1, const t_color *c2);
+t_color		subt_colors(const t_color *c1, const t_color *c2);
+t_color		color_multi_scalar(const t_color *c, float sclr);
+t_color		blend_two_colors(const t_color *c1, const t_color *c2);
 
 // Convert the RGB values into one int value and making batch (batch.c)
-int				rgb_to_int(const t_color *c);
-int				fill_batch(t_batch *can, const t_color *c, int width,
-					int height);
-int				paint_batch_at_mlx(const t_batch *can, t_ranger *alive);
+int			rgb_to_int(const t_color *c);
+int			fill_batch(t_batch *can, const t_color *c, int width, int height);
+int			paint_batch_at_mlx(const t_batch *can, t_ranger *alive);
 
 // Matrices operations (matrix_4_4.c)
-int				fill_zero_matrix(t_matrix *m);
-int				fill_identity_matrix(t_matrix *m);
-t_matrix		matrices_multiplication(const t_matrix *m1, const t_matrix *m2);
-// t_point_vector	matrix_by_tuple(const t_matrix *m, const t_point_vector *tuple);
+int			fill_zero_matrix(t_matrix *m);
+int			fill_identity_matrix(t_matrix *m);
+t_matrix	matrices_multiplication(const t_matrix *m1, const t_matrix *m2);
+// t_tuple	matrix_by_tuple(const t_matrix *m, const t_tuple *tuple);
 
 // Perform Matrix Inverse (matrix_inverse.c)
-t_matrix		matrix_inverse(const t_matrix *m);
+t_matrix	matrix_inverse(const t_matrix *m);
 
 // Get transforming matrices to move or rotate (transforms.c)
-t_matrix		get_translation_matrix(float x, float y, float z);
-t_matrix		get_scaling_matrix(float x, float y, float z);
-t_point_vector	matrix_by_tuple(const t_matrix *mat, const t_point_vector *tpl);
-void			reform_tupl_by_matrix(const t_matrix *mat, t_point_vector *tpl);
+t_matrix	get_translation_matrix(float x, float y, float z);
+t_matrix	get_scaling_matrix(float x, float y, float z);
+t_tuple		matrix_by_tuple(const t_matrix *mat, const t_tuple *tpl);
+void		reform_tupl_by_matrix(const t_matrix *mat, t_tuple *tpl);
 
 // Get rotation arround x y z axis (tuple_rotation.c)
-void			rotate_tuple(t_point_vector *tpl, int axis, int degree);
-void			shearing_trans(t_point_vector *tpl, float xy_xz_yx_yz_zx_zy[6]);
+void		rotate_tuple(t_tuple *tpl, int axis, int degree);
+void		shearing_trans(t_tuple *tpl, float xy_xz_yx_yz_zx_zy[6]);
 
 // Create and handle rays (ops_on_ray.c)
-t_ray			fill_ray(t_point_vector *orgn_p, t_point_vector v);
-t_point_vector	intrsction_point(const t_ray *r, float t);
+t_ray		fill_ray(t_tuple *orgn_p, t_tuple v);
+t_tuple		intrsction_point(const t_ray *r, float t);
 
 // Find if the ray intersect with specific shape or not (inspect_intersect.c)
-t_hit_info		ray_sphare_intrsection(const t_ray *r, const t_sphere *s);
-t_hit_info		ray_plane_intersection(const t_ray *r, const t_plane *p);
+t_hit_info	ray_sphare_intrsection(const t_ray *r, const t_sphere *s);
+t_hit_info	ray_plane_intersection(const t_ray *r, const t_plane *p);
 
 // Fill Basic shapes (form_shapes.c)
-t_sphere		fill_sphere(t_point_vector cntr, float rad, t_color clr);
-t_plane			fill_plane(t_point_vector cntr, t_point_vector normal_v,
-					t_color clr);
-t_cylndr		fill_cylndr(t_point_vector cntr, t_point_vector vec,
-					t_color clr, float *h_r);
+t_sphere	fill_sphere(t_tuple cntr, float rad, t_color clr);
+t_plane		fill_plane(t_tuple cntr, t_tuple normal_v,
+				t_color clr);
+t_cylndr	fill_cylndr(t_tuple cntr, t_tuple vec,
+				t_color clr, float *h_r);
 
 // Find normal and light vectors for light and shade (light_shade.c)
-t_point_vector	normal_vec_on_sphere(const t_sphere *s, t_point_vector p);
-int				ligth_effect_on_sphere_pxl_color(t_ranger *alive,
-					t_point_vector hit_p, int obj_id);
-int				light_effect_on_plane_pxl_color(t_ranger *alive,
-					t_point_vector hit_p, int obj_id);
-int				light_effect_on_cylndr_pxl_color(t_ranger *alive,
-					t_point_vector hit_p, int obj_id);
+t_tuple		normal_vec_on_sphere(const t_sphere *s, t_tuple p);
+int			ligth_effect_on_sphere_pxl_color(t_ranger *alive,
+				t_tuple hit_p, int obj_id);
+int			light_effect_on_plane_pxl_color(t_ranger *alive,
+				t_tuple hit_p, int obj_id);
+int			light_effect_on_cylndr_pxl_color(t_ranger *alive,
+				t_tuple hit_p, int obj_id);
 
 // Prepare rendering values from camera and canvas info and get
 // rays when rendering image (for_render.c)
-void			set_camera(t_ranger *alive);
-t_ray			ray_for_pixel(t_ranger *alive, int x, int y);
-void			get_camera_transform_matrix(t_ranger *alive);
-t_hit_info		get_hit_object(t_ranger *alive, const t_ray *r);
-// t_matrix		get_orientation_matrix(t_ranger *alive);
+void		set_camera(t_ranger *alive);
+t_ray		ray_for_pixel(t_ranger *alive, int x, int y);
+void		get_camera_transform_matrix(t_ranger *alive);
+t_hit_info	get_hit_object(t_ranger *alive, const t_ray *r);
+// t_matrix	get_orientation_matrix(t_ranger *alive);
 
 // Special function to operate cylinder (cylinder.c)
-t_hit_info		ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
+t_hit_info	ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
 
 //Parsing
-int	parsing(t_ranger *alive, char **av);
-int	read_width(char *strt);
-void	fill(char ***argsex, t_ranger *alive, int l);
-void	fill_ambient(t_ranger *alive, char **str);
-void	fill_camera(t_ranger *alive, char **str);
+int			parsing(t_ranger *alive, char **av);
+int			read_width(char *strt);
+void		fill(char ***argsex, t_ranger *alive, int l);
+void		fill_ambient(t_ranger *alive, char **str);
+void		fill_camera(t_ranger *alive, char **str);
 
 //get_next_line
-char	*ft_strchr(const char *s, int c);
-char	*gl_substr(char *s, int start, int len);
-char	*gl_strjoin(char *s1, char *s2);
-int	gl_strlen2(char *str);
-int	gl_strlen(char *str);
-char	*gl_strchr(const char *s, int c);
+char		*ft_strchr(const char *s, int c);
+char		*gl_substr(char *s, int start, int len);
+char		*gl_strjoin(char *s1, char *s2);
+int			gl_strlen2(char *str);
+int			gl_strlen(char *str);
+char		*gl_strchr(const char *s, int c);
 // int		ft_strlen(char *str);
 // char	*ft_strjoin(char *s1, char *s2);
 // char	*ft_substr(char *s, int start, int len);
-char	*get_next_line(int fd);
+char		*get_next_line(int fd);
 // char	*ft_strdup(char *src);
 
 #endif

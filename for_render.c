@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:42:11 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/18 22:13:22 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:01:33 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	set_camera(t_ranger *alive)
 
 t_ray	ray_for_pixel(t_ranger *alive, int x, int y)
 {
-	float			h;
-	float			w;
-	t_point_vector	vec_up;
-	t_point_vector	vec_right;
-	t_ray			result_ray;
+	float	h;
+	float	w;
+	t_tuple	vec_up;
+	t_tuple	vec_right;
+	t_ray	result_ray;
 
 	h = alive->cam.half_height - (y * alive->cam.pixel_size);
 	w = (x * alive->cam.pixel_size) - alive->cam.half_width;
@@ -52,10 +52,10 @@ t_ray	ray_for_pixel(t_ranger *alive, int x, int y)
 
 void	get_camera_transform_matrix(t_ranger *alive)
 {
-	t_point_vector		look_up;
+	t_tuple		look_up;
 
 	print_an_elemnt(&alive->cam.look_forward);
-	look_up = (t_point_vector){0.0, 1.0, 0.0, 0};
+	look_up = (t_tuple){0.0, 1.0, 0.0, 0};
 	alive->cam.look_forward = vec_norm(&alive->cam.look_forward);
 	alive->rend.look_right = cros_multiplication(&look_up,
 			&alive->cam.look_forward);

@@ -32,4 +32,4 @@ fclean: clean
 re: fclean all
 
 test: all
-	./$(NAME)
+	./$(NAME) test.rt

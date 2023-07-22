@@ -6,13 +6,13 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:59:12 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/13 15:48:21 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:58:55 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
 
-int	fill_vector(t_point_vector *v, float x, float y, float z)
+int	fill_vector(t_tuple *v, float x, float y, float z)
 {
 	if (!v)
 		return (write(2, "Error filling vector\n", 21), 0);
@@ -23,11 +23,11 @@ int	fill_vector(t_point_vector *v, float x, float y, float z)
 	return (1);
 }
 
-t_point_vector	add_vectors(const t_point_vector *v1, const t_point_vector *v2)
+t_tuple	add_vectors(const t_tuple *v1, const t_tuple *v2)
 {
-	t_point_vector	result_vec;
+	t_tuple	result_vec;
 
-	result_vec = (t_point_vector){0.0, 0.0, 0.0, 0};
+	result_vec = (t_tuple){0.0, 0.0, 0.0, 0};
 	if (!v1 || !v2 || v1->w == 1 || v2->w == 1)
 		return (write(2, "Error Adding vectors\n", 21), result_vec);
 	result_vec.w = 0;
@@ -37,12 +37,12 @@ t_point_vector	add_vectors(const t_point_vector *v1, const t_point_vector *v2)
 	return (result_vec);
 }
 
-t_point_vector	subtract_vectors(const t_point_vector *v1,
-					const t_point_vector *v2)
+t_tuple	subtract_vectors(const t_tuple *v1,
+					const t_tuple *v2)
 {
-	t_point_vector	result_vec;
+	t_tuple	result_vec;
 
-	result_vec = (t_point_vector){0.0, 0.0, 0.0, 0};
+	result_vec = (t_tuple){0.0, 0.0, 0.0, 0};
 	if (!v1 || !v2 || v1->w == 1 || v2->w == 1)
 		return (write(2, "Error Subtracting vectors\n", 26), result_vec);
 	result_vec.w = 0;
@@ -52,11 +52,11 @@ t_point_vector	subtract_vectors(const t_point_vector *v1,
 	return (result_vec);
 }
 
-t_point_vector	vector_opposite(const t_point_vector *v)
+t_tuple	vector_opposite(const t_tuple *v)
 {
-	t_point_vector	result_vec;
+	t_tuple	result_vec;
 
-	result_vec = (t_point_vector){0.0, 0.0, 0.0, 0};
+	result_vec = (t_tuple){0.0, 0.0, 0.0, 0};
 	if (!v || v->w == 1)
 		return (write(2, "Error finding vector opposite\n", 30), result_vec);
 	result_vec.w = 0;
@@ -66,12 +66,12 @@ t_point_vector	vector_opposite(const t_point_vector *v)
 	return (result_vec);
 }
 
-t_point_vector	get_vec_a_to_b(const t_point_vector *a,
-					const t_point_vector *b)
+t_tuple	get_vec_a_to_b(const t_tuple *a,
+					const t_tuple *b)
 {
-	t_point_vector	result_vec;
+	t_tuple	result_vec;
 
-	result_vec = (t_point_vector){0.0, 0.0, 0.0, 0.0};
+	result_vec = (t_tuple){0.0, 0.0, 0.0, 0.0};
 	if (!a || !b || a->w == 0 || b->w == 0)
 		return (write(2, "Error finding vector\n", 21), result_vec);
 	result_vec.w = 0;
