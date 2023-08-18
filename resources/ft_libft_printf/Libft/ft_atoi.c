@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 23:30:18 by ymohamed          #+#    #+#             */
-/*   Updated: 2022/08/11 09:18:25 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 02:18:43 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,3 @@ static void	calcu(int *nb, int *md, int *i, char *ptr)
 			*md = 20;
 	}
 }
-// int	main(void)
-// {
-// 	printf("%d\n", ft_atoi("-9223372036854775808")); //9223372036854775807
-// 	printf("%d\n", atoi("-9223372036854775808")); // SIZE_MAX
-// 	return (0);
-// }

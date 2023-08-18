@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 13:51:50 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/15 21:45:29 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 02:18:50 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,3 @@ char	**ft_split(char const *s, char c)
 	return (p);
 }
 
-// int main()
-// {
-// 	int i = 0;
-// 	char a[] = "   My  Name  Is Yassein  38 years ";
-// 	char	**split = ft_split(a, ' ');
-// 	while (split[i])
-// 	{
-// 		printf("%s \n", split[i]);
-// 		i++;
-// 	}
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/07/23 01:58:55 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 03:04:11 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	free_2d_array_char(char **str)
 void	fill_ambient(t_ranger *alive, char **str)
 {
 	char **tmp;
-	printf("%s\n",str[1]);
+	// printf("%s\n",str[1]);
 	alive->ambient.brightness = ft_atof(str[1]);
-	printf("test\n");
+	// printf("test\n");
 	tmp = ft_split(str[2],',');
 	alive->ambient.color.red = ft_atof(tmp[0]);
 	alive->ambient.color.green = ft_atof(tmp[1]);
@@ -80,7 +80,7 @@ void	fill_camera(t_ranger *alive, char **str)
 	alive->cam.location.x = ft_atof(tmp[0]);
 	alive->cam.location.y = ft_atof(tmp[1]);
 	alive->cam.location.z = ft_atof(tmp[2]);
-	ft_printf("%.6f \n %.6f\n %.6f\n",ft_atof(tmp[0]),ft_atof(tmp[1]),ft_atof(tmp[2]) );
+	// ft_printf("%.6f \n %.6f\n %.6f\n",ft_atof(tmp[0]),ft_atof(tmp[1]),ft_atof(tmp[2]) );
 	free_2d_array_char(tmp);
 	tmp = ft_split(str[2],',');
 	alive->cam.look_forward.w = 0;
@@ -216,11 +216,11 @@ void check_numbers(char ***argsex, t_ranger *alive, int l)
 	initiate_params(alive);
 	while (i < l)
 	{
-		if ( ft_strncmp(argsex[i][0],"A",1) == 0)
+		if (ft_strncmp(argsex[i][0], "A", 1) == 0)
 			alive->A++;
-		else if ( ft_strncmp(argsex[i][0],"C",1) == 0)
+		else if (ft_strncmp(argsex[i][0],"C",1) == 0)
 			alive->C++;
-		else if ( ft_strncmp(argsex[i][0],"L",1) == 0)
+		else if (ft_strncmp(argsex[i][0],"L",1) == 0)
 			alive->L++;
 		else if ( ft_strncmp(argsex[i][0],"pl",2) == 0)
 			alive->pl++;
@@ -232,11 +232,18 @@ void check_numbers(char ***argsex, t_ranger *alive, int l)
 	}
 }
 
-void check_for_errors(t_ranger *alive)
+void check_for_errors(t_ranger *alive, char ***argsex, int l)
 {
+
 	if (alive->A > 1 || alive->A == 0 || alive->C > 1 || alive->C == 0 || alive->L > 1 || alive->L == 0)
 	{
 		ft_printf("check inputs\n");
+		free_3d_char(argsex);
+		exit(0);
+	}
+	if (check_values(argsex, l))
+	{
+		ft_printf("wrong inputs\n");
 		exit(0);
 	}
 	if (alive->sp > 0)
@@ -255,14 +262,13 @@ void	fill(char ***argsex, t_ranger *alive, int l)
 	int	i;
 
 	i = 0;
+	
 	check_numbers(argsex, alive, l);
-	ft_printf("test\n");
-	check_for_errors(alive);
+	check_for_errors(alive,argsex, l);
 	initiate_params(alive);
 	alive->obj_index = 0;
 	while (i < l)
 	{
-		printf("%d\n",i);
 		if ( ft_strncmp(argsex[i][0],"A",1) == 0)
 			fill_ambient(alive,argsex[i]);
 		else if ( ft_strncmp(argsex[i][0],"C",1) == 0)
@@ -281,32 +287,45 @@ void	fill(char ***argsex, t_ranger *alive, int l)
 
 int	parsing(t_ranger *alive, char **av)
 {
-	int	l;
+	int		l;
 	char	**args;
-	int	i;
-	int	fd;
+	int		i;
+	int		fd;
 	char	***argsex;
 
-	i = 0;
+	i = -1;
 	l = read_width(av[1]);
 	args = (char**)malloc(sizeof(char*)*(l + 1));
 	fd = open(av[1], O_RDONLY);
-	while (i < l)
-	{
+	while (++i < l)
 		args[i] = get_next_line(fd);
-		i++;
-	}
 	args[i] = 0;
 	close(fd);
 	argsex = (char***)malloc(sizeof(char**) * (i + 1));
 	i = 0;
-	while(args[i])
+	while (args[i])
 	{
 		argsex[i] = ft_split(args[i],' ');
 		i++;
 	}
+	free_2d_array_char(args);
 	fill(argsex, alive, l);
-
-
 	return (0);
+}
+
+void	free_3d_char(char ***array)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (array[x])
+	{
+		y = 0;
+		while (array[x][y])
+			free (array[x][y++]);
+		free (array[x++]);
+	}
+	free (array);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/23 02:14:32 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 02:47:20 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,10 @@ char		*gl_strchr(const char *s, int c);
 // char	*ft_strjoin(char *s1, char *s2);
 // char	*ft_substr(char *s, int start, int len);
 char		*get_next_line(int fd);
+void		free_3d_char(char ***array);
+int			check_values(char ***argsex, int l);
+void		free_2d_array_char(char **str);
+int			check_float(char *array);
 // char	*ft_strdup(char *src);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/23 01:58:55 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 02:17:51 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(int ac, char **av)
 	alive.error = 0;
 	(void)ac;
 	parsing(&alive, av);
-	printf("%d\n", alive.no_of_object);
+	// printf("%d\n", alive.no_of_object);
 	fill_initial_values(&alive);
 	set_camera(&alive);
 	// set_objects(&alive);
