@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 17:43:07 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:27:38 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,10 @@ int			read_width(char *strt);
 void		fill(char ***argsex, t_ranger *alive, int l);
 void		fill_ambient(t_ranger *alive, char **str);
 void		fill_camera(t_ranger *alive, char **str);
+void		fill_light(t_ranger *alive, char **str);
+void		fill_plane2(t_ranger *alive, char **str);
+void		fill_sphere2(t_ranger *alive, char **str);
+void		fill_cylinder2(t_ranger *alive, char **str);
 
 //get_next_line
 char		*ft_strchr(const char *s, int c);
@@ -289,5 +293,9 @@ int			check_float(char *array);
 int			check_coordinates_float(char *array);
 int			check_ambient_error(char **array);
 int			check_light_error(char **array);
+void		norm_a_vector(t_tuple *vec);
+void		free_3d_char(char ***array);
+void		wrong_inputs(char ***argsex);
+void		fill_cylinder22(t_ranger *alive);
 
 #endif

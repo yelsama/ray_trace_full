@@ -6,196 +6,11 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 17:39:22 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:21:46 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
-
-void	norm_a_vector(t_tuple *vec)
-{
-	float	this_vec_mag;
-
-	this_vec_mag = vec_mag(vec);
-	vec->x = vec->x / this_vec_mag;
-	vec->y = vec->y / this_vec_mag;
-	vec->z = vec->z / this_vec_mag;
-}
-
-int	read_width(char *strt)
-{
-	int		fd;
-	char	*str;
-	int		i;
-
-	i = 0;
-	str = NULL;
-	fd = open(strt, O_RDONLY);
-	while (1)
-	{
-		str = get_next_line(fd);
-		if (str == NULL)
-			break ;
-		free(str);
-		i++;
-	}
-	close(fd);
-	return (i);
-}
-
-void	free_2d_array_char(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
-void	fill_ambient(t_ranger *alive, char **str)
-{
-	char	**tmp;
-
-	alive->ambient.brightness = ft_atof(str[1]);
-	tmp = ft_split(str[2],',');
-	alive->ambient.color.red = ft_atof(tmp[0]);
-	alive->ambient.color.green = ft_atof(tmp[1]);
-	alive->ambient.color.blue = ft_atof(tmp[2]);
-	free_2d_array_char(str);
-
-}
-
-void	fill_camera(t_ranger *alive, char **str)
-{
-	char	**tmp;
-
-	alive->cam.field_of_view = ft_atof(str[3]);
-	tmp = ft_split(str[1], ',');
-	alive->cam.location.w = 1;
-	alive->cam.location.x = ft_atof(tmp[0]);
-	alive->cam.location.y = ft_atof(tmp[1]);
-	alive->cam.location.z = ft_atof(tmp[2]);
-	free_2d_array_char(tmp);
-	tmp = ft_split(str[2], ',');
-	alive->cam.look_forward.w = 0;
-	alive->cam.look_forward.x = ft_atof(tmp[0]);
-	alive->cam.look_forward.y = ft_atof(tmp[1]);
-	alive->cam.look_forward.z = ft_atof(tmp[2]);
-	norm_a_vector(&alive->cam.look_forward);
-	free_2d_array_char(tmp);
-}
-
-void	fill_light(t_ranger *alive, char **str)
-{
-	char	**tmp;
-
-	alive->main_light.brightness = ft_atof(str[2]);
-	tmp = ft_split(str[1], ',');
-	alive->main_light.position.w = 1;
-	alive->main_light.position.x = ft_atof(tmp[0]);
-	alive->main_light.position.y = ft_atof(tmp[1]);
-	alive->main_light.position.z = ft_atof(tmp[2]);
-	free_2d_array_char(tmp);
-	tmp = ft_split(str[3], ',');
-	alive->main_light.color.red = ft_atof(tmp[0]);
-	alive->main_light.color.green = ft_atof(tmp[1]);
-	alive->main_light.color.blue = ft_atof(tmp[2]);
-	free_2d_array_char(tmp);
-}
-
-void	fill_plane2(t_ranger *alive, char **str)
-{
-	char	**tmp;
-
-	tmp = ft_split(str[1], ',');
-	alive->p[alive->pl].c_point.w = 1;
-	alive->p[alive->pl].c_point.x = ft_atof(tmp[0]);
-	alive->p[alive->pl].c_point.y = ft_atof(tmp[1]);
-	alive->p[alive->pl].c_point.z = ft_atof(tmp[2]);
-	free_2d_array_char(tmp);
-	tmp = ft_split(str[2], ',');
-	alive->p[alive->pl].normal_v.w = 0;
-	alive->p[alive->pl].normal_v.x = ft_atof(tmp[0]);
-	alive->p[alive->pl].normal_v.y = ft_atof(tmp[1]);
-	alive->p[alive->pl].normal_v.z = ft_atof(tmp[2]);
-	norm_a_vector(&alive->p[alive->pl].normal_v);
-	free_2d_array_char(tmp);
-	tmp = ft_split(str[3], ',');
-	alive->p[alive->pl].color.red = ft_atof(tmp[0]);
-	alive->p[alive->pl].color.green = ft_atof(tmp[1]);
-	alive->p[alive->pl].color.blue = ft_atof(tmp[2]);
-	free_2d_array_char(tmp);
-	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
-	alive->objcs[alive->obj_index].obj_type = plane;
-	alive->objcs[alive->obj_index].the_obj = &alive->p[alive->pl];
-	alive->pl++;
-	alive->obj_index++;
-}
-
-void	fill_sphere2(t_ranger *alive, char **str)
-{
-	char	**tmp;
-
-	tmp = ft_split(str[1], ',');
-	alive->s[alive->sp].cent.w = 1;
-	alive->s[alive->sp].cent.x = ft_atof(tmp[0]);
-	alive->s[alive->sp].cent.y = ft_atof(tmp[1]);
-	alive->s[alive->sp].cent.z = ft_atof(tmp[2]);
-	free_2d_array_char(tmp);
-	tmp = ft_split(str[3], ',');
-	alive->s[alive->sp].color.red = ft_atof(tmp[0]);
-	alive->s[alive->sp].color.green = ft_atof(tmp[1]);
-	alive->s[alive->sp].color.blue = ft_atof(tmp[2]);
-	alive->s[alive->sp].rad = ft_atof(str[2]) / 2;
-	free_2d_array_char(tmp);
-	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
-	alive->objcs[alive->obj_index].obj_type = sphere;
-	alive->objcs[alive->obj_index].the_obj = &alive->s[alive->sp];
-	alive->sp++;
-	alive->obj_index++;
-}
-
-void	fill_cylinder2(t_ranger *alive, char **str)
-{
-	char			**tmp;
-	t_tuple			tmp2;
-
-	tmp = ft_split(str[1], ',');
-	alive->c[alive->cy].cnt.w = 1;
-	alive->c[alive->cy].cnt.x = ft_atof(tmp[0]);
-	alive->c[alive->cy].cnt.y = ft_atof(tmp[1]);
-	alive->c[alive->cy].cnt.z = ft_atof(tmp[2]);
-	free_2d_array_char(tmp);
-	tmp = ft_split(str[2], ',');
-	alive->c[alive->cy].vec.w = 0;
-	alive->c[alive->cy].vec.x = ft_atof(tmp[0]);
-	alive->c[alive->cy].vec.y = ft_atof(tmp[1]);
-	alive->c[alive->cy].vec.z = ft_atof(tmp[2]);
-	norm_a_vector(&alive->c[alive->cy].vec);
-	free_2d_array_char(tmp);
-	alive->c[alive->cy].rad = (ft_atof(str[3])/2.0);
-	alive->c[alive->cy].height = ft_atof(str[4]);
-	tmp = ft_split(str[5], ',');
-	alive->c[alive->cy].color.red = ft_atoi(tmp[0]);
-	alive->c[alive->cy].color.green = ft_atoi(tmp[1]);
-	alive->c[alive->cy].color.blue = ft_atoi(tmp[2]);
-	free_2d_array_char(tmp);
-	tmp2 = rescale_vecotr(&alive->c[alive->cy].vec, alive->c[alive->cy].height / 2.0);
-	alive->c[alive->cy].a = point_from_point_vector(&alive->c[alive->cy].cnt, &tmp2);
-	tmp2 = rescale_vecotr(&tmp2, -1.0);
-	alive->c[alive->cy].b = point_from_point_vector(&alive->c[alive->cy].cnt, &tmp2);
-	alive->c[alive->cy].ba_v = get_vec_a_to_b(&alive->c[alive->cy].a, &alive->c[alive->cy].b);
-	alive->c[alive->cy].baba = dot_multiplication(&alive->c[alive->cy].ba_v, &alive->c[alive->cy].ba_v);
-	alive->objcs[alive->obj_index].obj_id = alive->obj_index;
-	alive->objcs[alive->obj_index].obj_type = cylinder;
-	alive->objcs[alive->obj_index].the_obj = &alive->c[alive->cy];
-	alive->cy++;
-	alive->obj_index++;
-}
 
 void	initiate_params(t_ranger *alive)
 {
@@ -207,7 +22,7 @@ void	initiate_params(t_ranger *alive)
 	alive->cy = 0;
 }
 
-void check_numbers(char ***argsex, t_ranger *alive, int l)
+void	check_numbers(char ***argsex, t_ranger *alive, int l)
 {
 	int	i;
 
@@ -230,30 +45,20 @@ void check_numbers(char ***argsex, t_ranger *alive, int l)
 		else if (argsex[i][0][0] <= 32)
 			;
 		else
-		{
-			ft_printf("Wrong Inputs \n");
-			free_3d_char(argsex);
-			exit(0);
-		}
+			wrong_inputs(argsex);
 		i++;
 	}
 }
 
-void check_for_errors(t_ranger *alive, char ***argsex, int l)
+void	check_for_errors(t_ranger *alive, char ***argsex, int l)
 {
 	if (alive->A > 1 || alive->A == 0 || alive->C > 1 
 		|| alive->C == 0 || alive->L > 1 || alive->L == 0)
 	{
-		ft_printf("check inputs\n");
-		free_3d_char(argsex);
-		exit(0);
+		wrong_inputs(argsex);
 	}
 	if (check_values(argsex, l))
-	{
-		ft_printf("wrong inputs\n");
-		free_3d_char(argsex);
-		exit(0);
-	}
+		wrong_inputs(argsex);
 	if (alive->sp > 0)
 		alive->s = malloc(sizeof(t_sphere) * (alive->sp));
 	if (alive->pl > 0)
@@ -312,27 +117,10 @@ int	parsing(t_ranger *alive, char **av)
 	i = 0;
 	while (args[i])
 	{
-		argsex[i] = ft_split(args[i],' ');
+		argsex[i] = ft_split(args[i], ' ');
 		i++;
 	}
 	free_2d_array_char(args);
 	fill(argsex, alive, l);
 	return (0);
-}
-
-void	free_3d_char(char ***array)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (array[x])
-	{
-		y = 0;
-		while (array[x][y])
-			free (array[x][y++]);
-		free (array[x++]);
-	}
-	free (array);
 }
