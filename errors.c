@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:10:32 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 17:13:24 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:29:49 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ int	check_sphere_error(char **array)
 	int	i;
 
 	i = 0;
-	printf("testsp\n");
 	while (array[i])
 		i++;
 	if (i != 4)
@@ -164,7 +163,6 @@ int	check_cylinder_error(char **array)
 	int	i;
 
 	i = 0;
-	printf("testcy\n");
 	while (array[i])
 		i++;
 	if (i != 6)
@@ -189,7 +187,6 @@ int	check_values(char ***argsex, int l)
 	i = -1;
 	while (++i < l)
 	{
-		printf("i = %d   l = %d args = <%s>\n", i, l, argsex[i][0]);
 		if (ft_strncmp(argsex[i][0], "A", 1) == 0)
 			if (check_ambient_error(argsex[i]))
 				return (1);
