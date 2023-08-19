@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 18:27:38 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:52:21 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,5 +297,6 @@ void		norm_a_vector(t_tuple *vec);
 void		free_3d_char(char ***array);
 void		wrong_inputs(char ***argsex);
 void		fill_cylinder22(t_ranger *alive);
+void		free_objects(t_ranger *alive);
 
 #endif

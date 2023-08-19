@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:18:08 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 18:28:05 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:53:23 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,12 @@ void	fill_cylinder22(t_ranger *alive)
 	alive->objcs[alive->obj_index].the_obj = &alive->c[alive->cy];
 	alive->cy++;
 	alive->obj_index++;
+}
+
+void	free_objects(t_ranger *alive)
+{
+	free(alive->s);
+	free(alive->p);
+	free(alive->c);
+	free(alive->objcs);
 }
