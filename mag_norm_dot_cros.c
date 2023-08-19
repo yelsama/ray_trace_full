@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mag_norm_dot_cros.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:08:39 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/23 02:02:34 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:48:29 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_tuple	vec_norm(const t_tuple *v)
 	magnitude = vec_mag(v);
 	if (magnitude == 0 || !v || v->w == 1)
 		return (write(2, "Error Normalizing vector\n", 26), result_vec);
-		result_vec.w = 0;
-		result_vec.x = v->x / magnitude;
-		result_vec.y = v->y / magnitude;
-		result_vec.z = v->z / magnitude;
+	result_vec.w = 0;
+	result_vec.x = v->x / magnitude;
+	result_vec.y = v->y / magnitude;
+	result_vec.z = v->z / magnitude;
 	return (result_vec);
 }
 

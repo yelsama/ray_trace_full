@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inspect_intersect.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:29:13 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/23 02:02:20 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:46:46 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	calculate_intersecion(const t_ray *r, const t_sphere *s, float *inf)
 	float			b;
 	float			c;
 	float			det;
-	t_tuple	tmp;
+	t_tuple			tmp;
 
 	tmp = get_vec_a_to_b(&s->cent, r->origin);
 	b = 2.0 * dot_multiplication(&tmp, &r->direction);

@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 02:47:20 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:43:07 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,8 @@ void		free_3d_char(char ***array);
 int			check_values(char ***argsex, int l);
 void		free_2d_array_char(char **str);
 int			check_float(char *array);
-// char	*ft_strdup(char *src);
+int			check_coordinates_float(char *array);
+int			check_ambient_error(char **array);
+int			check_light_error(char **array);
 
 #endif

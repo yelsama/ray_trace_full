@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:42:11 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 02:20:20 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:46:02 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	get_camera_transform_matrix(t_ranger *alive)
 {
 	t_tuple		look_up;
 
-	// print_an_elemnt(&alive->cam.look_forward);
 	look_up = (t_tuple){0.0, 1.0, 0.0, 0};
 	alive->cam.look_forward = vec_norm(&alive->cam.look_forward);
 	alive->rend.look_right = cros_multiplication(&look_up,
@@ -69,9 +68,9 @@ void	get_camera_transform_matrix(t_ranger *alive)
 
 static void	update_hit(t_hit_info *inf, t_hit_info *tmp_inf, int i)
 {
-			inf->hit_or_not = 1;
-			inf->t = tmp_inf->t;
-			inf->obj_id = i;
+	inf->hit_or_not = 1;
+	inf->t = tmp_inf->t;
+	inf->obj_id = i;
 }
 
 typedef struct hit_set

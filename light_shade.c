@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_shade.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/07/23 02:22:05 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:47:54 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int obj_id)
 	t_sphere		*s;
 	t_color			amb_clr;
 	t_color			full_clr;
-	t_tuple	pxl_to_light_v;
-	t_tuple	normal_v;
+	t_tuple			pxl_to_light_v;
+	t_tuple			normal_v;
 
 	s = (t_sphere *)alive->objcs[obj_id].the_obj;
 	pxl_to_light_v = get_vec_a_to_b(&hit_p, &alive->main_light.position);
