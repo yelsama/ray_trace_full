@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 18:21:46 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:53:49 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	fill(char ***argsex, t_ranger *alive, int l)
 			fill_sphere2(alive, argsex[i]);
 		else if (ft_strncmp(argsex[i][0], "cy", 2) == 0)
 			fill_cylinder2(alive, argsex[i]);
-		i++; 
+		i++;
 	}
 }
 
