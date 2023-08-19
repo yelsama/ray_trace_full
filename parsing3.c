@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:14:42 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 18:28:44 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 20:09:33 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	fill_sphere2(t_ranger *alive, char **str)
 void	fill_cylinder2(t_ranger *alive, char **str)
 {
 	char			**tmp;
-
 
 	tmp = ft_split(str[1], ',');
 	alive->c[alive->cy].cnt.w = 1;

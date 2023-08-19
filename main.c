@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 19:55:31 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/19 20:08:26 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	exit_clear_window(t_ranger *alive)
 {
 	mlx_clear_window(alive->frame.frame_ptr, alive->frame.window);
 	mlx_destroy_window(alive->frame.frame_ptr, alive->frame.window);
+	free_objects(alive);
 	exit(0);
 	return (0);
 }
@@ -56,7 +57,6 @@ int	create_amlx_window(t_ranger *alive)
 	t_ray			current_r;
 	int				x[3];
 
-
 	alive->frame.frame_ptr = mlx_init();
 	alive->frame.window = mlx_new_window(alive->frame.frame_ptr,
 			XBLOCK_DIM, YBLOCK_DIM, "mini_rt");
@@ -67,11 +67,9 @@ int	create_amlx_window(t_ranger *alive)
 	x[1] = -1;
 	while (++x[1] < YBLOCK_DIM)
 		loop_in_x_and_plot(alive, &current_r, &hit_p, x);
-	// TODO: free objects
 	mlx_hook(alive->frame.window, 17, 0, exit_clear_window, alive);
 	mlx_hook(alive->frame.window, 2, 0, exit_clear_window, alive);
 	mlx_loop(alive->frame.frame_ptr);
-	free_objects(alive);
 	return (1);
 }
 
