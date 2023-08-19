@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 02:17:51 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:07:12 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	create_amlx_window(t_ranger *alive)
 		}
 	}
 	mlx_hook(alive->frame.window, 17, 0, exit_clear_window, alive);
+	mlx_hook(alive->frame.window, 2, 0, exit_clear_window, alive);
 	mlx_loop(alive->frame.frame_ptr);
 	return (1);
 }

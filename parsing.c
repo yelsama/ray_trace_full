@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 03:04:11 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:07:27 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,13 +228,20 @@ void check_numbers(char ***argsex, t_ranger *alive, int l)
 			alive->sp++;
 		else if ( ft_strncmp(argsex[i][0],"cy",2) == 0)
 			alive->cy++;
+		else if (argsex[i][0][0] <= 32)
+			;
+		else
+		{
+			ft_printf("Wrong Inputs \n");
+			free_3d_char(argsex);
+			exit(0);
+		}
 		i++;
 	}
 }
 
 void check_for_errors(t_ranger *alive, char ***argsex, int l)
 {
-
 	if (alive->A > 1 || alive->A == 0 || alive->C > 1 || alive->C == 0 || alive->L > 1 || alive->L == 0)
 	{
 		ft_printf("check inputs\n");
@@ -243,7 +250,8 @@ void check_for_errors(t_ranger *alive, char ***argsex, int l)
 	}
 	if (check_values(argsex, l))
 	{
-		ft_printf("wrong inputs\n");
+		ft_printf("wrong inputs2\n");
+		free_3d_char(argsex);
 		exit(0);
 	}
 	if (alive->sp > 0)
