@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_shade.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:47:56 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 17:47:54 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/20 20:13:52 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@ typedef struct shadow_vars
 	t_ray		r;
 	float		light_t;
 }	t_shadow_var;
+
+typedef struct effect_on_plane_vars
+{
+	t_plane			*p;
+	t_color			amb_clr;
+	t_color			full_clr;
+	t_tuple			pxl_to_light_v;
+	t_tuple			pxl_to_cam_v;
+	t_tuple			cam_to_light_v;
+	t_tuple			normal_v;
+	t_hit_info		hit_inf;
+	t_ray			r;
+}	t_plane_effect_var;
 
 int	under_shadow(t_ranger *alive, t_tuple p, t_tuple v, int ob_id)
 {
@@ -75,24 +88,29 @@ int obj_id)
 int	light_effect_on_plane_pxl_color(t_ranger *alive, t_tuple hit_p,
 int obj_id)
 {
-	t_plane			*p;
-	t_color			amb_clr;
-	t_color			full_clr;
-	t_tuple			pxl_to_light_v;
-	t_tuple			normal_v;
+	t_plane_effect_var	s;
 
-	p = (t_plane *)alive->objcs[obj_id].the_obj;
-	pxl_to_light_v = get_vec_a_to_b(&hit_p, &alive->main_light.position);
-	normal_v = vec_norm(&p->normal_v);
-	amb_clr = blend_two_colors(&alive->amb_appear_clr, &p->color);
-	if (under_shadow(alive, hit_p, pxl_to_light_v, obj_id))
-		return (rgb_to_int(&amb_clr));
-	pxl_to_light_v = vec_norm(&pxl_to_light_v);
-	full_clr = color_multi_scalar(&alive->light_appear_clr,
-			dot_multiplication(&normal_v, &pxl_to_light_v));
-	full_clr = blend_two_colors(&full_clr, &p->color);
-	full_clr = add_colors(&full_clr, &amb_clr);
-	return (rgb_to_int(&full_clr));
+	s.p = (t_plane *)alive->objcs[obj_id].the_obj;
+	s.cam_to_light_v = get_vec_a_to_b(&alive->cam.location,
+			&alive->main_light.position);
+	s.r = fill_ray(&alive->cam.location, vec_norm(&s.cam_to_light_v));
+	s.hit_inf = ray_plane_intersection(&s.r, s.p);
+	s.pxl_to_light_v = get_vec_a_to_b(&hit_p, &alive->main_light.position);
+	s.pxl_to_cam_v = get_vec_a_to_b(&hit_p, &alive->cam.location);
+	s.normal_v = vec_norm(&s.p->normal_v);
+	if (dot_multiplication(&s.normal_v, &s.pxl_to_cam_v) < 0)
+		s.normal_v = rescale_vecotr(&s.normal_v, -1);
+	s.amb_clr = blend_two_colors(&alive->amb_appear_clr, &s.p->color);
+	if (s.hit_inf.hit_or_not && s.hit_inf.t < vec_mag(&s.cam_to_light_v))
+		return (rgb_to_int(&s.amb_clr));
+	if (under_shadow(alive, hit_p, s.pxl_to_light_v, obj_id))
+		return (rgb_to_int(&s.amb_clr));
+	s.pxl_to_light_v = vec_norm(&s.pxl_to_light_v);
+	s.full_clr = color_multi_scalar(&alive->light_appear_clr,
+			dot_multiplication(&s.normal_v, &s.pxl_to_light_v));
+	s.full_clr = blend_two_colors(&s.full_clr, &s.p->color);
+	s.full_clr = add_colors(&s.full_clr, &s.amb_clr);
+	return (rgb_to_int(&s.full_clr));
 }
 
 t_tuple	get_cylinder_normal_v(t_cylndr *c, t_tuple *hit_p)

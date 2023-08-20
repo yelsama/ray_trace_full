@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 18:52:21 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/19 20:20:56 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ typedef struct s_ranger
 	int				pl;
 	int				sp;
 	int				cy;
+	int				cam_in_obj;
 	int				obj_index;
 }	t_ranger;
 
@@ -263,6 +264,9 @@ t_hit_info	get_hit_object(t_ranger *alive, const t_ray *r);
 
 // Special function to operate cylinder (cylinder.c)
 t_hit_info	ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
+
+// Find if camera is inside an object or not (cam_inside.c)
+int			verify_camera_inside(t_ranger *alive);
 
 //Parsing
 int			parsing(t_ranger *alive, char **av);

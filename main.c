@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 19:55:31 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:38:11 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ int	create_amlx_window(t_ranger *alive)
 	current_r = fill_ray(&alive->cam.location, (t_tuple){0.0, 0.0, 0.0, 0});
 	hit_p = (t_tuple){0.0, 0.0, 0.0, 1};
 	x[1] = -1;
-	while (++x[1] < YBLOCK_DIM)
+	while (++x[1] < YBLOCK_DIM && !alive->cam_in_obj)
 		loop_in_x_and_plot(alive, &current_r, &hit_p, x);
-	// TODO: free objects
 	mlx_hook(alive->frame.window, 17, 0, exit_clear_window, alive);
 	mlx_hook(alive->frame.window, 2, 0, exit_clear_window, alive);
 	mlx_loop(alive->frame.frame_ptr);
@@ -89,9 +88,11 @@ int	main(int ac, char **av)
 	t_ranger	alive;
 
 	alive.error = 0;
+	alive.cam_in_obj = 0;
 	if (ac != 2)
 		return (write(2, "Error: Wrong number of arguments\n", 34), 1);
 	parsing(&alive, av);
+	alive.cam_in_obj = verify_camera_inside(&alive);
 	fill_initial_values(&alive);
 	set_camera(&alive);
 	if (1 && !create_amlx_window(&alive))
