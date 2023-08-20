@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 17:40:54 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/21 01:58:16 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/21 02:13:23 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ int	check_coordinates_float(char *array)
 
 	tmp2 = ft_split(array, '\n');
 	tmp = ft_split(tmp2[0], ',');
+	i = 0;
+	while (tmp[i])
+		i++;
+	if (i != 3)
+		return (1);
 	i = 0;
 	while (tmp[i])
 	{
