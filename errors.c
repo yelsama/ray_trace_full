@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:10:32 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/21 01:59:55 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/21 02:53:02 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ int	check_camera_error(char **array)
 	i = 0;
 	while (array[i])
 		i++;
-	if (i != 4)
+	if (i < 4 || i > 5)
 		return (1);
-	--i;
-	if (ft_strncmp(array[i], "\n", 1) == 0)
-		return (1);
+	if (i == 4)
+		if (ft_strncmp(array[--i], "\n", 1) == 0)
+			return (1);
+	if (i == 5)
+		if (ft_strncmp(array[--i], "\n", 1))
+			return (1);
 	tmp = ft_split(array[3], '\n');
 	free(array[3]);
 	array[3] = ft_strdup(tmp[0]);
@@ -45,11 +48,14 @@ int	check_plane_error(char **array)
 	i = 0;
 	while (array[i])
 		i++;
-	if (i != 4)
+	if (i < 4 || i > 5)
 		return (1);
-	--i;
-	if (ft_strncmp(array[i], "\n", 1) == 0)
-		return (1);
+	if (i == 4)
+		if (ft_strncmp(array[--i], "\n", 1) == 0)
+			return (1);
+	if (i == 5)
+		if (ft_strncmp(array[--i], "\n", 1))
+			return (1);
 	if (check_coordinates_float(array[1]))
 		return (1);
 	if (check_coordinates_float(array[2]))
@@ -66,11 +72,14 @@ int	check_sphere_error(char **array)
 	i = 0;
 	while (array[i])
 		i++;
-	if (i != 4)
+	if (i < 4 || i > 5)
 		return (1);
-	--i;
-	if (ft_strncmp(array[i], "\n", 1) == 0)
-		return (1);
+	if (i == 4)
+		if (ft_strncmp(array[--i], "\n", 1) == 0)
+			return (1);
+	if (i == 5)
+		if (ft_strncmp(array[--i], "\n", 1))
+			return (1);
 	if (check_float(array[2]))
 		return (1);
 	if (check_coordinates_float(array[1]))
@@ -80,18 +89,18 @@ int	check_sphere_error(char **array)
 	return (0);
 }
 
-int	check_cylinder_error(char **array)
+int	check_cylinder_error(char **array, int i)
 {
-	int	i;
-
-	i = 0;
 	while (array[i])
 		i++;
-	if (i != 6)
+	if (i < 6 || i > 7)
 		return (1);
-	--i;
-	if (ft_strncmp(array[i], "\n", 1) == 0)
-		return (1);
+	if (i == 6)
+		if (ft_strncmp(array[--i], "\n", 1) == 0)
+			return (1);
+	if (i == 7)
+		if (ft_strncmp(array[--i], "\n", 1))
+			return (1);
 	if (check_coordinates_float(array[1]))
 		return (1);
 	if (check_coordinates_float(array[2]))
@@ -128,7 +137,7 @@ int	check_values(char ***argsex, int l)
 			if (check_sphere_error(argsex[i]))
 				return (1);
 		if (ft_strncmp(argsex[i][0], "cy", 2) == 0)
-			if (check_cylinder_error(argsex[i]))
+			if (check_cylinder_error(argsex[i], 0))
 				return (1);
 	}
 	return (0);
