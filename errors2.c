@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 17:40:54 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 17:42:54 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:58:16 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	check_ambient_error(char **array)
 		i++;
 	if (i != 3)
 		return (1);
+	--i;
+	if (ft_strncmp(array[i], "\n", 1) == 0)
+		return (1);
 	if (check_float(array[1]))
 		return (1);
 	if (check_coordinates_float(array[2]))
@@ -89,6 +92,9 @@ int	check_light_error(char **array)
 	while (array[i])
 		i++;
 	if (i != 4)
+		return (1);
+	--i;
+	if (ft_strncmp(array[i], "\n", 1) == 0)
 		return (1);
 	if (check_float(array[2]))
 		return (1);

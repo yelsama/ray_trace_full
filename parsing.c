@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/20 17:17:35 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:47:14 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ void	check_numbers(char ***argsex, t_ranger *alive, int l)
 	{
 		if (!argsex[i][0])
 			continue ;
-		if (ft_strncmp(argsex[i][0], "A", 1) == 0)
+		if (ft_strncmp(argsex[i][0], "A", 2) == 0)
 			alive->am++;
-		else if (ft_strncmp(argsex[i][0], "C", 1) == 0)
+		else if (ft_strncmp(argsex[i][0], "C", 2) == 0)
 			alive->ca++;
-		else if (ft_strncmp(argsex[i][0], "L", 1) == 0)
+		else if (ft_strncmp(argsex[i][0], "L", 2) == 0)
 			alive->li++;
-		else if (ft_strncmp(argsex[i][0], "pl", 2) == 0)
+		else if (ft_strncmp(argsex[i][0], "pl", 3) == 0)
 			alive->pl++;
-		else if (ft_strncmp(argsex[i][0], "sp", 2) == 0)
+		else if (ft_strncmp(argsex[i][0], "sp", 3) == 0)
 			alive->sp++;
-		else if (ft_strncmp(argsex[i][0], "cy", 2) == 0)
+		else if (ft_strncmp(argsex[i][0], "cy", 3) == 0)
 			alive->cy++;
 		else if (argsex[i][0][0] <= 32)
 			;

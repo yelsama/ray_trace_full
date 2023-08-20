@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:10:32 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 23:26:50 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:59:55 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int	check_camera_error(char **array)
 	while (array[i])
 		i++;
 	if (i != 4)
+		return (1);
+	--i;
+	if (ft_strncmp(array[i], "\n", 1) == 0)
 		return (1);
 	tmp = ft_split(array[3], '\n');
 	free(array[3]);
@@ -44,6 +47,9 @@ int	check_plane_error(char **array)
 		i++;
 	if (i != 4)
 		return (1);
+	--i;
+	if (ft_strncmp(array[i], "\n", 1) == 0)
+		return (1);
 	if (check_coordinates_float(array[1]))
 		return (1);
 	if (check_coordinates_float(array[2]))
@@ -62,6 +68,9 @@ int	check_sphere_error(char **array)
 		i++;
 	if (i != 4)
 		return (1);
+	--i;
+	if (ft_strncmp(array[i], "\n", 1) == 0)
+		return (1);
 	if (check_float(array[2]))
 		return (1);
 	if (check_coordinates_float(array[1]))
@@ -79,6 +88,9 @@ int	check_cylinder_error(char **array)
 	while (array[i])
 		i++;
 	if (i != 6)
+		return (1);
+	--i;
+	if (ft_strncmp(array[i], "\n", 1) == 0)
 		return (1);
 	if (check_coordinates_float(array[1]))
 		return (1);
