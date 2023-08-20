@@ -6,19 +6,25 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/20 20:28:51 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:23:48 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
 
-	// free_objects(alive);
-	// mlx_clear_window(alive->frame.frame_ptr, alive->frame.window);
-	// mlx_destroy_window(alive->frame.frame_ptr, alive->frame.window);
 int	exit_clear_window(t_ranger *alive)
 {
-	(void)alive;
+	free_objects(alive);
+	mlx_clear_window(alive->frame.frame_ptr, alive->frame.window);
+	mlx_destroy_window(alive->frame.frame_ptr, alive->frame.window);
 	exit(0);
+	return (0);
+}
+
+int	key_check(int key, t_ranger *alive)
+{
+	if (key == 53)
+		exit_clear_window(alive);
 	return (0);
 }
 
@@ -71,18 +77,9 @@ int	create_amlx_window(t_ranger *alive)
 	while (++x[1] < YBLOCK_DIM && !alive->cam_in_obj)
 		loop_in_x_and_plot(alive, &current_r, &hit_p, x);
 	mlx_hook(alive->frame.window, 17, 0, exit_clear_window, alive);
-	mlx_hook(alive->frame.window, 2, 0, exit_clear_window, alive);
+	mlx_hook(alive->frame.window, 2, 0, key_check, alive);
 	mlx_loop(alive->frame.frame_ptr);
 	return (1);
-}
-
-void	fill_initial_values(t_ranger *alive)
-{
-	alive->light_appear_clr = color_multi_scalar(&alive->main_light.color,
-			alive->main_light.brightness);
-	alive->amb_appear_clr = color_multi_scalar(&alive->ambient.color,
-			alive->ambient.brightness);
-	get_camera_transform_matrix(alive);
 }
 
 int	main(int ac, char **av)
@@ -95,7 +92,11 @@ int	main(int ac, char **av)
 		return (write(2, "Error: Wrong number of arguments\n", 34), 1);
 	parsing(&alive, av);
 	alive.cam_in_obj = verify_camera_inside(&alive);
-	fill_initial_values(&alive);
+	alive.light_appear_clr = color_multi_scalar(&alive.main_light.color,
+			alive.main_light.brightness);
+	alive.amb_appear_clr = color_multi_scalar(&alive.ambient.color,
+			alive.ambient.brightness);
+	get_camera_transform_matrix(&alive);
 	set_camera(&alive);
 	if (1 && !create_amlx_window(&alive))
 		return (write(1, "Error making main frame window\n", 31), 1);
