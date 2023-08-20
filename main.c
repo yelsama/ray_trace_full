@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/20 21:23:48 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 22:45:43 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	main(int ac, char **av)
 	alive.cam_in_obj = 0;
 	if (ac != 2)
 		return (write(2, "Error: Wrong number of arguments\n", 34), 1);
+	exam_the_map_file(av[1], ".rt");
 	parsing(&alive, av);
 	alive.cam_in_obj = verify_camera_inside(&alive);
 	alive.light_appear_clr = color_multi_scalar(&alive.main_light.color,
@@ -98,7 +99,7 @@ int	main(int ac, char **av)
 			alive.ambient.brightness);
 	get_camera_transform_matrix(&alive);
 	set_camera(&alive);
-	if (1 && !create_amlx_window(&alive))
-		return (write(1, "Error making main frame window\n", 31), 1);
+	if (!create_amlx_window(&alive))
+		return (write(2, "Error making main frame window\n", 31), 1);
 	return (0);
 }

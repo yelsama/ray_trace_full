@@ -1,5 +1,0 @@
-int *test;
-
-test = NULL;
-
-if (!test)

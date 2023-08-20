@@ -4,7 +4,7 @@ SOURCES = main.c ops_on_point.c ops_on_vector.c mag_norm_dot_cros.c colors.c bat
           matrix_4_4.c matrix_inverse.c transforms.c tuple_rotation.c extra.c ops_on_ray.c \
 		  form_shapes.c light_shade.c for_render.c inspect_intersect.c cylinder.c \
 		  parsing.c get_next_line.c get_next_line_utils.c errors.c errors2.c parsing2.c \
-		  parsing3.c parsing4.c cam_inside.c \
+		  parsing3.c parsing4.c cam_inside.c pre_parse.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 

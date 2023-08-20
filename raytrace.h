@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/20 20:29:50 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 22:33:39 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,9 @@ t_hit_info	ray_cylinder_intersect(const t_ray *r, const t_cylndr *c);
 
 // Find if camera is inside an object or not (cam_inside.c)
 int			verify_camera_inside(t_ranger *alive);
+
+// preparse check the the path and the file extention (preparse.c)
+void		exam_the_map_file(char *file, char *extention);
 
 //Parsing
 int			parsing(t_ranger *alive, char **av);
