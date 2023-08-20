@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:14:42 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 18:28:44 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/20 00:33:30 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	fill_cylinder2(t_ranger *alive, char **str)
 {
 	char			**tmp;
 
-
 	tmp = ft_split(str[1], ',');
 	alive->c[alive->cy].cnt.w = 1;
 	alive->c[alive->cy].cnt.x = ft_atof(tmp[0]);
@@ -121,8 +120,12 @@ void	free_3d_char(char ***array)
 	{
 		y = 0;
 		while (array[x][y])
-			free (array[x][y++]);
-		free (array[x++]);
+		{
+			free (array[x][y]);
+			y++;
+		}
+		free (array[x]);
+		x++;
 	}
 	free (array);
 }

@@ -6,16 +6,18 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/20 17:38:11 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 20:28:51 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytrace.h"
 
+	// free_objects(alive);
+	// mlx_clear_window(alive->frame.frame_ptr, alive->frame.window);
+	// mlx_destroy_window(alive->frame.frame_ptr, alive->frame.window);
 int	exit_clear_window(t_ranger *alive)
 {
-	mlx_clear_window(alive->frame.frame_ptr, alive->frame.window);
-	mlx_destroy_window(alive->frame.frame_ptr, alive->frame.window);
+	(void)alive;
 	exit(0);
 	return (0);
 }
@@ -56,11 +58,12 @@ int	create_amlx_window(t_ranger *alive)
 	t_ray			current_r;
 	int				x[3];
 
-
 	alive->frame.frame_ptr = mlx_init();
+	if (!alive->frame.frame_ptr)
+		return (0);
 	alive->frame.window = mlx_new_window(alive->frame.frame_ptr,
 			XBLOCK_DIM, YBLOCK_DIM, "mini_rt");
-	if (!alive->frame.frame_ptr || !alive->frame.window)
+	if (!alive->frame.window)
 		return (0);
 	current_r = fill_ray(&alive->cam.location, (t_tuple){0.0, 0.0, 0.0, 0});
 	hit_p = (t_tuple){0.0, 0.0, 0.0, 1};
@@ -70,7 +73,6 @@ int	create_amlx_window(t_ranger *alive)
 	mlx_hook(alive->frame.window, 17, 0, exit_clear_window, alive);
 	mlx_hook(alive->frame.window, 2, 0, exit_clear_window, alive);
 	mlx_loop(alive->frame.frame_ptr);
-	free_objects(alive);
 	return (1);
 }
 

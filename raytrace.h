@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 20:20:56 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 20:29:50 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,9 +166,9 @@ typedef struct s_ranger
 	t_cylndr		*c;
 	int				no_of_object;
 	int				error;
-	int				A;
-	int				C;
-	int				L;
+	int				am;
+	int				ca;
+	int				li;
 	int				pl;
 	int				sp;
 	int				cy;
@@ -302,5 +302,7 @@ void		free_3d_char(char ***array);
 void		wrong_inputs(char ***argsex);
 void		fill_cylinder22(t_ranger *alive);
 void		free_objects(t_ranger *alive);
+char		*change_spaces(char *str);
+void		initiate_params2(t_ranger *alive);
 
 #endif

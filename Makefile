@@ -12,14 +12,14 @@ LIBX = ./resources/mlx/libmlx.a
 LIBFTBF = ./resources/ft_libft_printf/libftprintf.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 all: $(NAME)
 
 $(NAME):$(OBJECTS)
 	$(MAKE) -C ./resources/mlx
 	$(MAKE)	-C ./resources/ft_libft_printf
-	$(CC) -o $(NAME) $(SOURCES) $(LIBX) $(LIBFTBF)  -framework OpenGL -framework AppKit
+	$(CC) $(CFLAGS) -o $(NAME) $(SOURCES) $(LIBX) $(LIBFTBF)  -framework OpenGL -framework AppKit
 
 clean:
 	$(MAKE) clean -C ./resources/mlx
