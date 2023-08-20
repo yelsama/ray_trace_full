@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/20 22:33:39 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:23:01 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,9 @@ int			verify_camera_inside(t_ranger *alive);
 
 // preparse check the the path and the file extention (preparse.c)
 void		exam_the_map_file(char *file, char *extention);
+
+// Check if all given vectors are normalized or not (check_vectors.c)
+void		check_vectors(t_ranger *alive);
 
 //Parsing
 int			parsing(t_ranger *alive, char **av);

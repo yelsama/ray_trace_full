@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:10:53 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 18:22:35 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:29:44 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	norm_a_vector(t_tuple *vec)
 {
-	float	this_vec_mag;
+	// float	this_vec_mag;
 
-	this_vec_mag = vec_mag(vec);
-	vec->x = vec->x / this_vec_mag;
-	vec->y = vec->y / this_vec_mag;
-	vec->z = vec->z / this_vec_mag;
+	(void)vec;
+	// this_vec_mag = vec_mag(vec);
+	// vec->x = vec->x / this_vec_mag;
+	// vec->y = vec->y / this_vec_mag;
+	// vec->z = vec->z / this_vec_mag;
 }
 
 int	read_width(char *strt)

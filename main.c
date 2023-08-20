@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:58:59 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/20 22:45:43 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:02:28 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	main(int ac, char **av)
 		return (write(2, "Error: Wrong number of arguments\n", 34), 1);
 	exam_the_map_file(av[1], ".rt");
 	parsing(&alive, av);
+	check_vectors(&alive);
 	alive.cam_in_obj = verify_camera_inside(&alive);
 	alive.light_appear_clr = color_multi_scalar(&alive.main_light.color,
 			alive.main_light.brightness);
