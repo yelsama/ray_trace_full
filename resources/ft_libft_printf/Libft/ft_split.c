@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 13:51:50 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 02:18:50 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:19:45 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**ft_split(char const *s, char c)
 	char	**p;
 	int		words;
 	int		i;
-	
+
 	if (!s)
 		return (0);
 	words = count_strings(s, c);
@@ -77,4 +77,3 @@ char	**ft_split(char const *s, char c)
 	p[i] = 0;
 	return (p);
 }
-

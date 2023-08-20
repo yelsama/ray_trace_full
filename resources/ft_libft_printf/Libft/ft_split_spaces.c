@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:11:24 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/19 20:26:09 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:19:54 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	ft_isspace(int c)
 	return (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\v' || c == '\f' || c == '\r');
 }
-
 
 static char	*split_strings(const char *s)
 {

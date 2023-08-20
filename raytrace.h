@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:44:20 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/19 22:43:54 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:16:33 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,9 +166,9 @@ typedef struct s_ranger
 	t_cylndr		*c;
 	int				no_of_object;
 	int				error;
-	int				A;
-	int				C;
-	int				L;
+	int				am;
+	int				ca;
+	int				li;
 	int				pl;
 	int				sp;
 	int				cy;

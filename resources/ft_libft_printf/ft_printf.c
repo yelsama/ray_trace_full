@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:25:42 by ymohamed          #+#    #+#             */
-/*   Updated: 2022/10/10 08:07:05 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:18:43 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	on_action(int *i, char *argdefiner, va_list argu)
 
 	n = 0;
 	if (argdefiner[*i] == 's')
-	{	
+	{
 		p = (char *)va_arg(argu, int *);
 		if (!p)
 		{

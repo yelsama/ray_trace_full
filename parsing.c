@@ -6,7 +6,7 @@
 /*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/20 00:33:39 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:17:35 by mohouhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	initiate_params(t_ranger *alive)
 {
-	alive->A = 0;
-	alive->C = 0;
-	alive->L = 0;
+	alive->am = 0;
+	alive->ca = 0;
+	alive->li = 0;
 	alive->pl = 0;
 	alive->sp = 0;
 	alive->cy = 0;
@@ -33,11 +33,11 @@ void	check_numbers(char ***argsex, t_ranger *alive, int l)
 		if (!argsex[i][0])
 			continue ;
 		if (ft_strncmp(argsex[i][0], "A", 1) == 0)
-			alive->A++;
+			alive->am++;
 		else if (ft_strncmp(argsex[i][0], "C", 1) == 0)
-			alive->C++;
+			alive->ca++;
 		else if (ft_strncmp(argsex[i][0], "L", 1) == 0)
-			alive->L++;
+			alive->li++;
 		else if (ft_strncmp(argsex[i][0], "pl", 2) == 0)
 			alive->pl++;
 		else if (ft_strncmp(argsex[i][0], "sp", 2) == 0)
@@ -54,8 +54,8 @@ void	check_numbers(char ***argsex, t_ranger *alive, int l)
 void	check_for_errors(t_ranger *alive, char ***argsex, int l)
 {
 	initiate_params2(alive);
-	if (alive->A > 1 || alive->A == 0 || alive->C > 1 
-		|| alive->C == 0 || alive->L > 1 || alive->L == 0)
+	if (alive->am > 1 || alive->am == 0 || alive->ca > 1 
+		|| alive->ca == 0 || alive->li > 1 || alive->li == 0)
 	{
 		wrong_inputs(argsex);
 	}
