@@ -6,7 +6,7 @@
 /*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:19:03 by ymohamed          #+#    #+#             */
-/*   Updated: 2023/08/24 08:28:30 by ymohamed         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:08:44 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_line(char *line)
 		i++;
 	if (!line[i] || line[i] == '\n' || line[i] == '#')
 		return (0);
-	if (!ft_isdigit(line[i]) && !ft_strchr("\n\t ,.-+ACLcypls", line[i]))
+	if (!ft_isdigit(line[i]) && !ft_strchr("\n-+ACLcypls", line[i]))
 		err++;
 	i = 1;
 	while (line[i] && !err)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:43:12 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/21 01:47:14 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:13:44 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ int	parsing(t_ranger *alive, char **av)
 	argsex[i] = 0;
 	free_2d_array_char(args);
 	fill(argsex, alive, l);
+	free_3d_char(argsex);
 	return (0);
 }

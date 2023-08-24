@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:10:53 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/20 23:37:23 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:24:49 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,22 @@ void	free_2d_array_char(char **str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
-		free(str[i]);
+		if (str[i])
+		{
+			free(str[i]);
+			str[i] = NULL;
+		}
 		i++;
 	}
-	free(str);
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
 }
 
 void	fill_ambient(t_ranger *alive, char **str)
@@ -60,7 +70,7 @@ void	fill_ambient(t_ranger *alive, char **str)
 	alive->ambient.color.red = ft_atof(tmp[0]);
 	alive->ambient.color.green = ft_atof(tmp[1]);
 	alive->ambient.color.blue = ft_atof(tmp[2]);
-	free_2d_array_char(str);
+	free_2d_array_char(tmp);
 }
 
 void	fill_camera(t_ranger *alive, char **str)

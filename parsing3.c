@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohouhou <mohouhou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymohamed <ymohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:14:42 by mohouhou          #+#    #+#             */
-/*   Updated: 2023/08/20 00:33:30 by mohouhou         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:16:12 by ymohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,19 +112,15 @@ void	fill_cylinder2(t_ranger *alive, char **str)
 void	free_3d_char(char ***array)
 {
 	int	x;
-	int	y;
 
 	x = 0;
-	y = 0;
 	while (array[x])
 	{
-		y = 0;
-		while (array[x][y])
+		if (array[x])
 		{
-			free (array[x][y]);
-			y++;
+			free_2d_array_char(array[x]);
+			array[x] = NULL;
 		}
-		free (array[x]);
 		x++;
 	}
 	free (array);
